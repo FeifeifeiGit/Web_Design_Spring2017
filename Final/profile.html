@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Edit Profile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.js"></script>
+
+    <style>
+        body {
+            background-color: #edeff2;
+        }
+        
+        #container {
+            width: 80%;
+            margin: auto;
+            background-color: white;
+        }
+        
+        .div-divider {
+            padding-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid lightgray
+        }
+        
+        .form-error {
+            color: #d18d73;
+            font-family: Monaco;
+        }
+    </style>
+
+</head>
+
+<body>
+    <main>
+        <div id="container">
+
+            <div class="row">
+                <form action="" class="form-horizontal" enctype="multipart/form-data">
+                    <div class="col-lg-8 col-lg-offset-2 ">
+
+                        <div class="div-divider">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><b>Username: </b></div>
+                                <div class="panel-footer">
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="username"> edit:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" pattern="^[a-zA-Z0-9_]*$" name="username" class="form-control" placeholder="new username" data-validation-error-msg="username must only contains alphanumeric" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="div-divider">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><b>Headshot: </b></div>
+                                <div class="panel-footer">
+
+                                    <div class="form-group">
+
+                                        <div class="col-sm-offset-2">
+                                            <input type="file" name="headshot" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="div-divider">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><b>Email: </b></div>
+                                <div class="panel-footer">
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="email"> edit:</label>
+                                        <div class="col-sm-10">
+                                            <input type="email" name="email" class="form-control" placeholder="yourname@domain.com" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="div-divider">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><b>Phone Number: </b></div>
+                                <div class="panel-footer">
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="phone"> edit:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="phone" class="form-control" placeholder="xxx-xxx-xxxx" pattern="^\d{3}-\d{3}-\d{4}$" data-validation-error-msg="phone number should be in right format" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="div-divider">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><b>Bio: </b></div>
+                                <div class="panel-footer">
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="description"> edit:</label>
+                                        <div class="col-sm-10">
+                                            <textarea type="text" name="description" class="form-control" placeholder="your description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-8 col-lg-offset-5">
+                        <input type="Submit" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script type="text/javascript">
+        $.validate({
+            modules: 'html5',
+        });
+
+        $("input").rules("remove", "required");
+    </script>
+
+</body>
+
+</html>
