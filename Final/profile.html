@@ -9,7 +9,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.js"></script>
-
     <style>
         body {
             background-color: #edeff2;
@@ -27,8 +26,8 @@
             border-bottom: 1px solid lightgray
         }
         
-        .form-error {
-            color: #d18d73;
+        .form-group .form-error {
+            color: red;
             font-family: Monaco;
         }
     </style>
@@ -36,6 +35,7 @@
 </head>
 
 <body>
+
     <main>
         <div id="container">
 
@@ -43,75 +43,103 @@
                 <form action="" class="form-horizontal" enctype="multipart/form-data">
                     <div class="col-lg-8 col-lg-offset-2 ">
 
-                        <div class="div-divider">
+                        <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-body"><b>Username: </b></div>
-                                <div class="panel-footer">
+                                <div class="panel-heading"> <a data-toggle="collapse" href="#collapse1"><b><span class="glyphicon glyphicon-edit"></span> Username: </b></a></div>
+                                <div id="collapse1" class="panel-collapse collapse">
+                                    <div class="panel-body">
 
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="username"> edit:</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" pattern="^[a-zA-Z0-9_]*$" name="username" class="form-control" placeholder="new username" data-validation-error-msg="username must only contains alphanumeric" />
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for="username"> edit:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" pattern="^[a-zA-Z0-9_]*$" name="username" class="form-control" placeholder="new username" data-validation-error-msg="username must only contains alphanumeric" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="div-divider">
+                        <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-body"><b>Headshot: </b></div>
-                                <div class="panel-footer">
+                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse2"><b><span class="glyphicon glyphicon-edit"></span> Headshot: </b></a></div>
+                                <div id="collapse2" class="panel-collapse collapse">
+                                    <div class="panel-body">
 
-                                    <div class="form-group">
+                                        <div class="form-group">
 
-                                        <div class="col-sm-offset-2">
-                                            <input type="file" name="headshot" />
+                                            <div class="col-sm-offset-2">
+                                                <input type="file" name="headshot" data-validation="mime" data-validation-allowing="jpg, png, gif" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="div-divider">
+                        <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-body"><b>Email: </b></div>
-                                <div class="panel-footer">
 
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="email"> edit:</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" name="email" class="form-control" placeholder="yourname@domain.com" />
+                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse3"><b><span class="glyphicon glyphicon-edit"></span> Birthday: </b></a></div>
+                                <div id="collapse3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for="birthday"> edit:</label>
+                                            <div class="col-sm-10">
+                                                <input id="datefield" type="date" name="birthday" min="1900-01-01" max="2017-04-22" class="form-control" placeholder="yyyy-mm-dd" data-validation="birthdate" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="div-divider">
+                        <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-body"><b>Phone Number: </b></div>
-                                <div class="panel-footer">
+                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse4"><b><span class="glyphicon glyphicon-edit"></span> Phone Number: </b></a></div>
+                                <div id="collapse4" class="panel-collapse collapse">
+                                    <div class="panel-body">
 
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="phone"> edit:</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="phone" class="form-control" placeholder="xxx-xxx-xxxx" pattern="^\d{3}-\d{3}-\d{4}$" data-validation-error-msg="phone number should be in right format" />
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for="phone"> edit:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="phone" class="form-control" placeholder="xxx-xxx-xxxx" pattern="^\d{3}-\d{3}-\d{4}$" data-validation-error-msg="phone number should be in right format" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="div-divider">
+                        <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-body"><b>Bio: </b></div>
-                                <div class="panel-footer">
+                                <div class="panel-heading"> <a data-toggle="collapse" href="#collapse5"><b><span class="glyphicon glyphicon-edit"></span> School/ Company: </b></a></div>
+                                <div id="collapse5" class="panel-collapse collapse">
+                                    <div class="panel-body">
 
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="description"> edit:</label>
-                                        <div class="col-sm-10">
-                                            <textarea type="text" name="description" class="form-control" placeholder="your description"></textarea>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for="workplace"> edit:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="workplace" class="form-control" placeholder="new workplace" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="div-divider col-lg-10 col-lg-offset-1">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse6"><b><span class="glyphicon glyphicon-edit"></span> Bio: </b></a></div>
+                                <div id="collapse6" class="panel-collapse collapse">
+                                    <div class="panel-body">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for="description"> edit:</label>
+                                            <div class="col-sm-10">
+                                                <textarea type="text" name="description" class="form-control" placeholder="your description"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -129,10 +157,26 @@
 
     <script type="text/javascript">
         $.validate({
-            modules: 'html5',
+            modules: 'html5, date, file',
+
         });
 
         $("input").rules("remove", "required");
+    </script>
+    <script type="text/javascript">
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("datefield").setAttribute("max", today);
     </script>
 
 </body>
