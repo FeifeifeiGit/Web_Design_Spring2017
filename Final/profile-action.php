@@ -1,4 +1,8 @@
 <?php
+require 'vendor/autoload.php';
+
+use Aws\S3\S3Client ;
+use Aws\S3\Exception\S3Exception;
 
 include "db.php";
 session_start();
@@ -7,15 +11,33 @@ $username=$headshot=$birthday=$phonenumber=$workplace=$description="";
 $date = date('Y-m-d');
 $error=0;
 
-$target_dir="https://s3-us-west-2.amazonaws.com/minisocial/img/";
-//$target_dir="img/";
+try{
+    $client = S3Client::factory(array(
+        'credentials' => array(
+            'key'    => 'AKIAIWVQZB2VOE5J4LJQ',
+            'secret' => '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',
+         ),
+        'version' => '2006-03-01',
+        'region' => 'us-west-2'
+    ));
+    } catch(Exception $e) {
+     exit($e->getMessage());
+} 
+
+//S3 bucket name
+$bucket = 'minisocial';
+
+//set img folder in S3 bucket, witch all images uploaded here;
+$target_dir="img/";
 $headshot = $target_dir . basename($_FILES["headshot"]["name"]);
+
+//this is the local folder, if you do not want to upload to s3
+//$headshot = basename($_FILES["headshot"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     $username=$_POST["username"];
-    //$headshot=$_POST["headshot"];
     $birthday=$_POST["birthday"];
     $phonenumber=$_POST["phone"];
     $workplace=$_POST["workplace"];
@@ -25,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     // php validation 
 
     
-
+    //check the uploaded picture
     $check = getimagesize($_FILES["headshot"]["tmp_name"]);
     if($check !== false) {
         echo "File is an image - " . $check["mime"] . ".";
@@ -42,25 +64,49 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $_SESSION['typeError']="image already exists";
         $uploadOk = 0;
     }
+
     // check file type
-    /*if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+    /*这个不能用
+    不知为啥不能识别file type
+    我加上后全部变成type invalid了
+    */
+
+    /*
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
          $error++;
         $_SESSION['typeError']="image invalid";
         $uploadOk = 0;
     }
     */
     
-
+   
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
         echo "Sorry, your file was not uploaded.";
+
     // if everything is ok, try to upload file
     } else {
-         if (move_uploaded_file($_FILES["headshot"]["tmp_name"], $headshot)) {
+
+        try{
+            //upload to S3
+            $result = $client->putObject(array(
+                'Bucket' => $bucket,
+                'Key'    => $headshot,
+                'Body' => fopen($_FILES['headshot']['tmp_name'], 'r+'),
+            ));
+
+         } catch (Exception $e) {
+
+            exit($e->getMessage());
+        }
+         
+         //upload to local folder
+         /*if (move_uploaded_file($_FILES["headshot"]["tmp_name"], $headshot)) {
              echo "The file ". basename( $_FILES["headshot"]["name"]). " has been uploaded.";
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
+        */
     }
 
 
@@ -114,8 +160,10 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         }
 
         if(!empty($headshot)){
-            $sql="UPDATE  user SET headshot='$headshot' WHERE id=2";
+            $targetPath="https://s3-us-west-2.amazonaws.com/minisocial/".$headshot;
+            $sql="UPDATE  user SET headshot='$targetPath' WHERE id=2";
             $result=mysqli_query($conn, $sql);
+            echo "<br>$targetPath";
             if($result==false){
                 echo "error update headshot<br>";
             }
