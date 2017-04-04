@@ -44,7 +44,7 @@ session_start();
 </head>
 
 <body>
-<?php include "navBar.php";?>
+<?php include "userHome/navBar.php";?>
 
     <main>
         <div class="container">
