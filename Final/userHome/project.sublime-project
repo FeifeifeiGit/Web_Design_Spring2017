@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		},
+		{
+			"path": "/Applications/MAMP/htdocs/xdebugTest"
+		}
+	],
+	"settings":{
+		"xdebug":
+		{
+			"url": "http://project:8888/userHome.php",
+		}
+	}
+}

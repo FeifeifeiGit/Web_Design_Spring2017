@@ -73,14 +73,41 @@ a{
     transition: 0.3s;
     background-color: white;
 }
+.closebtn {
+    padding-left: 10px;
+    color: #888;
+    font-weight: bold;
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+.closebtn:hover {
+    color: #000;
+}
 .new-post-header,  .new-post-footer{
 	font-family: Georgia, "Lucida Console";	
 	padding: 4px;
 }
+.modal-header{
+    font-family: Arial, Verdana;	
+    letter-spacing: 80%;
+    font-size: 1em;
+	padding-top: 0.7em;
+	padding-bottom: 0.3em;
+}
+#fileToUpload{
+	display: none;
+}
+#postContent{
+	min-height: 4em;
+}
+.modal-footer img, i{
+ 	margin-right:0.5em;
+}
 .new-post-header a:hover,.new-post-header a:link,.new-post-header a:visited{
 	text-decoration: none;
 }
-.new-post .btn{
+.new-post .btn, .modal-footer a{
 	border-radius: 25px;
 	background-color: #f0f0f5;
 	margin:5px;
@@ -94,6 +121,9 @@ a{
 }
 textarea{
 	border-style: none;
+}
+.modal-dialog{
+	padding: 2em 2em;
 }
 .post-owner div{
  display: inline-block;
@@ -156,9 +186,13 @@ hr{
 	position: fixed;
 	margin-top: 0px;
 	padding-top: 1em;
+	margin-bottom: 20px;/* */
 }
 .usePage-friend-list .friend-item{
 	padding:0.5em 1em;
+}
+.friend-item span{
+	margin-left: 0.5em;
 }
 .friend-item .online-icon{
 	font-size: 0.6em;
@@ -166,7 +200,8 @@ hr{
 	color: green;
 }
 .rightSideBar-footer{
-  margin-top: 32.5em;
+ position: fixed;
+ bottom: 0;
 }
 .rightSideBar-footer button{
 	border:none;

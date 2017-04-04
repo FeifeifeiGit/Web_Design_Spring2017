@@ -1,3 +1,11 @@
+<?php
+//start session, get the username/id in this session
+ session_start();
+ //change to $sesson("");
+ $currentUser ="Fei";
+ $currentAvatar = "img/avatar.png";
+error_reporting(E_ALL); 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,48 +20,13 @@
 	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="css/userHome.css" rel="stylesheet">
+	<script src="css/userHome.js"></script>
+	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 </head>
 <body>
-	<!-- Navigation bar-->
-		<nav class="navbar navbar-default navbar-fixed-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>                        
-				      </button>
-						<span class="nav navbar-brand navbar-left" id="brandname">Find Your Group</span>
-				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav navbar-left">
-				        <li ><form class="navbar-form">
-			            	<div class="input-group">
-			               	 	<input type="text" class="form-control" placeholder="Search">
-			               	 	<div class="input-group-btn">
-			    	           		<button type="submit" class="btn btn-default" >
-			    	           			 <i class="glyphicon glyphicon-search"></i>
-			    	           		</button>
-			  	           		</div>
-			           		</div>
-		          		</form></li>
-		          	</ul>
-		          	<ul class="nav navbar-nav navbar-left">
-		          		<li >
-	          		      	<a href="#userPage"><img  src="img/avatar.png" class="avatar img-responsive img-circle" style="display:inline-block;" width="20" height="20" alt="Avatar"/><span style="padding-left:0.7em;">Name</span></a>
-	          		    </li>
-		          	</ul>
-		          	<ul class="nav navbar-nav navbar-right">
-	          		    <li>
-	          		    	<a href="#sth">something else</a>
-	          		    </li>
-	          			<li ><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout<span class="sr-only">(log out)</span></a></li>
-		       		</ul>
-		       	</div>	
-			</div>	
-		</nav>
+<?php include "navBar.php";?>
 
-		<div class="main-wrapper container-fluid text-left">
+       <div class="main-wrapper container-fluid text-left">
 			<div class="row">
 
 				<div class="col-sm-8 col-sm-push-2">
@@ -66,7 +39,7 @@
 				   		 		<a href="#userPage"><img src="img/avatar.png" class="avatar img-responsive" width="30" height="20" alt="Avatar"/></a>
 				   		 	</div>
 				   			<div>
-								<textarea rows="3" cols="90">
+								<textarea rows="3" cols="90" data-toggle="modal" data-target="#postModal">
 									post body here
 								</textarea>
 							</div>
@@ -74,6 +47,67 @@
 						<div class="new-post-footer">
 							<a class="btn"><span><img src="img/images-icon.png" width="30px" height="25px" /></span>Photos
 							</a>
+						</div>
+					</div>
+
+					<!-- Modal -->
+					<div id="postModal" class="modal fade" role="dialog">
+						 <div class="modal-dialog">
+						   <!-- Modal content-->
+						    <div class="modal-content">
+						        <div class="modal-header">
+							       <span class="glyphicon glyphicon-pencil"></span>create a new post
+						        </div>
+							    <div class="modal-body">
+							        <div id="postContent" contenteditable="true" >
+							             contentEdible Content
+							        </div>
+							    </div>
+						      	<div class="modal-footer">
+						     		<form action="upload.php" method="post" enctype="multipart/form-data">
+							      		<a class="btn pull-left" onclick="document.getElementById('fileToUpload').click();"><span><img src="img/images-icon.png" width="30px" height="25px" /></span>Photos
+							      		</a>
+							      		<input type="file" name="fileToUpload" id="fileToUpload">
+							      		<a class="btn pull-left"><i class="em em-angry"></i>Feeling/Mood</a>
+							      		<input type="submit" name ="submit" value="Create" class="btn btn-danger">  
+							      	</form>
+									
+						      	</div>
+						    </div>
+						</div>
+					</div>
+
+					<div class="single-post">
+						<div class="post-owner">
+							<div class="post-avatar">
+								<img src="img/avatar-1.jpg" alt="post-owner image" width="30px" height="30px"/>
+							</div>
+							<div class="post-infor">
+								<a href="#poster's page">poster name</a>
+								<p>Apr.03 2017<span class="glyphicon glyphicon-globe"></span></p>
+							</div>
+							<span class="closebtn" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+						</div>
+						<div class="post-body">
+							<div class="post-text">
+							   <p>
+							 		I just post a new picture!!!!
+							 		image is <?php echo $_GET["image"] ;?>. 
+							 		<?php var_dump($_GET)?>
+							   </p>
+							   <p>
+							   	 great music for commute:<a href=" https://www.youtube.com/watch?v=HdzI-191xhU&list=PLa8jvpZUJc5R9a-TH4mCaEocJbPzyDeET ">youtube playlist</a>
+							   </p>
+							</div>
+							<div class="post-pic">
+								<img class="img-responsive" src="<?php echo $_GET["image"] ;?>" alt="post image icon" width="500" height="450" />
+							</div>
+						</div>
+						<hr>
+						<div class="post-footer feedback-section">
+								<a href="#like"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
+								<a href="#comment"><span class="glyphicon glyphicon-comment"></span>Comment</a>
+								<a href="#share"><span class="glyphicon glyphicon-share-alt"></span>Share</a>
 						</div>
 					</div>
 
@@ -86,6 +120,7 @@
 								<a href="#poster's page">poster name</a>
 								<p>Mar.27 2017<span class="glyphicon glyphicon-globe"></span></p>
 							</div>
+							<span class="closebtn" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
 						</div>
 						<div class="post-body">
 							<div class="post-text">
@@ -200,29 +235,29 @@
 					<div class="usePage-friend-list">
 <!-- Friend list end-->
 						<div class="friend-item">
-							<a href="#userPage"><img src="img/avatar.png" alt="avatar" width="24" height="24"/> User Name</a>
+							<a href="#userPage"><img src="img/avatar.png" alt="avatar" width="24" height="24"/><span>User D</span></a>
 							<span class="online-icon fa fa-circle"></span></a>
 						</div>
 
 						<div class="friend-item">
-							<a href="#userPage"><img src="img/avatar-1.jpg" alt="avatar" width="24" height="24"/> User Name</a>
+							<a href="#userPage"><img src="img/avatar-1.jpg" alt="avatar" width="24" height="24"/><span>User A</span></a>
 							<span class="online-icon fa fa-circle"></span></a>
 						</div>
 
 						<div class="friend-item">
-							<a href="#userPage"><img src="img/avatar-2.jpeg" alt="avatar" width="24" height="24"/> User Name</a>
+							<a href="#userPage"><img src="img/avatar-2.jpeg" alt="avatar" width="24" height="24"/><span>User B</span></a>
 							<span class="online-icon fa fa-circle"></span></a>
 						</div>
 
 						<div class="friend-item">
-							<a href="#userPage"><img src="img/avatar-3.jpeg" alt="avatar" width="24" height="24"/> User Name</a>
+							<a href="#userPage"><img src="img/avatar-3.jpeg" alt="avatar" width="24" height="24"/> <span>User C</span></a>
 							<span class="online-icon fa fa-circle"></span></a>
 						</div>
 <!-- Friend list end-->
 						<div class="rightSideBar-footer">
-	    	           		<button type="submit">
+	    	           		<button type="submit" onclick="myFunction()">
 	    	           			 <i class="glyphicon glyphicon-search"></i>
-	    	           		</button><input type="text"  placeholder="Search"><button>
+	    	           		</button><input type="text" onkeyup="myFunction()" placeholder="Search"><button>
 	    	           			 <i class="glyphicon glyphicon-cog"></i>
 	    	           		</button>
 						</div>
