@@ -26,25 +26,26 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
     // php validation 
 
+     if(!empty(basename($_FILES["headshot"]["name"]))){
+            //check the uploaded picture
+            $check = getimagesize($_FILES["headshot"]["tmp_name"]);
+            if($check !== false) {
+                 echo "File is an image - " . $check["mime"] . ".";
+                $uploadOk = 1;
+            } else {
+                $error++;
+                $_SESSION['typeError']="this is not a real image";
+                $uploadOk = 0;
+            }
+
+            // Check if file already exists
+            if (file_exists($headshot)) {
+                $error++;
+                $_SESSION['typeError']="file already exists";
+                $uploadOk = 0;
+            }
+        }
     
-    //check the uploaded picture
-    $check = getimagesize($_FILES["headshot"]["tmp_name"]);
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    } else {
-        $error++;
-        $_SESSION['typeError']="this is not a real image";
-        $uploadOk = 0;
-    }
-
-    // Check if file already exists
-    if (file_exists($headshot)) {
-         $error++;
-        $_SESSION['typeError']="image already exists";
-        $uploadOk = 0;
-    }
-
     // check file type
     /*这个不能用
     不知为啥不能识别file type
@@ -58,40 +59,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $uploadOk = 0;
     }
     */
-    
-   
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-
-    // if everything is ok, try to upload file
-    } else {
-
-        try{
-            //upload to S3
-            $result = $client->putObject(array(
-                'Bucket' => $bucket,
-                'Key'    => $headshot,
-                'Body' => fopen($_FILES['headshot']['tmp_name'], 'r+'),
-            ));
-
-         } catch (Exception $e) {
-
-            exit($e->getMessage());
-        }
-         
-         //upload to local folder
-         /*if (move_uploaded_file($_FILES["headshot"]["tmp_name"], $headshot)) {
-             echo "The file ". basename( $_FILES["headshot"]["name"]). " has been uploaded.";
-        } else {
-            echo "Sorry, there was an error uploading your file.";
-        }
-        */
-    }
-
-
-
-
 
 
     if(preg_match('/[^a-z_\-0-9]/i', $username) && !empty($_POST["username"])){
@@ -141,7 +108,44 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             else echo "successfully update username!<br>";
         }
 
-        if(!empty($headshot)){
+
+
+        if(!empty(basename($_FILES["headshot"]["name"]))){
+
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+
+            // if everything is ok, try to upload file
+             } 
+
+            else {
+
+                try{
+                //upload to S3
+                    $result = $client->putObject(array(
+                        'Bucket' => $bucket,
+                        'Key'    => $headshot,
+                        'Body' => fopen($_FILES['headshot']['tmp_name'], 'r+'),
+                     ));
+
+                 } catch (Exception $e) {
+
+                    exit($e->getMessage());
+                 }
+         
+         //upload to local folder
+         /*
+         if (move_uploaded_file($_FILES["headshot"]["tmp_name"], $headshot)) {
+             echo "The file ". basename( $_FILES["headshot"]["name"]). " has been uploaded.";
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
+        */
+        }
+
+
+             //save the image path to database
             $targetPath="https://s3-us-west-2.amazonaws.com/minisocial/".$headshot;
             $sql="UPDATE  user SET headshot='$targetPath' WHERE id=2";
             $result=mysqli_query($conn, $sql);
@@ -151,6 +155,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             }
             else echo "successfully update headshot!<br>";
         }
+
+
 
         if(!empty($phonenumber)){
             $sql="UPDATE  user SET phone='$phonenumber' WHERE id=2";
