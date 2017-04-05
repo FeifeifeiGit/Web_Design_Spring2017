@@ -16,6 +16,10 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                 'Bucket' => $bucket,
                 'Key'    => $imagename,
                 'Body' => fopen($_FILES['uploadimage']['tmp_name'], 'r+'),
+                'options' => [
+                        'scheme' => 'http',
+                ],
+
             ));
 
          } catch (Exception $e) {

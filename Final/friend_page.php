@@ -176,6 +176,7 @@
     $num_rows = mysqli_num_rows($result);
 
 ?>
+
 	<!------- Nav Bar------->
 	<div>
 		<nav class="navbar navbar-default">
