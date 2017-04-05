@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
-
+<?php include "userHome/navBar.php";?>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>my photo</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
     <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -15,6 +15,16 @@
     <title>my photo</title>
 
     <style>
+        body{
+            background-image: url("img/background5.jpg");
+            /*background-repeat: no-repeat;*/
+            background-attachment: fixed;
+        }
+
+        .container{
+            background-color: white;
+            padding: 40px;
+        }
         
         #photonav {
             font-family: Papyrus;
@@ -44,7 +54,7 @@
 
 
 <body>
-<?php include "userHome/navBar.php";?>
+
 
 
     <main>
