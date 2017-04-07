@@ -36,12 +36,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                 $error++;
                 $_SESSION['typeError']="this is not a real image";
                 $uploadOk = 0;
+                
             }
 
             // Check if file already exists
             if (file_exists($headshot)) {
                 $error++;
                 $_SESSION['typeError']="file already exists";
+               
                 $uploadOk = 0;
             }
         }
@@ -64,22 +66,25 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if(preg_match('/[^a-z_\-0-9]/i', $username) && !empty($_POST["username"])){
         $error++;
         $_SESSION['usernameError']="username only contains alphanumeric";
+        
     }
 
     if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$birthday) && !empty($_POST["birthday"])){
-        
+        $error++;
         $_SESSION['birthdayError']="your date format is invalid";
+        
     }
     else if($date<=$birthday){
         $error++;
         $_SESSION['birthdayError']="your date is invalid";
+        
     }
    
 
-    if(!preg_match('/^\d{3}-\d{3}-\d{4}$/', $phonenumber) && !empty($_POST["phone"])){
-       
+    if(!preg_match('/^\d{3}-\d{3}-\d{4}$/', $phonenumber) && !empty($_POST["phone"])){      
         $error++;
         $_SESSION['phoneError']="phone format is invalid";
+        
     }
 
 

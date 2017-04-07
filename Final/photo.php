@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html>
-<?php include "userHome/navBar.php";?>
+<?php //include "userHome/navBar.php" ?>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>my photo</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    
     <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.js"></script>
+     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+     
     <title>my photo</title>
 
     <style>
         body{
-            background-image: url("img/background5.jpg");
-            /*background-repeat: no-repeat;*/
+            background-image: url("img/background3.jpg");
+            background-repeat: no-repeat;
             background-attachment: fixed;
         }
+        
 
         .container{
             background-color: white;
@@ -29,6 +32,7 @@
         #photonav {
             font-family: Papyrus;
         }
+
         
         .grid {
             margin-top: 40px;
@@ -38,25 +42,38 @@
             opacity: 0.8;
         }
 
+        .thumbnail:hover .over {
+            opacity: 1;
+        }
+
         #addnew:hover {
             color: black;
         }
         
        
         .container{
-            margin-top: 150px;
+            margin-top: 100px;
         }
+
+        .over {
+            opacity: 0;
+            position: absolute;
+            top: 30px;
+            right: 10px;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%)
+        }
+
+        .userlike{
+            color: red;
+        }
+
+        
     </style>
 </head>
 <?php include "db.php"; ?>
 
-
-
-
 <body>
-
-
-
     <main>
 
         <div class="container">
@@ -94,51 +111,119 @@
         </form>
 
             <div class="tab-content">
-                <div id="photowall" class="tab-pane fade in  active">
+                <div id="photowall" class="tab-pane fade in  active" role="tabpanel">
                     <div class="modal fade text-center" id="myModel" tabindex="-1" aria-labelledby="myModelLabel" area-hidden="true">
                         <div class="modal-dialog modal-lg" style="display: inline-block; width: auto;">
                             <div class="modal-content">
 
                                 <img src="" class="showPic" width=700px>
                                 <div class="modal-footer">
+                                    <button class="btn btn-danger deletePic" type="button" id="" onclick="return Deleteqry();" style="float: left;">Delete</button>
+                                    <!--button class="btn btn-default deletePic" id="" onclick="return Addtolike();">
+                                    <span class="glyphicon glyphicon-heart-empty"></span></button-->
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
 
 
-                    <div class="row">
-                        <div class="grid">
+                    <div class="row grid">
+                       
                             
                                 <?php
-                                    $sql="SELECT image FROM post";
+                                    //get all the user liked post
+                                    $postquery="SELECT Post_Id FROM UserLike WHERE User_Id=1";
+                                    $likedresult=mysqli_query($conn, $postquery);
+                                    $likedPost=Array();
+                                    while($row = mysqli_fetch_assoc($likedresult)){
+                                        array_push($likedPost, $row['Post_Id']);
+                                    }
+
+                                    $sql="SELECT Photo_Path, Post_Id FROM Post";
                                     $result=mysqli_query($conn, $sql);
+
                                     
+                                    //display all post
                                     while($row = mysqli_fetch_assoc($result)){
-                                        $image = $row['image'];
+                                        $image = $row['Photo_Path'];
+                                        $id= $row['Post_Id'];
+                                        
                                 ?>
-                                    <div class='col-xs-offset-0 col-xs-12 col-sm-offset-0 col-sm-6 col-md-4 col-lg-3 col-lg-offset-0 item'>
+                                    <div class='col-md-4 col-sm-6 col-lg-3 item'>
+                                   
                                         <div class='thumbnail'>
-                                             <a data-toggle="modal" data-target="#myModel"><img src='<?php echo $image; ?>' class='image getSrc'/></a>
+                                             <a data-toggle="modal" data-target="#myModel"><img src='<?php echo $image; ?>' id='<?php echo $id; ?>' class='image getSrc'/></a>
+                                            
+                                             <div class="over">
+                                              <?php 
+                                              //if user liked the post, then display remove-like button
+                                              if(in_array($id, $likedPost)){ ?>
+                                              <a href="photo-action.php?removeLike=<?php echo $id; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
+
+                                               <?php }
+
+                                               //if user does not add post to like, then display add-to-like button
+                                                else{ ?>
+                                                    <a href="photo-action.php?addToLike=<?php echo $id; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart-empty"></span></a>
+                                               <?php } ?>
+                                                
+                                             </div>
+                                             
                                         </div>
                                     </div>
 
                                 <?php
                                     }
-                                ?>
-                                
-
+                                ?>                            
                         </div>
-                    </div>
                 </div>
 
-                <div id="like" class="tab-pane fade">
-                    <h3>seems you haven't choose any liked photo!</h3>
+                <div id="like" class="tab-pane fade" role="tabpanel">
+
+                <div class="modal fade text-center" id="tabModel" tabindex="-1" aria-labelledby="myModelLabel" area-hidden="true">
+                        <div class="modal-dialog modal-lg" style="display: inline-block; width: auto;">
+                            <div class="modal-content">
+
+                                <img src="" class="showPic" width=700px>
+                                <div class="modal-footer">
+                                    <button class="btn btn-danger deletePic" type="button" id="" onclick="return Deleteqry();" style="float: left;">Delete</button>
+                                   
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="row grid">
+                    <?php 
+
+                        $sql="SELECT Photo_Path, Post_Id FROM Post WHERE Post_Id in (SELECT Post_Id FROM UserLike WHERE User_Id=1)";
+                        $result=mysqli_query($conn, $sql);
+                        while($row = mysqli_fetch_assoc($result)){
+                            $image = $row['Photo_Path'];
+                            $id= $row['Post_Id'];
+
+                            ?>
+                                    <div class='col-md-4 col-sm-6 col-lg-3 item'>
+                                   
+                                        <div class='thumbnail'>
+                                             <a data-toggle="modal" data-target="#tabModel"><img src='<?php echo $image; ?>' id='<?php echo $id; ?>' class='image getSrc'/></a>
+                                             <div class="over">
+                                              <a href="photo-action.php?removeLike=<?php echo $id; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
+                                             </div>
+                                             
+                                        </div>
+                                    </div>
+
+                                <?php
+                                    }
+                                ?>             
+                    
+                </div>
+                       
                 </div>
             </div>
         </div>
@@ -151,30 +236,68 @@
     </footer>
 
     <script type="text/javascript">
-        $(function() {
+/*
+       $(function() {
             $('.thumbnail img').load(function() {
                 $('.grid').masonry({
                     itemSelector: '.item',
                     layoutMode: 'fitRows'
                 });
+                
             });
         });
-        $(function() {
-            $('.grid').masonry({
-                // options
-                itemSelector: '.item',
-                layoutMode: 'fitRows'
+    
+    </script>
 
+<script type="text/javascript">
+    $(function() {
+        var $container = $('.grid');
+            $container.imagesLoaded(function() {
+                 $container.masonry({
+                    itemSelector: '.item',
+                    layoutMode: 'fitRows'
+                });
+                
             });
+        
 
+        $('a[data-toggle=tab]').each(function () {
+            var $this = $(this);
+            $this.on('shown.bs.tab', function () {
+                $container.imagesLoaded(function() {
+                    $container.masonry({
+                        itemSelector: '.item',
+                        layoutMode: 'fitRows'
+                     });
+                
+                 });
+            });
+      
         });
+    });
+
     </script>
 
     <script>
     $('.getSrc').click(function(){
         var src = $(this).attr('src'); 
         $('.showPic').attr('src', src);
+        var id = $(this).attr('id');
+        $('.deletePic').attr('id', id);
+        
     });
+
+    function Deleteqry(){
+        var id = $('.deletePic').attr('id');
+        window.location="photo-action.php?delete="+id;
+    }
+
+    function Addtolike(){
+        var id = $('.deletePic').attr('id');
+        window.location="photo-action.php?addToLike="+id;
+    }
+    
+    
     </script>
 </body>
 
