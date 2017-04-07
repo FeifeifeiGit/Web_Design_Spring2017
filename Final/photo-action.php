@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         
     }
 
-    header("Location: photo.php");
+    header("Location: photo.php#photowall");
     exit; 
 }
 
@@ -50,7 +50,7 @@ if($_GET['delete']){
             echo "error delete photo post<br>";
         }
   
-    header("Location: photo.php");
+    header("Location: photo.php#photowall");
     exit; 
 
   }
@@ -63,19 +63,35 @@ if($_GET['addToLike']){
     if($result==false){
         echo "error add to like<br>";
     }
-    header("Location: photo.php");
+    header("Location: photo.php#photowall");
     exit; 
   }
 
 //remove post from user like list
 if ($_GET['removeLike']) {
+    
+
     $id=$_GET['removeLike'];
     $sql="DELETE FROM UserLike WHERE Post_Id=$id and User_Id=1";
     $result=mysqli_query($conn, $sql);
     if($result==false){
         echo "cannot remove from like list<br>";
     }
-    header("Location: photo.php");
+    
+    header("Location: photo.php#photowall");
+    exit; 
+}
+
+
+if ($_GET['removeLikeTab']) {
+    $id=$_GET['removeLikeTab'];
+    $sql="DELETE FROM UserLike WHERE Post_Id=$id and User_Id=1";
+    $result=mysqli_query($conn, $sql);
+    if($result==false){
+        echo "cannot remove from like list<br>";
+    }
+    
+    header("Location: photo.php#like");
     exit; 
 }
 
