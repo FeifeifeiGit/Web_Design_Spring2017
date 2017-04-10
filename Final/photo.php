@@ -8,8 +8,8 @@
     <title>my photo</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.js"></script>
      <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
@@ -78,13 +78,17 @@
     <main>
 
         <div class="container">
-        <div id="tabs">
             <ul class="nav nav-tabs" id="photonav">
+<<<<<<< HEAD
                 <li class="active"><a data-toggle="tab" href="#photowall" id="nav1">Photo Wall</a></li>
                 <li ><a data-toggle="tab" href="#like" id="nav2">My Like</a></li>
+=======
+                <li class="active"><a data-toggle="tab" href="#photowall">Photo Wall</a></li>
+                <li><a data-toggle="tab" href="#like">My Like</a></li>
+>>>>>>> parent of 5d284a1... change profile table
                 <li class="pull-right"><button class="btn btn-danger" data-toggle="modal" data-target="#addphoto" id="addnew">add new</button></li>
             </ul>
-        </div>
+
         <form method="post" action="photo-action.php" enctype="multipart/form-data">
             <div class="modal fade text-center" id="addphoto" tabindex="-1" aria-labelledby="addphotoLabel" area-hidden="true">
                 <div class="modal-dialog">
@@ -113,7 +117,7 @@
         </form>
 
             <div class="tab-content">
-                <div id="photowall" class="tab-pane fade in active" role="tabpanel">
+                <div id="photowall" class="tab-pane fade in  active" role="tabpanel">
                     <div class="modal fade text-center" id="myModel" tabindex="-1" aria-labelledby="myModelLabel" area-hidden="true">
                         <div class="modal-dialog modal-lg" style="display: inline-block; width: auto;">
                             <div class="modal-content">
@@ -121,7 +125,8 @@
                                 <img src="" class="showPic" width=700px>
                                 <div class="modal-footer">
                                     <button class="btn btn-danger deletePic" type="button" id="" onclick="return Deleteqry();" style="float: left;">Delete</button>
-                        
+                                    <!--button class="btn btn-default deletePic" id="" onclick="return Addtolike();">
+                                    <span class="glyphicon glyphicon-heart-empty"></span></button-->
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                                 </div>
@@ -131,7 +136,9 @@
 
 
                     <div class="row grid">
-                        <?php
+                       
+                            
+                                <?php
                                     //get all the user liked post
                                     $postquery="SELECT Post_Id FROM UserLike WHERE User_Id=1";
                                     $likedresult=mysqli_query($conn, $postquery);
@@ -149,9 +156,7 @@
                                         $image = $row['Photo_Path'];
                                         $id= $row['Post_Id'];
                                         
-                         ?>
-                            
-                               
+                                ?>
                                     <div class='col-md-4 col-sm-6 col-lg-3 item'>
                                    
                                         <div class='thumbnail'>
@@ -213,8 +218,7 @@
                                         <div class='thumbnail'>
                                              <a data-toggle="modal" data-target="#tabModel"><img src='<?php echo $image; ?>' id='<?php echo $id; ?>' class='image getSrc'/></a>
                                              <div class="over">
-                                              <a href="photo-action.php?removeLikeTab=<?php echo $id; ?>" class="btn btn-default" id="<?php echo $id; ?>"><span class="glyphicon glyphicon-heart userlike"></span></a>
-                                            
+                                              <a href="photo-action.php?removeLike=<?php echo $id; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
                                              </div>
                                              
                                         </div>
@@ -236,6 +240,20 @@
         <a class="up-arrow" href="#" title="TO TOP"> <span class="glyphicon glyphicon-chevron-up"></span></a><br> <br>
         <p>&copy;Web Design Final</p>
     </footer>
+
+    <script type="text/javascript">
+/*
+       $(function() {
+            $('.thumbnail img').load(function() {
+                $('.grid').masonry({
+                    itemSelector: '.item',
+                    layoutMode: 'fitRows'
+                });
+                
+            });
+        });
+    
+    </script>
 
 <script type="text/javascript">
     $(function() {
@@ -284,6 +302,7 @@
         var id = $('.deletePic').attr('id');
         window.location="photo-action.php?addToLike="+id;
     }
+<<<<<<< HEAD
 
      var url = document.location.toString(); // select current url shown in browser.
     if (url.match('#')) {
@@ -345,6 +364,11 @@ $('#tabs a[href="' + hash + '"]').tab('show');
 
     
 </script>
+=======
+    
+    
+    </script>
+>>>>>>> parent of 5d284a1... change profile table
 </body>
 
 </html>
