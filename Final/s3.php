@@ -1,8 +1,8 @@
 <?php
-require 'template/vendor/autoload.php';
+require 'aws/vendor/autoload.php';
 
-use template\S3\S3Client ;
-use template\S3\Exception\S3Exception;
+use Aws\S3\S3Client ;
+use Aws\S3\Exception\S3Exception;
 
 
 try{

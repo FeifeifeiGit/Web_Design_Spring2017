@@ -105,11 +105,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         update into database if input is not empty;
         */
         if(!empty($username)){
-<<<<<<< HEAD
-            $sql="UPDATE  Users SET DisplayName='$username' WHERE User_Id=22";
-=======
-            $sql="UPDATE  user SET username='$username' WHERE id=2";
->>>>>>> parent of 5d284a1... change profile table
+            $sql="UPDATE  Users SET DisplayName='$username' WHERE id=2";
             $result=mysqli_query($conn, $sql);
             if($result==false){
                 echo "error update username<br>";
@@ -156,11 +152,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
              //save the image path to database
             $targetPath="https://s3-us-west-2.amazonaws.com/minisocial/".$headshot;
-<<<<<<< HEAD
-            $sql="UPDATE  Users SET ProfilePhoto='$targetPath' WHERE User_Id=22";
-=======
-            $sql="UPDATE  user SET headshot='$targetPath' WHERE id=2";
->>>>>>> parent of 5d284a1... change profile table
+            $sql="UPDATE  Users SET ProfilePhoto='$targetPath' WHERE id=2";
             $result=mysqli_query($conn, $sql);
             echo "<br>$targetPath";
             if($result==false){
@@ -172,11 +164,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 
         if(!empty($phonenumber)){
-<<<<<<< HEAD
-            $sql="UPDATE  Users SET PhoneNumber='$phonenumber' WHERE User_Id=22";
-=======
-            $sql="UPDATE  user SET phone='$phonenumber' WHERE id=2";
->>>>>>> parent of 5d284a1... change profile table
+            $sql="UPDATE  Users SET PhoneNumber='$phonenumber' WHERE id=2";
             $result=mysqli_query($conn, $sql);
             if($result==false){
                 echo "error update phonenumber<br>";
@@ -185,11 +173,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         }
 
         if(!empty($description)){
-<<<<<<< HEAD
-            $sql="UPDATE  Users SET Description='$description' WHERE User_Id=22";
-=======
-            $sql="UPDATE  user SET description='$description' WHERE id=2";
->>>>>>> parent of 5d284a1... change profile table
+            $sql="UPDATE  Users SET Description='$description' WHERE id=2";
             $result=mysqli_query($conn, $sql);
             if($result==false){
                 echo "error update description<br>";
@@ -198,11 +182,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         }
 
         if(!empty($workplace)){
-<<<<<<< HEAD
-            $sql="UPDATE  Users SET SchoolOrWork='$workplace' WHERE User_Id=22";
-=======
-            $sql="UPDATE  user SET workplace='$workplace' WHERE id=2";
->>>>>>> parent of 5d284a1... change profile table
+            $sql="UPDATE  Users SET SchoolOrWork='$workplace' WHERE id=2";
             $result=mysqli_query($conn, $sql);
             if($result==false){
                 echo "error update workplace<br>";
@@ -211,11 +191,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         }
 
         if(!empty($birthday)){
-<<<<<<< HEAD
-            $sql="UPDATE  Users SET Birthday='$birthday' WHERE User_Id=22";
-=======
-            $sql="UPDATE  user SET birthday='$birthday' WHERE id=2";
->>>>>>> parent of 5d284a1... change profile table
+            $sql="UPDATE  Users SET Birthday='$birthday' WHERE id=2";
             $result=mysqli_query($conn, $sql);
             if($result==false){
                 echo "error update birthday<br>";

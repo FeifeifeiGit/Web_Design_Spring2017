@@ -69,13 +69,14 @@ if($_GET['addToLike']){
 
 //remove post from user like list
 if ($_GET['removeLike']) {
+    
+
     $id=$_GET['removeLike'];
     $sql="DELETE FROM UserLike WHERE Post_Id=$id and User_Id=1";
     $result=mysqli_query($conn, $sql);
     if($result==false){
         echo "cannot remove from like list<br>";
     }
-<<<<<<< HEAD
     
     header("Location: photo.php");
     exit; 
@@ -91,13 +92,7 @@ if ($_GET['removeLikeTab']) {
     }
     
     header("Location: photo.php#like");
-=======
-    header("Location: photo.php");
->>>>>>> parent of 5d284a1... change profile table
     exit; 
 }
-
-require_once 'Offers.php';
-$offers = new Offers();
 
 ?>

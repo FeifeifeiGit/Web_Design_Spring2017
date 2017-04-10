@@ -4,13 +4,13 @@ require_once 'Offers.php';
 $offers = new Offers();
 
 
-if(isset($_GET['whichTab']) && !empty($_GET['whichTab'])) {
-    $action = $_GET['whichTab'];
+if(isset($_POST['whichTab']) && !empty($_POST['whichTab'])) {
+    $action = $_POST['whichTab'];
     switch($action) {
-        case 'photowall' : 
+        case 'tab1' : 
             echo($offers->retrieveA());
             break;
-        case 'like' : 
+        case 'tab2' : 
             echo($offers->retrieveB());
             break;
         
