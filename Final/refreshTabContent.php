@@ -13,7 +13,9 @@ if(isset($_POST['whichTab']) && !empty($_POST['whichTab'])) {
         case 'tab2' : 
             echo($offers->retrieveB());
             break;
-        
+        case 'tab3' : 
+            echo($offers->retrieveC());
+            break;
     }
 }
 

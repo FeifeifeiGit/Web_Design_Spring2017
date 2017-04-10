@@ -188,7 +188,7 @@
 
                                 <img src="" class="showPic" width=700px>
                                 <div class="modal-footer">
-                                    <button class="btn btn-danger deletePic" type="button" id="" onclick="return Deleteqry();" style="float: left;">Delete</button>
+                                    <!--button class="btn btn-danger deletePic" type="button" id="" onclick="return Deleteqry();" style="float: left;">Delete</button-->
                                    
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
@@ -266,6 +266,8 @@
     </script>
 
     <script>
+
+    //get the src in each pic and pass src to the modal panel
     $('.getSrc').click(function(){
         var src = $(this).attr('src'); 
         $('.showPic').attr('src', src);
@@ -284,42 +286,19 @@
         window.location="photo-action.php?addToLike="+id;
     }
 
-
-   /*  var url = document.location.toString(); // select current url shown in browser.
-    if (url.match('#')) {
-        $('.nav-tabs a[href=#' + url.split('#')[1] + ']').tab('show'); // activate current tab after reload page.
-    }
-     //Change hash for page-reload
-    $('.nav-tabs a').on('shown', function (e) { // this function call when we change tab.
-        window.location.hash = e.target.hash; // to change hash location in url.
-    });
-
-
-
-    $('#tabs a').click(function(e) {
-         e.preventDefault();
-     $(this).tab('show');
-    
-    });
-    */
-
-
-
+    //refresh tag content to its clicked tab
     $(document).ready(function() {
         if (location.hash) {
             $("a[href='" + location.hash + "']").tab("show");
         }
         $(document.body).on("click", "a[data-toggle]", function(event) {
             location.hash = this.getAttribute("href");
-        });
+            });
     });
-
     $(window).on("popstate", function() {
         var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
         $("a[href='" + anchor + "']").tab("show");
     });
-
-
 
 
   
