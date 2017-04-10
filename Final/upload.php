@@ -102,7 +102,11 @@ if ($uploadOk == 0) {
                      catch(Exception $e){
                             exit($e->getMessage());
                      }
-                 }else{
+                 }else if(empty(trim($_POST["postContent"]))){
+                    echo "Cannot send empty post!!!";
+                    exit;
+                 }
+                 else{
                     //if no image,just insert the content.
                      try{
                         $targetPath=s3path.$target_file;

@@ -1,13 +1,20 @@
 document.getElementById("submit").addEventListener("click", function(event) {
 			event.preventDefault();
-			console.log('prevened called'+event.defaultPrevented);
+			console.log('prevent called'+event.defaultPrevented);
 			//disable post content div
-			$("#postContent").prop('disable', 'true');
-
+			//$("#postContent").prop('disable', 'true');
+     
   		var fileSelect=document.getElementById("fileToUpload");
   		var files = fileSelect.files;
   		//get the post Content
   		var content=$("#postContent").text();
+  		if((files===undefined)&&(content.trim().length==0)){
+  			var feedback = document.getElementById("posting-feedback");
+  				feedback.innerHTML="<b>Cannot Publish Empty Content!</b>";
+  				feedback.style.color = "red";
+  				console.log("postSubmit return because of empty post");
+  				return;
+  		}
 		// Create a new FormData object.
 		var formData = new FormData();
 	  		// Add the file to the request.
@@ -29,9 +36,5 @@ document.getElementById("submit").addEventListener("click", function(event) {
 			    console.log('readyState: ' +this.readyState);
 			  }
 		};
-		// Send the Data.
-		// Open the connection.
-	     
-	    // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		 xhr.send(formData);
 	});

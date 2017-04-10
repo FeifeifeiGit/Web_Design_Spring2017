@@ -35,7 +35,7 @@ function myFunction() {
            reader.readAsDataURL(file); //reads the data as a URL
            preview.style.display="inline-block";
            console.log('preview src' + preview.src);
-           console.log('fileuploaded src ' + file.src);
+           console.log(reader.result);
            console.log('preview display' + preview.style.display);
        } else {
            preview.src = "";

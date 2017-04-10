@@ -15,7 +15,7 @@ body{
 	padding-right: 2em;
 }
 .navbar-form .input-group{
-	width: 40em;
+	width: 30em;
 }
 .nav .glyphicon-search{
 	color: #e62e00;
@@ -99,7 +99,7 @@ a{
 	display: none;
 }
 #postContent{
-	min-height: 2em;
+	min-height: 4em;
 	text-align: left;
 	position: relative;
 }
