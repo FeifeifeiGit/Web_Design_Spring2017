@@ -10,12 +10,7 @@ try{
         'profile' => 'project',
         'version' => '2006-03-01',
         'region' => 'us-west-2',
-        /*
-        'credentials' =>array (
-        'key' => 'AKIAIGK33EOOYWITJCQA',
-        'secret' => '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',
-    )
-    */
+     
         
     ));
     } catch(Exception $e) {
