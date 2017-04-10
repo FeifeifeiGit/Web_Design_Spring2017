@@ -73,6 +73,7 @@
 </head>
 <?php include "db.php"; ?>
 
+
 <body>
     <main>
 
@@ -80,7 +81,7 @@
         <div id="tabs">
             <ul class="nav nav-tabs" id="photonav">
                 <li class="active"><a data-toggle="tab" href="#photowall" id="nav1">Photo Wall</a></li>
-                <li><a data-toggle="tab" href="#like" id="nav2">My Like</a></li>
+                <li ><a data-toggle="tab" href="#like" id="nav2">My Like</a></li>
                 <li class="pull-right"><button class="btn btn-danger" data-toggle="modal" data-target="#addphoto" id="addnew">add new</button></li>
             </ul>
         </div>
@@ -287,18 +288,52 @@
      var url = document.location.toString(); // select current url shown in browser.
     if (url.match('#')) {
         $('.nav-tabs a[href=#' + url.split('#')[1] + ']').tab('show'); // activate current tab after reload page.
-    }
+    
     // Change hash for page-reload
     $('.nav-tabs a').on('shown', function (e) { // this function call when we change tab.
         window.location.hash = e.target.hash; // to change hash location in url.
     });
+    }
 
-    $('#tabs a').click(function(e) {
+    $( "#tabs" ).tabs({                                                                  
+  activate:function(event,ui){ 
+    //Remove the content of the current tab
+    ui.newPanel.empty();
+    //load the file you want into current panel
+    ui.newPanel.load('content'+(ui.newTab.index()+1)+'.php');                                                 
+  }                                                                          
+});
+    </script>
+
+    <script type="text/javascript">
+    /*$('#nav1').click(function() {
+    $.ajax({ url: 'refreshTabContent.php',
+           data: {whichTab: 'photowall'},
+           type: 'post',
+           success: function(output) {
+                     $('#photowall').html(output);
+                    }
+    });
+    });
+    
+
+    $('#nav2').click(function() {
+    $.ajax({ url: 'refreshTabContent.php',
+           data: {whichTab: 'like'},
+           type: 'get',
+           success: function(output) {
+                     $('#like').html(output);
+                    }
+    });
+    });
+
+/*
+$('#tabs a').click(function(e) {
   e.preventDefault();
   $(this).tab('show');
 });
 
-//store the currently selected tab in the hash value
+// store the currently selected tab in the hash value
 $("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
   var id = $(e.target).attr("href").substr(1);
   window.location.hash = id;
@@ -308,10 +343,8 @@ $("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
 var hash = window.location.hash;
 $('#tabs a[href="' + hash + '"]').tab('show');
 
-
-
-  
-    </script>
+    
+</script>
 </body>
 
 </html>

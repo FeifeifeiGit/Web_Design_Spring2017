@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         
     }
 
-    header("Location: photo.php#photowall");
+    header("Location: photo.php");
     exit; 
 }
 
@@ -50,7 +50,7 @@ if($_GET['delete']){
             echo "error delete photo post<br>";
         }
   
-    header("Location: photo.php#photowall");
+    header("Location: photo.php");
     exit; 
 
   }
@@ -63,7 +63,7 @@ if($_GET['addToLike']){
     if($result==false){
         echo "error add to like<br>";
     }
-    header("Location: photo.php#photowall");
+    header("Location: photo.php");
     exit; 
   }
 
@@ -78,7 +78,7 @@ if ($_GET['removeLike']) {
         echo "cannot remove from like list<br>";
     }
     
-    header("Location: photo.php#photowall");
+    header("Location: photo.php");
     exit; 
 }
 
@@ -94,5 +94,8 @@ if ($_GET['removeLikeTab']) {
     header("Location: photo.php#like");
     exit; 
 }
+
+require_once 'Offers.php';
+$offers = new Offers();
 
 ?>
