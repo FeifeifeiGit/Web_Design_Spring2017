@@ -99,7 +99,9 @@ a{
 	display: none;
 }
 #postContent{
-	min-height: 4em;
+	min-height: 2em;
+	text-align: left;
+	position: relative;
 }
 .modal-footer img, i{
  	margin-right:0.5em;

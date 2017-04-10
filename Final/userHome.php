@@ -19,9 +19,14 @@ error_reporting(E_ALL);
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="css/userHome.css" rel="stylesheet">
-	<script src="css/userHome.js"></script>
+	<link href="css/userHome.css?v=1" rel="stylesheet">
+	<script src="css/userHome.js?v=3"></script>
 	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+	<script >
+		//set the backdrop=true when post modal pop up
+		
+			 
+	</script>
 </head>
 <body>
 <?php include "navBar.php";?>
@@ -49,7 +54,7 @@ error_reporting(E_ALL);
 							</a>
 						</div>
 					</div>
-
+					<p id="posting-feedback"> post test here </p>
 					<!-- Modal -->
 					<div id="postModal" class="modal fade" role="dialog">
 						 <div class="modal-dialog">
@@ -60,16 +65,19 @@ error_reporting(E_ALL);
 						        </div>
 							    <div class="modal-body">
 							        <div id="postContent" contenteditable="true" >
-							             contentEdible Content
+							             <div>
+							             	<img id="preview-img" height="50" alt=""/>
+							             </div>
 							        </div>
 							    </div>
 						      	<div class="modal-footer">
 						     		<form action="upload.php" method="post" enctype="multipart/form-data">
 							      		<a class="btn pull-left" onclick="document.getElementById('fileToUpload').click();"><span><img src="img/images-icon.png" width="30px" height="25px" /></span>Photos
 							      		</a>
-							      		<input type="file" name="fileToUpload" id="fileToUpload">
+							      		<input type="file" name="fileToUpload" id="fileToUpload"
+							      		onchange="previewFile()">
 							      		<a class="btn pull-left"><i class="em em-angry"></i>Feeling/Mood</a>
-							      		<input type="submit" name ="submit" value="Create" class="btn btn-danger">  
+							      		<input type="button" name ="submit" id="submit" value="Create" class="btn btn-danger">  
 							      	</form>
 									
 						      	</div>
@@ -268,6 +276,6 @@ error_reporting(E_ALL);
 			</div>
 		</div>
 
-
+<script src="css/postSubmit.js?v=3"></script>
 </body>
 </html>

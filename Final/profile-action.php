@@ -107,7 +107,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             }
             else echo "successfully update username!<br>";
         }
-
+ 
 
 
         if(!empty(basename($_FILES["headshot"]["name"]))){
