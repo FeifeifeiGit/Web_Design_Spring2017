@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 	<link rel="icon" href="img/logo.png" type="image/x-icon">
 	<link href="css/userHome.css" rel="stylesheet">
 	<script src="css/userHome.js"></script>
@@ -114,7 +115,7 @@
 
 	#friend_photo_small {
 		width: 120px;
-		height: 140px;
+		height: 130px;
 		margin: 0 auto;
 	}
 
@@ -123,6 +124,35 @@
 	#photos {
 		display: none;
 	}
+
+	.post_photo{
+		padding: 0;
+
+	}
+
+	#friend_friends{
+		width: 100px;
+		height: 100px;
+		margin: 0 auto;
+	}
+
+	.friends {
+    position:relative;
+	}
+	.friends .friend_name {
+    position:absolute;
+    top:60px;
+    left:20px;
+    width:300px;
+		color: white;
+	}
+
+	/*.main_panel {
+  /* height: 480px;
+  height: calc(100vh - 200px);
+
+}*/
+
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -138,7 +168,7 @@
 			$("#friends").hide();
 			$("#photos").hide();
 		});
-		$("#friend_link").click(function() {
+		$(".friend_link").click(function() {
 			$("#friends").show();
 			$("#about").hide();
 			$("#home").hide();
@@ -151,17 +181,22 @@
 			$("#friends").hide();
 		});
 
-		$('form').submit(function() {
-			var comment = $.trim($('#comment').val());
-			if (comment === '') {
-				//alert('Text-field is empty.');
-				$("#comment").attr("placeholder", "Please Enter Something...").placeholder();
+
+
+		$('#comment_form').submit(function(event) {
+			event.preventDefault();
+			//var comment = $.trim($(this).find('input').val());
+			//var comment = $.trim($('.comment').val());
+			if (!$.trim($(this).find('.comment').val())) {
+				alert($(this).find('.comment'));
+				//$('.comment').attr("placeholder", "Please Enter Something...").placeholder();
+				$(this).find('.comment').attr("placeholder", "Please Enter Something...").placeholder();
 				return false;
 			}
 		});
 
-		$("#comment").blur(function() {
-			$("#comment").attr("placeholder", "Enter your comment").placeholder();
+		$(".comment").blur(function() {
+			$(this).attr("placeholder", "Enter your comment").placeholder();
 		});
 
 		$("form input").keypress(function(event) {
@@ -171,11 +206,13 @@
 			}
 		});
 
-		$("#comment_link").click(function() {
+		$(".comment_link").click(function() {
 			//e.preventDefault();
-			$("#comment").focus();
+			$(".comment").focus();
 			return false;
 		});
+
+
 
 		$('.getSrc_small').click(function(){
         var src = $(this).attr('src');
@@ -195,30 +232,37 @@
            $(this).parent().addClass('active');
         });
 
-
 	})
 </script>
 
+
 <body>
 	<?php
-		//session_start();
-    ob_start();
+    //ob_start();
     include 'db.php';
-		include "navBar.php";
+    include "navBar.php";
 ?>
-		<!------- Nav Bar------->
-
-
-		<!------- Cover ------->
+		<!-- Cover ------->
 		<div class="cover">
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="row">
 						<div class="col-lg-4">
-							<img class="profile_photo" src="img/profile_photo.png" />
+							<?php
+                            $sql_friend="SELECT * FROM Users where User_Id = 22";
+                            $result_friend=mysqli_query($conn, $sql_friend);
+                            $row_friend = mysqli_fetch_assoc($result_friend);
+                            $display_name = $row_friend['DisplayName'];
+                            $profile_photo = $row_friend['ProfilePhoto'];
+                            $birthday = $row_friend['Birthday'];
+                            $gender = $row_friend['Gender'];
+                            $email = $row_friend['Email'];
+                            ?>
+							<img class="profile_photo" src="<?php echo $profile_photo; ?>" />
 						</div>
 						<div class="profile_name col-lg-8">
-							<h1 id='friend_name'>Scarlett Johansson</h1>
+
+							<h1 id='friend_name'><?php echo $display_name; ?></h1>
 						</div>
 					</div>
 				</div>
@@ -231,12 +275,12 @@
 									<li><a href="#">Unfriend</a></li>
 								</ul>
 							</button>
-							<button type="button" id="follow_status" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span>Following &nbsp<i class="fa fa-sort-desc" aria-hidden="true"></i></span>
+							<!-- <button type="button" id="follow_status" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span>Following &nbsp<i class="fa fa-sort-desc" aria-hidden="true"></i></span>
 								<ul class="dropdown-menu">
 									<li><a href="#">Unfollowed</a></li>
 									<li><a href="#">F2</a></li>
 								</ul>
-							</button>
+							</button> -->
 							<button type="button" id="more_options" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span><i class="fa fa-bars" aria-hidden="true"></i></span>
 								<ul class="dropdown-menu">
 									<li><a href="#">Report</a></li>
@@ -253,7 +297,7 @@
 						<ul class="nav navbar-nav navbar-right" id="active">
 							<li class="active"><a href="#" id="home_link">Timeline</a></li>
 							<li><a href="#" id="about_link">About</a></li>
-							<li><a href="#" id="friend_link">Friends</a></li>
+							<li><a href="#" class="friend_link">Friends</a></li>
 							<li><a href="#" id="photo_link">Photos</a></li>
 							<li><a href="#"><span>More &nbsp<i class="fa fa-sort-desc" aria-hidden="true"></i></span></a></li>
 						</ul>
@@ -265,13 +309,13 @@
 		<div class="container-fluid headwrap">
 			<div class="mycontainer">
 				<br><br>
-													<!--   ----------"Home" div----------------->
+													<!--"Home" div----------------->
 				<div id="home">
 					<div class="row">
 						<div class="col-lg-5">
 							<div class="left_menu" data-spy="affix" data-offset-top="10">
 
-									<!--   ---------Left Photo Panel----------------->
+									<!---Left Photo Panel----------------->
 								<div class="panel panel-default">
 									<div class="panel-heading"><b>Photos</b></div>
 									<div class="panel-body">
@@ -287,21 +331,22 @@
 											</div>
 											<div class="photos">
 												<?php
-																							$sql_serchphoto="SELECT Photo_Path FROM Post";
-																							$result_photo=mysqli_query($conn, $sql_serchphoto);
-
-																							while ($row = mysqli_fetch_assoc($result_photo)) {
-																									$image = $row['Photo_Path']; ?>
+                                                                                            $sql_serchphoto="SELECT * FROM Post WHERE User_Id=22 Order BY Post_Id DESC";
+                                                                                            $result_photo=mysqli_query($conn, $sql_serchphoto);
+                                                                                            $count = 6;
+                                                                                            while ($row = mysqli_fetch_assoc($result_photo)) {
+                                                                                                if ($count > 0) {
+                                                                                                    $image = $row['Photo_Path']; ?>
 																							<div class='col-md-4 item'>
 																									<div class='thumbnail'>
 																											 <a data-toggle="modal" data-target="#myModel_small"><img src='<?php echo $image; ?>' class='image getSrc_small'id="friend_photo_small"/></a>
 																									</div>
 																							</div>
-
 																					<?php
-
-																							}
-																					?>
+                                                                                    $count--;
+                                                                                                }
+                                                                                            }
+                                                                                    ?>
 											</div>
 
 									</div>
@@ -309,11 +354,35 @@
 									</div>
 								</div>
 
-									<!--   ----------Left Friend Panel----------------->
+									<!--Left Friend Panel----------------->
 								<div class="panel panel-default">
-									<div class="panel-heading"><b>Friends</b></div>
+									<div class="panel-heading"><b>Friends<a href="#" class="friend_link"><span style="float:right">More</span></a></b></div>
 									<div class="panel-body">
 										<div class="friends">
+											<?php
+                                                $sql_friend_friends = "select Users.User_Id, Users.ProfilePhoto, Users.DisplayName
+												from FriendsList JOIN Users on FriendsList.Friend_Id = Users.User_Id WHERE FriendsList.User_Id = 22";
+                                                $result_friend_friends = mysqli_query($conn, $sql_friend_friends);
+																								$count = 6;
+                                                while ($row = mysqli_fetch_assoc($result_friend_friends)) {
+                                                    if ($count > 0) {
+                                                        $image = $row['ProfilePhoto'];
+                                                        $friend_name = $row['DisplayName']?>
+														<div class='col-md-4 item'>
+																<div class='thumbnail'>
+																		 <a href="#"><img src='<?php echo $image; ?>' class='friend_friends' id="friend_friends"/></a>
+																</div>
+																<div class="friend_name">
+																	<p>
+																		<?php echo $friend_name; ?>
+																	</p>
+																</div>
+														</div>
+												<?php
+                                                $count--;
+                                                    }
+                                                }
+                                                ?>
 
 										</div>
 									</div>
@@ -335,62 +404,77 @@
 							</div>
 							<div class="panel-footer"><a href="#">Post <span class="glyphicon glyphicon-check"></span></a></div>
 						</div>-->
+						<?php
+                                    $sql_post = "SELECT * FROM Post WHERE User_Id=22 ORDER BY Post_Id DESC";
+                                    $result_post=mysqli_query($conn, $sql_post);
+                                    while ($row_post = mysqli_fetch_assoc($result_post)) {
+                                        $image_post = $row_post['Photo_Path'];
+                                        $comment_post = $row_post['Content'];
+                                        $time_post = $row_post['Post_Time'];
+                                        $comment_post = $row_post['Content'];
+                                        $id_post = $row_post['Post_Id']; ?>
+
+
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<a href="#"><img src="image/friend1.png" width="30px" height="30px" /></a>
-									&nbsp&nbsp<b>Joey`s Moments</b></div>
+									<a href="#"><img src="<?php echo $profile_photo; ?>" width="30px" height="30px" /></a>
+									&nbsp&nbsp<b><?php echo $display_name; ?>`s Moments</b>
+								<span style="float:right"><?php echo $time_post; ?></span></div>
 								<div class="panel-body">
-									<p>Had a blast! Happy Halloween Y'll! It's freaking awesome to be yourself! This is our anniversary! It was her who pulled me out of whatever that was a year ago! I love her!!! My 凝姐！</p>
+
+									<p><?php echo $comment_post; ?></p>
+									<img class="post_photo img-responsive center-block" src="<?php echo $image_post; ?>"/>
 									<!--embed video from youtube-->
-									<div class="embed-responsive embed-responsive-16by9">
+									<!-- <div class="embed-responsive embed-responsive-16by9">
 										<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/OrWjjOOYxhI"></iframe>
-									</div>
+									</div> -->
 								</div>
 								<div class="panel-footer">
 									<a href="#"> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp Like</a>&nbsp
-									<a href="#" id="comment_link"> <span class="glyphicon glyphicon glyphicon-share-alt"></span>&nbsp Comment</a>&nbsp
+									<a href="#" class="comment_link"> <span class="glyphicon glyphicon glyphicon-share-alt"></span>&nbsp Comment</a>&nbsp
 									<a href="#"> <span class="glyphicon glyphicon-share"></span>&nbsp Share</a>
 
 									<br />
 									<hr />
 
-										<!--   ----------"Comment" div----------------->
+										<!--"Comment" div----------------->
 									<div class="commnet_div">
 										<?php
-													$sql = 'select * from Comments';
-						    					$result = mysqli_query($conn, $sql);
-						    					$num_rows = mysqli_num_rows($result);
-                                    while ($row = mysqli_fetch_array($result)) {
-                                        echo "<p>";
-                                        echo $row["message"] . "<br />";
-                                        echo "</p>";
-                                    }
-                                ?>
-											<form method="post">
-												<input type="text" name="comment" class="comment" id="comment" placeholder="Enter you comment" />
+                                        $sql_comment = "SELECT * FROM Comments WHERE Post_Id='$id_post' ORDER BY Comment_Id DESC";
+                                        $result_comment = mysqli_query($conn, $sql_comment);
+                                        while ($row_comment = mysqli_fetch_array($result_comment)) {
+                                            echo "<p>";
+                                            if ($row_comment['Content'] != '') {
+                                                echo $row_comment['Content'] . "<br />";
+                                            }
+                                            echo "</p>";
+                                        } ?>
+											<form class="comment_form" id="comment_form" method="post">
+												<input type="text" name="comment" class="comment" id="comment" placeholder="Enter your comment" />
 
 												<?php
-
                                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         $message = $_POST['comment'];
-                                        $sql_insert = "insert into Comments (message) values ('$message');";
-                                        $result = mysqli_query($conn, $sql_insert);
+                                        $sql_insert = "insert into Comments (Content,User_Id,Post_Id) values ('$message',1,11);";
+                                                                                //ob_start();
+                                                                                $result = mysqli_query($conn, $sql_insert);
                                         header("location:".$_SERVER['PHP_SELF']);
-                                        exit;
+                                        exit();
                                     }
-                                    //mysqli_close($conn);
-
-                                    ob_end_flush();
+                                    //ob_end_flush();
                                 ?>
 											</form>
 									</div>
 								</div>
 							</div>
+							<?php
+                                    } ?>
+
 						</div>
 					</div>
 				</div>
 
-				<!-- -------------- "About" div----------------------->
+				<!-- "About" div----------------------->
 				<div id="about">
 					<div class="panel panel-default">
 						<div class="panel-heading"><b>About</b></div>
@@ -404,17 +488,37 @@
 
 								<div class="tab-content col-lg-9">
 									<div class="tab-pane active" id="tab_a">
-										<h4>Overview</h4>
-										<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-										</p>
+
+										<table>
+											<tr>
+												<td>
+												</td>
+											</tr>
+										</table>
 									</div>
 									<div class="tab-pane" id="tab_b">
 										<h4>Pane B</h4>
 										<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
 									</div>
 									<div class="tab-pane" id="tab_c">
-										<h4>Pane C</h4>
-										<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+										<table>
+											<tr>
+												<td>Address</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Birthday</td>
+												<td><?php echo $birthday; ?></td>
+											</tr>
+											<tr>
+												<td>Gender</td>
+												<td><?php echo $gender; ?></td>
+											</tr>
+											<tr>
+												<td>Email</td>
+												<td><?php echo $email; ?></td>
+											</tr>
+										</table>
 									</div>
 								</div>
 							</div>
@@ -426,9 +530,9 @@
 
 
 
-				<!-- -------------- "Friends" div----------------------->
+				<!--"Friends" div----------------------->
 				<div id="friends">
-					<div class="panel panel-default">
+					<!-- <div class="panel panel-default">
 						<div class="panel-heading"><b>Friends</b></div>
 						<div class="panel-body">
 							<div class="about">
@@ -439,11 +543,52 @@
 							<a href="#"> <span class="glyphicon glyphicon-chevron-left"></span></a>
 							<a href="#"> <span class="glyphicon glyphicon-chevron-right"></span></a>
 						</div>
-					</div>
+					</div> -->
+					<?php
+						$sql_friend_friends = "select Users.User_Id, Users.ProfilePhoto, Users.DisplayName,Users.FirstName,Users.LastName
+						from FriendsList JOIN Users on FriendsList.Friend_Id = Users.User_Id WHERE FriendsList.User_Id = 22";
+																		$result_friend_friends = mysqli_query($conn, $sql_friend_friends);
+																		while ($row = mysqli_fetch_assoc($result_friend_friends)) {
+																						$image = $row['ProfilePhoto'];
+																						$friend_name = $row['DisplayName'];
+																						$friend_first = $row['FirstName'];
+																						$friend_last = $row['LastName'];?>
+								<div class='col-md-4 item'>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<div class="friend_name">
+											<p>
+												<?php echo $friend_first . " " . $friend_last . " (" . $friend_name . ")"; ?>
+											</p>
+										</div></div>
+										<div class="panel-body">
+											<div class="about">
+												<div class="row">
+													<div class="col-sm-5">
+														<a href="#"><img src='<?php echo $image; ?>' class='friend_friends img-circle' id="friend_friends"/></a>
+													</div>
+													<div class="col-sm-7">
+														<p>
+															Hello everybody!
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="panel-footer">
+											<a href="#"> <span class="glyphicon glyphicon-chevron">Follow</span></a>
+										</div>
+
+									</div>
+
+								</div>
+						<?php
+									}
+											?>
 				</div>
 
 
-				<!-- -------------- "Photos" div----------------------->
+				<!--"Photos" div----------------------->
 				<div id="photos">
 					<div class="panel panel-default">
 						<div class="panel-heading"><b>Photos &nbsp<a href="photo.php" style="float:right">Photo Wall</a></b></div>
@@ -462,21 +607,19 @@
 	                    </div>
 							<div class="photos">
 								<?php
-	                                    $sql_serchphoto="SELECT Photo_Path FROM Post";
-	                                    $result_photo=mysqli_query($conn, $sql_serchphoto);
-
-	                                    while ($row = mysqli_fetch_assoc($result_photo)) {
-	                                        $image = $row['Photo_Path']; ?>
+                                        $sql_serchphoto="SELECT * FROM Post WHERE User_Id=22 ORDER BY Post_Id";
+                                        $result_photo=mysqli_query($conn, $sql_serchphoto);
+                                        while ($row = mysqli_fetch_assoc($result_photo)) {
+                                            $image = $row['Photo_Path']; ?>
 	                                    <div class='col-xs-offset-0 col-xs-6 col-sm-offset-0 col-sm-4 col-md-3 col-lg-2 col-lg-offset-0 item'>
 	                                        <div class='thumbnail'>
 	                                             <a data-toggle="modal" data-target="#myModel"><img src='<?php echo $image; ?>' class='image getSrc'id="friend_photo"/></a>
 	                                        </div>
 	                                    </div>
-
 	                                <?php
 
-	                                    }
-	                                ?>
+                                        }
+                                    ?>
 							</div>
 						</div>
 						<div class="panel-footer">
