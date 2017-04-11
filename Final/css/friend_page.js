@@ -26,32 +26,38 @@ $(document).ready(function() {
 
 
 
-  $('#comment_form').submit(function(event) {
-    event.preventDefault();
-    //var comment = $.trim($(this).find('input').val());
-    //var comment = $.trim($('.comment').val());
-    if (!$.trim($(this).find('.comment').val())) {
-      alert($(this).find('.comment'));
-      //$('.comment').attr("placeholder", "Please Enter Something...").placeholder();
-      $(this).find('.comment').attr("placeholder", "Please Enter Something...").placeholder();
-      return false;
-    }
-  });
+  // $('.comment_form').submit(function(event) {
+  //   event.preventDefault();
+  //   //var comment = $.trim($('.comment').val());
+  //   var comment = $.trim($(this).children().val());
+  //   if (comment == '') {
+  //     alert($(this).children().attr("class"));
+  //     //$('.comment').attr("placeholder", "Please Enter Something...").placeholder();
+  //     $(this).children().attr("placeholder", "Please Enter Something...").placeholder();
+  //     return false;
+  //   }
+  // });
 
   $(".comment").blur(function() {
     $(this).attr("placeholder", "Enter your comment").placeholder();
   });
 
-  $("form input").keypress(function(event) {
+  $(".comment_form .comment").keypress(function(event) {
     if (event.which == 13) {
       event.preventDefault();
-      $("form").submit();
+      if(!$(this).val()){
+        //alert($(this).attr("placeholder"));
+          $(this).attr("placeholder", "Please Enter Something...").placeholder();
+          return false;
+      }
+      $(this).parent().submit();
     }
   });
 
   $(".comment_link").click(function() {
     //e.preventDefault();
-    $(".comment").focus();
+    //alert($(this).siblings(".comment_div").attr('class'));
+    $(this).siblings(".comment_div").children(".comment_form").children(".comment").focus();
     return false;
   });
 
