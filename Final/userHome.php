@@ -15,13 +15,22 @@ error_reporting(E_ALL);
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+	  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+	  crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="css/userHome.css" rel="stylesheet">
-	<script src="css/userHome.js"></script>
+	<link href="css/userHome.css?v=1" rel="stylesheet">
+	<script src="css/userHome.js?v=3"></script>
+	<script src="css/newPost.js"></script>
 	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+	<script >
+		//set the backdrop=true when post modal pop up
+		
+			 
+	</script>
 </head>
 <body>
 <?php include "navBar.php";?>
@@ -39,17 +48,18 @@ error_reporting(E_ALL);
 				   		 		<a href="#userPage"><img src="img/avatar.png" class="avatar img-responsive" width="30" height="20" alt="Avatar"/></a>
 				   		 	</div>
 				   			<div>
-								<textarea rows="3" cols="90" data-toggle="modal" data-target="#postModal">
-									post body here
+								<textarea rows="3" cols="80" data-toggle="modal" data-target="#postModal">
+							
 								</textarea>
 							</div>
 						</div>
 						<div class="new-post-footer">
 							<a class="btn"><span><img src="img/images-icon.png" width="30px" height="25px" /></span>Photos
 							</a>
+							<span id="posting-feedback"> post test here </span>
 						</div>
 					</div>
-
+					
 					<!-- Modal -->
 					<div id="postModal" class="modal fade" role="dialog">
 						 <div class="modal-dialog">
@@ -60,54 +70,23 @@ error_reporting(E_ALL);
 						        </div>
 							    <div class="modal-body">
 							        <div id="postContent" contenteditable="true" >
-							             contentEdible Content
+							             <div>
+							             	<img id="preview-img" height="50" alt=""/>
+							             </div>
 							        </div>
 							    </div>
 						      	<div class="modal-footer">
 						     		<form action="upload.php" method="post" enctype="multipart/form-data">
 							      		<a class="btn pull-left" onclick="document.getElementById('fileToUpload').click();"><span><img src="img/images-icon.png" width="30px" height="25px" /></span>Photos
 							      		</a>
-							      		<input type="file" name="fileToUpload" id="fileToUpload">
+							      		<input type="file" name="fileToUpload" id="fileToUpload"
+							      		onchange="previewFile()">
 							      		<a class="btn pull-left"><i class="em em-angry"></i>Feeling/Mood</a>
-							      		<input type="submit" name ="submit" value="Create" class="btn btn-danger">  
+							      		<input type="button" name ="submit" id="submit" value="Create" class="btn btn-danger">  
 							      	</form>
 									
 						      	</div>
 						    </div>
-						</div>
-					</div>
-
-					<div class="single-post">
-						<div class="post-owner">
-							<div class="post-avatar">
-								<img src="img/avatar-1.jpg" alt="post-owner image" width="30px" height="30px"/>
-							</div>
-							<div class="post-infor">
-								<a href="#poster's page">poster name</a>
-								<p>Apr.03 2017<span class="glyphicon glyphicon-globe"></span></p>
-							</div>
-							<span class="closebtn" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
-						</div>
-						<div class="post-body">
-							<div class="post-text">
-							   <p>
-							 		I just post a new picture!!!!
-							 		image is <?php echo $_GET["image"] ;?>. 
-							 		<?php var_dump($_GET)?>
-							   </p>
-							   <p>
-							   	 great music for commute:<a href=" https://www.youtube.com/watch?v=HdzI-191xhU&list=PLa8jvpZUJc5R9a-TH4mCaEocJbPzyDeET ">youtube playlist</a>
-							   </p>
-							</div>
-							<div class="post-pic">
-								<img class="img-responsive" src="<?php echo $_GET["image"] ;?>" alt="post image icon" width="500" height="450" />
-							</div>
-						</div>
-						<hr>
-						<div class="post-footer feedback-section">
-								<a href="#like"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
-								<a href="#comment"><span class="glyphicon glyphicon-comment"></span>Comment</a>
-								<a href="#share"><span class="glyphicon glyphicon-share-alt"></span>Share</a>
 						</div>
 					</div>
 
@@ -126,9 +105,6 @@ error_reporting(E_ALL);
 							<div class="post-text">
 							   <p>
 							 		nightmire traffic in the morning.
-							   </p>
-							   <p>
-							   	 great music for commute:<a href=" https://www.youtube.com/watch?v=HdzI-191xhU&list=PLa8jvpZUJc5R9a-TH4mCaEocJbPzyDeET ">youtube playlist</a>
 							   </p>
 							</div>
 							<div class="post-pic">
@@ -268,6 +244,6 @@ error_reporting(E_ALL);
 			</div>
 		</div>
 
-
+<script src="css/postSubmit.js?v=3"></script>
 </body>
 </html>

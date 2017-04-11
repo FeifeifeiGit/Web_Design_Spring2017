@@ -41,14 +41,14 @@
 		          		</form></li>
 		          	</ul>
 		          	<ul class="nav navbar-nav navbar-left">
-		          		<li >
+		          		<li id="user-infor">
 	          		      	<a href="#userPage"><img  src="img/avatar.png" class="avatar img-responsive img-circle" style="display:inline-block;" width="20" height="20" alt="Avatar"/><span style="padding-left:0.7em;">Name</span></a>
+	          		    </li>
+	          		    <li>
+	          		    	<a href="userHome.php">Home</a>
 	          		    </li>
 		          	</ul>
 		          	<ul class="nav navbar-nav navbar-right">
-	          		    <li>
-	          		    	<a href="#sth">something else</a>
-	          		    </li>
 	          			<li ><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout<span class="sr-only">(log out)</span></a></li>
 		       		</ul>
 		       	</div>	
