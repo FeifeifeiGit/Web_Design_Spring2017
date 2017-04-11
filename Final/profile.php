@@ -44,8 +44,8 @@ session_start();
 </head>
 
 <body>
-<?php include "userHome/navBar.php";?>
 
+<?php include "userHome/navBar.php";?>
     <main>
         <div class="container">
 
@@ -66,6 +66,7 @@ session_start();
                                             </div>
                                             <div class="error col-sm-8 col-sm-offset-2">
                                                 <?php echo $_SESSION['usernameError']; ?>
+                                               
                                             </div>
 
                                         </div>
@@ -87,6 +88,7 @@ session_start();
                                             </div>
                                             <div class="error col-sm-8 col-sm-offset-2">
                                                 <?php echo $_SESSION['typeError']; ?>
+
                                             </div>
                                         </div>
                                     </div>
@@ -185,6 +187,7 @@ session_start();
         });
 
         $("input").rules("remove", "required");
+        
     </script>
     <script type="text/javascript">
         var today = new Date();
@@ -201,8 +204,12 @@ session_start();
         today = yyyy + '-' + mm + '-' + dd;
         document.getElementById("datefield").setAttribute("max", today);
     </script>
+
     <?php
-    session_destroy(); 
+    unset($_SESSION["usernameError"]);
+    unset($_SESSION["birthdayError"]);
+    unset($_SESSION["phoneError"]);
+    unset($_SESSION["typeError"]);
     ?>
 
 </body>

@@ -10,7 +10,8 @@ try{
         'profile' => 'project',
         'version' => '2006-03-01',
         'region' => 'us-west-2',
-     
+        'scheme' => 'http'
+
         
     ));
     } catch(Exception $e) {
