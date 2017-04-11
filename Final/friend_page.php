@@ -239,21 +239,10 @@
                                             }
                                             echo "</p>";
                                         } ?>
-                                                <form class="comment_form" id="comment_form" method="post">
-                                                    <input type="text" name="comment" class="comment" id="<?php echo $id_post?>" placeholder="Enter your comment" />
-
-                                                    <?php
-                                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                        $message = $_POST['comment'];
-                                        $sql_insert = "insert into Comments (Content,User_Id,Post_Id) values ('$message',2,'$id_post');";
-                                        //ob_start();
-                                        $result = mysqli_query($conn, $sql_insert);
-                                        header("location:friend_page.php");
-                                        exit;
-                                    }
-                                    //ob_end_flush();
-                                ?>
-                                                </form>
+                                        <form class="comment_form" id="comment_form" method="post" action="friend_page-action.php?>">
+                                        <input type="text" name="comment" class="comment" id="<?php echo $id_post?>" placeholder="Enter your comment" />
+                                        <input type="hidden" name="postId" value="<?php echo $id_post?>" />
+                                        </form>
                                         </div>
                                     </div>
                                 </div>
