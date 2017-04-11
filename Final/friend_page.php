@@ -21,221 +21,16 @@
 	<link rel="icon" href="img/logo.png" type="image/x-icon">
 	<link href="css/userHome.css" rel="stylesheet">
 	<script src="css/userHome.js"></script>
+  <link href="css/friend_page.css" rel="stylesheet">
+	<script src="css/friend_page.js"></script>
 </head>
 <style>
 	.cover {
 		background-image: url("img/cover.jpg");
-		background-color: red;
-		height: 360px;
-		width: 900px;
-		margin: auto;
-		top: -20px;
-		position: relative;
 	}
 
-	.cover_button {
-		margin-top: 300px;
-		margin-left: 130px;
-		margin-bottom: 20px;
-	}
-
-	#friend_status:hover .dropdown-menu {
-		display: block;
-	}
-
-	#follow_status:hover .dropdown-menu {
-		display: block;
-	}
-
-	#more_options:hover .dropdown-menu {
-		display: block;
-	}
-
-	.dropdown-menu {
-		display: none;
-		position: absolute;
-		background-color: #f9f9f9;
-		min-width: 100px;
-		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-		z-index: 1;
-	}
-
-	.profile_photo {
-		width: 150px;
-		height: 150px;
-		margin-left: 20px;
-		bottom: -380px;
-		position: absolute;
-		z-index: 1;
-		border: solid 5px white;
-	}
-
-	#friend_name {
-		color: white;
-		bottom: -350px;
-		position: absolute;
-		margin-left: 50px;
-		z-index: 1;
-	}
-
-	.mycontainer {
-		width: 900px;
-		margin: auto;
-	}
-
-	.panel>.panel-heading {
-		color: #e62e00;
-	}
-
-
-	.affix {
-		top: 0;
-		width: 360px;
-		z-index: 2;
-	}
-
-	.comment {
-		width: 100%;
-	}
-
-	.comment_div {
-		color: black;
-	}
-
-	.thumbnail {
-		margin:-10px;
-		padding: 0px !important;
-	}
-
-	#friend_photo {
-		width: 140px;
-		height: 180px;
-		margin: 0 auto;
-	}
-
-	#friend_photo_small {
-		width: 120px;
-		height: 130px;
-		margin: 0 auto;
-	}
-
-	#about,
-	#friends,
-	#photos {
-		display: none;
-	}
-
-	.post_photo{
-		padding: 0;
-
-	}
-
-	#friend_friends{
-		width: 100px;
-		height: 100px;
-		margin: 0 auto;
-	}
-
-	.friends {
-    position:relative;
-	}
-	.friends .friend_name {
-    position:absolute;
-    top:60px;
-    left:20px;
-    width:300px;
-		color: white;
-	}
-
-	/*.main_panel {
-  /* height: 480px;
-  height: calc(100vh - 200px);
-
-}*/
 
 </style>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#about_link").click(function() {
-			$("#about").show();
-			$("#home").hide();
-			$("#friends").hide();
-			$("#photos").hide();
-		});
-		$("#home_link").click(function() {
-			$("#home").show();
-			$("#about").hide();
-			$("#friends").hide();
-			$("#photos").hide();
-		});
-		$(".friend_link").click(function() {
-			$("#friends").show();
-			$("#about").hide();
-			$("#home").hide();
-			$("#photos").hide();
-		});
-		$("#photo_link").click(function() {
-			$("#photos").show();
-			$("#about").hide();
-			$("#home").hide();
-			$("#friends").hide();
-		});
-
-
-
-		$('#comment_form').submit(function(event) {
-			event.preventDefault();
-			//var comment = $.trim($(this).find('input').val());
-			//var comment = $.trim($('.comment').val());
-			if (!$.trim($(this).find('.comment').val())) {
-				alert($(this).find('.comment'));
-				//$('.comment').attr("placeholder", "Please Enter Something...").placeholder();
-				$(this).find('.comment').attr("placeholder", "Please Enter Something...").placeholder();
-				return false;
-			}
-		});
-
-		$(".comment").blur(function() {
-			$(this).attr("placeholder", "Enter your comment").placeholder();
-		});
-
-		$("form input").keypress(function(event) {
-			if (event.which == 13) {
-				event.preventDefault();
-				$("form").submit();
-			}
-		});
-
-		$(".comment_link").click(function() {
-			//e.preventDefault();
-			$(".comment").focus();
-			return false;
-		});
-
-
-
-		$('.getSrc_small').click(function(){
-        var src = $(this).attr('src');
-        $('.showPic_small').attr('src', src);
-
-    });
-
-		$('.getSrc').click(function(){
-        var src = $(this).attr('src');
-        $('.showPic').attr('src', src);
-    });
-
-		$('#myModel_small').appendTo("body");
-
-		$('#active li a').click(function() {
-           $('#active li').removeClass();
-           $(this).parent().addClass('active');
-        });
-
-	})
-</script>
-
-
 <body>
 	<?php
     //ob_start();
@@ -396,14 +191,7 @@
 
 						<!-- middle friend zone-->
 						<div class="col-lg-7">
-							<!--friend1-->
-							<!--<div class="panel panel-default">
-							<div class="panel-heading"><b>Leave a comment</b></div>
-							<div class="panel-body">
-								<textarea class="mood" rows="5" style="width:100%;border:none" placeholder="TYPE YOUR MOOD HERE"></textarea>
-							</div>
-							<div class="panel-footer"><a href="#">Post <span class="glyphicon glyphicon-check"></span></a></div>
-						</div>-->
+
 						<?php
                                     $sql_post = "SELECT * FROM Post WHERE User_Id=22 ORDER BY Post_Id DESC";
                                     $result_post=mysqli_query($conn, $sql_post);
@@ -501,24 +289,25 @@
 										<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
 									</div>
 									<div class="tab-pane" id="tab_c">
-										<table>
-											<tr>
-												<td>Address</td>
-												<td></td>
-											</tr>
-											<tr>
-												<td>Birthday</td>
-												<td><?php echo $birthday; ?></td>
-											</tr>
-											<tr>
-												<td>Gender</td>
-												<td><?php echo $gender; ?></td>
-											</tr>
-											<tr>
-												<td>Email</td>
-												<td><?php echo $email; ?></td>
-											</tr>
-										</table>
+                    <table class="tg" style="undefined;table-layout: fixed; width: 485px">
+                      <colgroup>
+                        <col style="width: 109.2px">
+                        <col style="width: 500px">
+                      </colgroup>
+
+                      <tr>
+                        <td>Birthday</td>
+                        <td><?php echo $birthday; ?></td>
+                      </tr>
+                      <tr>
+                        <td>Gender</td>
+                        <td><?php echo $gender; ?></td>
+                      </tr>
+                      <tr>
+                        <td>Email</td>
+                        <td><?php echo $email; ?></td>
+                      </tr>
+                    </table>
 									</div>
 								</div>
 							</div>
@@ -532,18 +321,7 @@
 
 				<!--"Friends" div----------------------->
 				<div id="friends">
-					<!-- <div class="panel panel-default">
-						<div class="panel-heading"><b>Friends</b></div>
-						<div class="panel-body">
-							<div class="about">
-
-							</div>
-						</div>
-						<div class="panel-footer">
-							<a href="#"> <span class="glyphicon glyphicon-chevron-left"></span></a>
-							<a href="#"> <span class="glyphicon glyphicon-chevron-right"></span></a>
-						</div>
-					</div> -->
+					
 					<?php
 						$sql_friend_friends = "select Users.User_Id, Users.ProfilePhoto, Users.DisplayName,Users.FirstName,Users.LastName
 						from FriendsList JOIN Users on FriendsList.Friend_Id = Users.User_Id WHERE FriendsList.User_Id = 22";
