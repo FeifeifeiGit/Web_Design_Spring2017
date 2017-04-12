@@ -146,7 +146,7 @@
                                     //display all post
                                     while($row = mysqli_fetch_assoc($result)){
                                         $image = $row['Photo_Path'];
-                                        $id= $row['Post_Id'];
+                                        $id = $row['Post_Id'];
                                         
                          ?>
                             

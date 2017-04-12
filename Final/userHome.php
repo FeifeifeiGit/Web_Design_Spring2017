@@ -1,9 +1,10 @@
 <?php
 //start session, get the username/id in this session
  session_start();
- //change to $sesson("");
- $currentUser ="Fei";
- $currentAvatar = "img/avatar.png";
+include "s3.php";
+include "db.php";
+
+
 error_reporting(E_ALL); 
 ?>
 <!DOCTYPE html>
@@ -22,7 +23,7 @@ error_reporting(E_ALL);
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="css/userHome.css?v=1" rel="stylesheet">
+	<link href="css/userHome.css?v=2" rel="stylesheet">
 	<script src="css/userHome.js?v=3"></script>
 	<script src="css/newPost.js"></script>
 	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
@@ -45,7 +46,7 @@ error_reporting(E_ALL);
 				   		</div>
 				   		<div class="new-post-body">
 				   		 	<div style="margin-bottom:30px;">
-				   		 		<a href="#userPage"><img src="img/avatar.png" class="avatar img-responsive" width="30" height="20" alt="Avatar"/></a>
+				   		 		<a href="friend_page.php?userId=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>" class="avatar img-responsive" width="30" height="20" alt="Avatar"/></a>
 				   		 	</div>
 				   			<div>
 								<textarea rows="3" cols="80" data-toggle="modal" data-target="#postModal">
@@ -90,106 +91,72 @@ error_reporting(E_ALL);
 						</div>
 					</div>
 
+<?php
+$homePostQuery = "SELECT * FROM Post 
+Join Users on Users.User_Id=Post.User_Id
+WHERE Post.User_Id in (SELECT Friend_Id FROM FriendsList WHERE FriendsList.User_Id='$currentId') 
+ORDER BY Post.Post_Time desc 
+";
+$homePostResult = mysqli_query($conn, $homePostQuery);
+				while($row = mysqli_fetch_assoc($homePostResult)){
+                        $postOwner = $row['DisplayName'];
+                        $ownerId = $row['User_Id'];
+                        $ownerAvarta = $row['ProfilePhoto'];
+                        $postTimeOrigin = $row['Post_Time'];
+                        $tempTime = strtotime($postTimeOrigin);
+                        $postTime = date("D M d Y H:i", $tempTime);
+                        $postText = $row['Content'];
+                        $postImage = $row['Photo_Path'];
+ ?>
 					<div class="single-post">
 						<div class="post-owner">
 							<div class="post-avatar">
-								<img src="img/avatar-1.jpg" alt="post-owner image" width="30px" height="30px"/>
+								<img src="<?php echo $ownerAvarta; ?>" alt="post-owner image" width="30px" height="30px"/>
 							</div>
 							<div class="post-infor">
-								<a href="#poster's page">poster name</a>
-								<p>Mar.27 2017<span class="glyphicon glyphicon-globe"></span></p>
+								<a href="friend_page.php?userId=<?php echo $ownerId;?>"><?php echo $postOwner;?></a>
+								<p><?php echo $postTime;?><span class="glyphicon glyphicon-globe"></span></p>
 							</div>
 							<span class="closebtn" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
 						</div>
 						<div class="post-body">
 							<div class="post-text">
 							   <p>
-							 		nightmire traffic in the morning.
+							 		<?php echo $postText;?>
 							   </p>
 							</div>
+						<?php 
+						   if(($postImage==null)||($postImage=="")){}
+						   else{
+						?>
 							<div class="post-pic">
-								<img class="img-responsive" src="img/postExample-1.jpeg" alt="post image icon" width="500" height="450" />
+								<img class="img-responsive" src="<?php echo $postImage;?>" alt="post image icon" width="500" height="450" />
 							</div>
-						</div>
-						<hr>
-						<div class="post-footer feedback-section">
-								<a href="#like"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
-								<a href="#comment"><span class="glyphicon glyphicon-comment"></span>Comment</a>
-								<a href="#share"><span class="glyphicon glyphicon-share-alt"></span>Share</a>
-						</div>
-					</div>
 
+						<?php
+							}
+						 ?>
+						</div>
+						<hr>
+						<div class="post-footer feedback-section">
+								<a href="#like"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
+								<a href="#comment"><span class="glyphicon glyphicon-comment"></span>Comment</a>
+								<a href="#share"><span class="glyphicon glyphicon-share-alt"></span>Share</a>
+						</div>
+					</div>
+						<?php
+                                }
+                        ?>  
 <!--second post -->
-					<div class="single-post">
-						<div class="post-owner">
-							<div class="post-avatar">
-								<img src="img/avatar-2.jpeg" alt="post-owner image" width="30px" height="30px"/>
-							</div>
-							<div class="post-infor">
-								<a href="#poster's page">poster name</a>
-								<p>Mar.27 2017<span class="glyphicon glyphicon-globe"></span></p>
-							</div>
-						</div>
-						<div class="post-body">
-							<div class="post-text">
-							   <p>
-							 		blizzard in boston 2017!!!!
-							   </p>
-							   <p>
-							   	  wheather warning : avoid any unnecessary traffic. School cancaled.....
-							   </p>
-							</div>
-							<div class="post-pic">
-								<img class="img-responsive" src="img/postExample-2.jpeg" alt="post image icon" width="500" height="450" />
-							</div>
-						</div>
-						<hr>
-						<div class="post-footer feedback-section">
-								<a href="#like"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
-								<a href="#comment"><span class="glyphicon glyphicon-comment"></span>Comment</a>
-								<a href="#share"><span class="glyphicon glyphicon-share-alt"></span>Share</a>
-						</div>
-					</div>
-<!--second post end -->	
-<!--third post -->
-					<div class="single-post">
-						<div class="post-owner">
-							<div class="post-avatar">
-								<img src="img/avatar-3.jpeg" alt="post-owner image" width="30px" height="30px"/>
-							</div>
-							<div class="post-infor">
-								<a href="#poster's page">poster name</a>
-								<p>Mar.27 2017<span class="glyphicon glyphicon-globe"></span></p>
-							</div>
-						</div>
-						<div class="post-body">
-							<div class="post-text">
-							   <p>
-							 		Spring in the air Finally!!! Kidding
-							   </p>
-							   <p>
-							   	  low quality picture to show the post effect on my post page.
-							   </p>
-							</div>
-							<div class="post-pic">
-								<img class="img-responsive" src="img/postExample-3.jpeg" alt="post image icon" width="500" height="450" />
-							</div>
-						</div>
-						<hr>
-						<div class="post-footer feedback-section">
-								<a href="#like"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
-								<a href="#comment"><span class="glyphicon glyphicon-comment"></span>Comment</a>
-								<a href="#share"><span class="glyphicon glyphicon-share-alt"></span>Share</a>
-						</div>
-					</div>
+					
 <!--third post end -->	
 				</div>
 <!--left side bar -->
 				<div class="col-sm-2 col-sm-pull-8 leftSideBar">
 					<div class="left-wrapper">
 						<div class="profile-shortcut">
-							<a href="#userPage"><img src="img/avatar.png" alt="avatar" width="20" height="20"/> User Name
-								<a class="edit-icon" href="#editProfile"><span class="glyphicon glyphicon-edit"></span></a>
+							<a href="friend_page.php?userId=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>"  alt="avatar" width="20" height="20"/> <?php echo $displayName; ?>
+								<a class="edit-icon" href="profile.php"><span class="glyphicon glyphicon-edit"></span></a>
 							</a>
 						</div>
 						<div class="calender">
@@ -210,25 +177,30 @@ error_reporting(E_ALL);
 
 					<div class="usePage-friend-list">
 <!-- Friend list end-->
+<?php
+$friendListQuery = "SELECT * FROM Users WHERE User_Id in (SELECT Friend_Id FROM FriendsList WHERE User_Id='$currentId') ORDER BY Users.online LIMIT 10";
+$fListResult = mysqli_query($conn, $friendListQuery);
+				while($row = mysqli_fetch_assoc($fListResult)){
+                        $friendAvarta = $row['ProfilePhoto'];
+                        $friendId= $row['User_Id'];
+                        $friendName = $row['DisplayName'];
+                        $online = $row['online'];
+ ?>
 						<div class="friend-item">
-							<a href="#userPage"><img src="img/avatar.png" alt="avatar" width="24" height="24"/><span>User D</span></a>
+							<a href="friend_page.php?userId=<?php echo $friendId ;?>"><img src="<?php echo $friendAvarta; ?>" alt="avatar" width="24" height="24"/><span><?php echo $friendName; ?></span></a>
 							<span class="online-icon fa fa-circle"></span></a>
+							<?php 
+							  if ($online==1){
+							  	echo "<script> $('.online-icon').css({'color':'green'})</script>";
+							  }else{
+							  	echo "<script> $('.online-icon').css({'color':'grey'})</script>";
+							  }
+							 ?>
 						</div>
-
-						<div class="friend-item">
-							<a href="#userPage"><img src="img/avatar-1.jpg" alt="avatar" width="24" height="24"/><span>User A</span></a>
-							<span class="online-icon fa fa-circle"></span></a>
-						</div>
-
-						<div class="friend-item">
-							<a href="#userPage"><img src="img/avatar-2.jpeg" alt="avatar" width="24" height="24"/><span>User B</span></a>
-							<span class="online-icon fa fa-circle"></span></a>
-						</div>
-
-						<div class="friend-item">
-							<a href="#userPage"><img src="img/avatar-3.jpeg" alt="avatar" width="24" height="24"/> <span>User C</span></a>
-							<span class="online-icon fa fa-circle"></span></a>
-						</div>
+						<?php
+                                }
+                        ?>  
+						
 <!-- Friend list end-->
 						<div class="rightSideBar-footer">
 	    	           		<button type="submit" onclick="myFunction()">
