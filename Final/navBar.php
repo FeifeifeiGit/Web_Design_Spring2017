@@ -1,3 +1,26 @@
+<?php
+ session_start();
+
+include "s3.php";
+include "db.php";
+ //change to $sesson("");
+ //$currentUser =$_SESSION['User_Id'];
+ $currentId = 1;
+ $getUserQuery="SELECT * FROM Users WHERE User_Id= '$currentId' ";
+ $userResult=mysqli_query($conn, $getUserQuery);
+ $row = mysqli_fetch_assoc($userResult);
+//get user infor
+ $displayName = $row['DisplayName'];
+ $avatar = "";
+ if($row['ProfilePhoto']==null){
+     $avatar ="https://s3-us-west-2.amazonaws.com/minisocial/img/default.png" ;
+ }else{
+ 		$avatar = $row['ProfilePhoto'];
+	}
+//if include nav, can access to these variable directly
+//$_SESSION['userName'] = $displayName;
+//$_SESSION['avatar'] =  $avatar ;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +65,7 @@
 		          	</ul>
 		          	<ul class="nav navbar-nav navbar-left">
 		          		<li id="user-infor">
-	          		      	<a href="#userPage"><img  src="img/avatar.png" class="avatar img-responsive img-circle" style="display:inline-block;" width="20" height="20" alt="Avatar"/><span style="padding-left:0.7em;">Name</span></a>
+	          		      	<a href="friend_page.php?User_Id=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>" class="avatar img-responsive img-circle" style="display:inline-block;" width="20" height="20" alt="Avatar"/><span style="padding-left:0.7em;"><?php echo $displayName; ?></span></a>
 	          		    </li>
 	          		    <li>
 	          		    	<a href="userHome.php">Home</a>
