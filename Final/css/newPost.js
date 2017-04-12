@@ -38,6 +38,7 @@ $(document).ready(function() {
 		}
 		//create a text only post
 		 if((file===undefined)&&(content.trim().length>0)){
+		 	//insert the new post after newPost section
 		 	newPost.insertAfter(".new-post:first");
 		 	newPost.find(".post-pic").css("display", "none");
 		 	return;

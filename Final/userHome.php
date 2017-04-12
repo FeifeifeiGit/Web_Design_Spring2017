@@ -5,6 +5,7 @@ include "s3.php";
 include "db.php";
 
 
+
 error_reporting(E_ALL); 
 ?>
 <!DOCTYPE html>
@@ -39,7 +40,7 @@ error_reporting(E_ALL);
        <div class="main-wrapper container-fluid text-left">
 			<div class="row">
 
-				<div class="col-sm-8 col-sm-push-2">
+				<div class="col-sm-8 col-sm-push-2 " id="center-col">
 				   <div class="new-post">
 				   		<div class="new-post-header">
 				   			<a href="#newpost"><span class="glyphicon  glyphicon-pencil"></span>what is in your mind?</a>
@@ -92,11 +93,12 @@ error_reporting(E_ALL);
 					</div>
 
 <?php
+$item_per_page = 1;
 $homePostQuery = "SELECT * FROM Post 
 Join Users on Users.User_Id=Post.User_Id
 WHERE Post.User_Id in (SELECT Friend_Id FROM FriendsList WHERE FriendsList.User_Id='$currentId') 
 ORDER BY Post.Post_Time desc 
-";
+LIMIT $item_per_page";
 $homePostResult = mysqli_query($conn, $homePostQuery);
 				while($row = mysqli_fetch_assoc($homePostResult)){
                         $postOwner = $row['DisplayName'];
@@ -147,9 +149,9 @@ $homePostResult = mysqli_query($conn, $homePostQuery);
 						<?php
                                 }
                         ?>  
-<!--second post -->
-					
-<!--third post end -->	
+<!-- post end -->
+					<div class="loading-info"><img src="img/ajax-loader.gif" /></div>
+
 				</div>
 <!--left side bar -->
 				<div class="col-sm-2 col-sm-pull-8 leftSideBar">
@@ -178,7 +180,8 @@ $homePostResult = mysqli_query($conn, $homePostQuery);
 					<div class="usePage-friend-list">
 <!-- Friend list end-->
 <?php
-$friendListQuery = "SELECT * FROM Users WHERE User_Id in (SELECT Friend_Id FROM FriendsList WHERE User_Id='$currentId') ORDER BY Users.online LIMIT 10";
+$Firends_number = 10;
+$friendListQuery = "SELECT * FROM Users WHERE User_Id in (SELECT Friend_Id FROM FriendsList WHERE User_Id='$currentId') ORDER BY Users.online LIMIT $Firends_number";
 $fListResult = mysqli_query($conn, $friendListQuery);
 				while($row = mysqli_fetch_assoc($fListResult)){
                         $friendAvarta = $row['ProfilePhoto'];
@@ -217,5 +220,6 @@ $fListResult = mysqli_query($conn, $friendListQuery);
 		</div>
 
 <script src="css/postSubmit.js?v=3"></script>
+<script src="css/reloadPost.js"></script>
 </body>
 </html>
