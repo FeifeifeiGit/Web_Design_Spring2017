@@ -4,7 +4,7 @@
 include "s3.php";
 include "db.php";
  //change to $sesson("");
- $currentId =1;
+ $currentId =22;
  //$currentId =  $_SESSION["userId"];
  $getUserQuery="SELECT * FROM Users WHERE User_Id= '$currentId' ";
  $userResult=mysqli_query($conn, $getUserQuery);

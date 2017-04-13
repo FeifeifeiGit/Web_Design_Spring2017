@@ -5,7 +5,7 @@ include "db.php"; //include config file
 $page_number = filter_var($_POST["page"], FILTER_SANITIZE_NUMBER_INT, FILTER_FLAG_STRIP_HIGH);
 $item_per_page = 1;//same as the userHome part 
 $offset = (($page_number-1)*$item_per_page);
-$currentId = 1;
+$currentId = 22;
 //$currentId =  $_SESSION["userId"];
 //throw HTTP error if page number is not valid
 if(!is_numeric($page_number)){
