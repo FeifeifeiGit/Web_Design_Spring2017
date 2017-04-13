@@ -2,6 +2,8 @@
 <html>
 <?php 
 include "navBar.php";
+
+ $friendId=$_GET["friendId"];
 ?>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -82,36 +84,11 @@ include "navBar.php";
         <div id="tabs">
             <ul class="nav nav-tabs" id="photonav">
                 <li class="active"><a data-toggle="tab" href="#photowall" id="nav1">Photo Wall</a></li>
-                <li><a data-toggle="tab" href="#like" id="nav2">My Like</a></li>
-                <li class="pull-right"><button class="btn btn-danger" data-toggle="modal" data-target="#addphoto" id="addnew">add new</button></li>
+                <li><a data-toggle="tab" href="#like" id="nav2">Friend Like</a></li>
+                
             </ul>
         </div>
-        <form method="post" action="photo-action.php" enctype="multipart/form-data">
-            <div class="modal fade text-center" id="addphoto" tabindex="-1" aria-labelledby="addphotoLabel" area-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                       
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="addphotoLabel">add new photo</h4>
-                            </div>
-                            <div class="modal-body">
-
-                                <div class="form-group">
-                                    <div class="col-sm-8">
-                                        <input type="file" name="uploadimage" size="50" id="uploadimage" />
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <input type="submit" class="btn btn-primary"/>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                       
-                    </div>
-                </div>
-            </div>
-        </form>
+        
 
             <div class="tab-content">
                 <div id="photowall" class="tab-pane fade in active" role="tabpanel">
@@ -120,10 +97,8 @@ include "navBar.php";
                             <div class="modal-content">
 
                                 <img src="" class="showPic" width=700px>
-                                <div class="modal-footer">
-                                    <button class="btn btn-danger deletePic" type="button" id="" onclick="return Deleteqry();" style="float: left;">Delete</button>
-                        
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <div class="modal-footer">     
+                                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                                 </div>
                             </div>
@@ -142,7 +117,7 @@ include "navBar.php";
                                     }
 
                                     //get all user's posts
-                                    $sql="SELECT Photo_Path, Post_Id FROM Post WHERE User_Id='$currentId' ";
+                                    $sql="SELECT Photo_Path, Post_Id FROM Post WHERE User_Id='$friendId' ";
                                     $result=mysqli_query($conn, $sql);
 
                                     
@@ -163,13 +138,13 @@ include "navBar.php";
                                               <?php 
                                               //if user liked the post, then display remove-like button
                                               if(in_array($id, $likedPost)){ ?>
-                                              <a href="photo-action.php?removeLike=<?php echo $id; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
+                                              <a href="photo-action.php?friendRemoveLike=<?php echo $id; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
 
                                                <?php }
 
                                                //if user does not add post to like, then display add-to-like button
                                                 else{ ?>
-                                                    <a href="photo-action.php?addToLike=<?php echo $id; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart-empty"></span></a>
+                                                    <a href="photo-action.php?friendAddToLike=<?php echo $id; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart-empty"></span></a>
                                                <?php } ?>
                                                 
                                              </div>
@@ -205,7 +180,7 @@ include "navBar.php";
                 <div class="row grid">
                     <?php 
 
-                        $sql="SELECT Photo_Path, Post_Id FROM Post WHERE Post_Id in (SELECT Post_Id FROM UserLike WHERE User_Id='$currentId')";
+                        $sql="SELECT Photo_Path, Post_Id FROM Post WHERE Post_Id in (SELECT Post_Id FROM UserLike WHERE User_Id='$friendId')";
                         $result=mysqli_query($conn, $sql);
                         while($row = mysqli_fetch_assoc($result)){
                             $image = $row['Photo_Path'];
@@ -217,7 +192,18 @@ include "navBar.php";
                                         <div class='thumbnail'>
                                              <a data-toggle="modal" data-target="#tabModel"><img src='<?php echo $image; ?>' id='<?php echo $id; ?>' class='image getSrc'/></a>
                                              <div class="over">
-                                              <a href="photo-action.php?removeLikeTab=<?php echo $id; ?>" class="btn btn-default" id="<?php echo $id; ?>"><span class="glyphicon glyphicon-heart userlike"></span></a>
+                                               <?php 
+                                              //if user liked the post, then display remove-like button
+                                              if(in_array($id, $likedPost)){ ?>
+                                              <a href="photo-action.php?friendRemoveLikeTab=<?php echo $id; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
+
+                                               <?php }
+
+                                               //if user does not add post to like, then display add-to-like button
+                                                else{ ?>
+                                                    <a href="photo-action.php?friendAddToLikeTab=<?php echo $id; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart-empty"></span></a>
+                                               <?php } ?>
+                                                
                                             
                                              </div>
                                              
@@ -281,15 +267,6 @@ include "navBar.php";
         
     });
 
-    function Deleteqry(){
-        var id = $('.deletePic').attr('id');
-        window.location="photo-action.php?delete="+id;
-    }
-
-    function Addtolike(){
-        var id = $('.deletePic').attr('id');
-        window.location="photo-action.php?addToLike="+id;
-    }
 
     //refresh tag content to its clicked tab
     $(document).ready(function() {
