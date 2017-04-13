@@ -4,14 +4,8 @@
 include "s3.php";
 include "db.php";
  //change to $sesson("");
-<<<<<<< HEAD
  $currentId =$_SESSION['userId'];
-
- //$currentId = 1;
-=======
- $currentId =1;
- //$currentId =  $_SESSION["userId"];
->>>>>>> 8aa441c0b5d90d0ff22f796c8d894b47fc9a80f8
+ //$currentId =1;
  $getUserQuery="SELECT * FROM Users WHERE User_Id= '$currentId' ";
  $userResult=mysqli_query($conn, $getUserQuery);
  $row = mysqli_fetch_assoc($userResult);
