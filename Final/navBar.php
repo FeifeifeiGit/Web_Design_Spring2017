@@ -9,6 +9,8 @@ include "db.php";
  $currentId =$_SESSION['userId'];
  //$currentId =1;
 
+
+
  $getUserQuery="SELECT * FROM Users WHERE User_Id= '$currentId' ";
  $userResult=mysqli_query($conn, $getUserQuery);
  $row = mysqli_fetch_assoc($userResult);
