@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 // Initiate Server
 $servername = "webdesignfinal.ccxaerxt39bn.us-west-2.rds.amazonaws.com:3306";
 $usernameServer = "webteam";

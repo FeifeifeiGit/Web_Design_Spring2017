@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (!isset($_SESSION["message"])){
+    $_SESSION["message"] = "Please Login ";
+}
+    
+if (isset($_SESSION["username"])) {
+        $usernameHandler = $_SESSION["username"];
+} else {
+    $usernameHandler = "";
+}
+?>
 <html>
 <head>
     <title> Login </title>
@@ -42,10 +54,10 @@
         
         <div class="col-xs-12 col-sm-6 col-md-6">
             <form method="post" role="form" action="login-action.php" enctype="multipart/form-data">
-                <h2>Please Login <small>Start your social network here.</small></h2>
+                <h2><?php echo $_SESSION["message"]; ?> <small>Start your social network here.</small></h2>
                 <hr class="colorgraph">
                 <div class="form-group">
-                    <input type="email" name="email" class="form-control input-lg" placeholder="Email Address" required>
+                    <input type="email" name="email" class="form-control input-lg" placeholder="Email Address" value="<?php echo $usernameHandler;?>" required>
                 </div>
                 <div class="form-group">
                     <input type="password" name="password" class="form-control input-lg" placeholder="Password" required>
