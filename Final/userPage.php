@@ -43,9 +43,7 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <?php
-
-                            $friend_id=$_GET['userId'];
-                            $sql_friend="SELECT * FROM Users where User_Id = '$friend_id'";
+                            $sql_friend="SELECT * FROM Users where User_Id = '$currentId'";
                             $result_friend=mysqli_query($conn, $sql_friend);
                             $row_friend = mysqli_fetch_assoc($result_friend);
                             $display_name = $row_friend['DisplayName'];
@@ -65,48 +63,7 @@
                 <div class="col-lg-6">
                     <div class="cover_button">
                         <div class="btn-group">
-                        <?php
-                            if(isFriend($friend_id, $currentId)){
-                        ?>
-                             <button type="button" id="friend_status" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span>Connected &nbsp<i class="fa fa-sort-desc" aria-hidden="true"></i></span>
-								<ul class="dropdown-menu">
-									<li><a href="#">Close Friends</a></li>
-									<li><a href="friend_page-action.php?unfriend=<?php echo $friend_id;?>">Unfriend</a></li>
-								</ul>
-							</button>
-                            <button type="button" class="btn btn-default"><a href="friend_page-action.php?unfriend=<?php echo $friend_id;?>">Unfriend</a>
-                            </button>
-                            <?php
-                                ;
-                            }
-                            else {
-                            ?>
                             
-                            <button type="button" id="friend_status" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span>Unconnect &nbsp<i class="fa fa-sort-desc" aria-hidden="true"></i></span>
-								<ul class="dropdown-menu">
-									<li><a href="#">Close Friends</a></li>
-									<li><a href="#">add to friend</a></li>
-								</ul>
-							</button>
-
-                             <button type="button" class="btn btn-default"><a href="#">add to friend</a>
-                            </button>
-                            <?php
-                                ;
-                            }
-                            ?>
-                            <!-- <button type="button" id="follow_status" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span>Following &nbsp<i class="fa fa-sort-desc" aria-hidden="true"></i></span>
-								<ul class="dropdown-menu">
-									<li><a href="#">Unfollowed</a></li>
-									<li><a href="#">F2</a></li>
-								</ul>
-							</button> -->
-                            <button type="button" id="more_options" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span><i class="fa fa-bars" aria-hidden="true"></i></span>
-								<ul class="dropdown-menu">
-									<li><a href="#">Report</a></li>
-									<li><a href="#">Block</a></li>
-								</ul>
-							</button>
                         </div>
                     </div>
                 </div>
@@ -151,7 +108,7 @@
                                         </div>
                                         <div class="photos">
                                             <?php
-                                                $sql_serchphoto="SELECT * FROM Post WHERE User_Id='$friend_id' Order BY Post_Id DESC";
+                                                $sql_serchphoto="SELECT * FROM Post WHERE User_Id='$currentId' Order BY Post_Id DESC";
                                                 $result_photo=mysqli_query($conn, $sql_serchphoto);
                                                 $count = 6;
                                                  while ($row = mysqli_fetch_assoc($result_photo)) {
@@ -179,25 +136,20 @@
                                     <div class="panel-body">
                                         <div class="friends">
                                             <?php
-                                                $sql_friend_friends = "SELECT * FROM FriendsList JOIN Users on FriendsList.Friend_Id = Users.User_Id WHERE FriendsList.User_Id = '$friend_id'";
+                                                $sql_friend_friends = "SELECT * FROM FriendsList JOIN Users on FriendsList.Friend_Id = Users.User_Id WHERE FriendsList.User_Id = '$currentId'";
                                                 $result_friend_friends = mysqli_query($conn, $sql_friend_friends);
-																								$count = 6;
+                                                                                                $count = 6;
                                                 while ($row = mysqli_fetch_assoc($result_friend_friends)) {
                                                     if ($count > 0) {
                                                         $image = $row['ProfilePhoto'];
                                                         $friend_name = $row['DisplayName'];
                                                         $friendId=$row['User_Id'];
+
                                                         ?>
                                                 <div class='col-md-4 item'>
-                                                    <?php if($currentId!=$friendId) { ?>
                                                     <div class='thumbnail'>
                                                         <a href="friend_page.php?userId=<?php echo $friendId ;?>"><img src='<?php echo $image; ?>' class='friend_friends' id="friend_friends"/></a>
                                                     </div>
-                                                    <?php
-                                                        ;
-                                                    }
-                                                    ?>
-                                                   
                                                     <div class="friend_name">
                                                         <p>
                                                             <?php echo $friend_name; ?>
@@ -224,7 +176,7 @@
                         <div class="col-lg-7">
 
                             <?php
-                                    $sql_post = "SELECT * FROM Post WHERE User_Id='$friend_id' ORDER BY Post_Id DESC";
+                                    $sql_post = "SELECT * FROM Post WHERE User_Id='$currentId' ORDER BY Post_Id DESC";
                                     $result_post=mysqli_query($conn, $sql_post);
                                     while ($row_post = mysqli_fetch_assoc($result_post)) {
                                         $image_post = $row_post['Photo_Path'];
@@ -247,8 +199,8 @@
                                         <img class="post_photo img-responsive center-block" src="<?php echo $image_post; ?>" />
                                         <!--embed video from youtube-->
                                         <!-- <div class="embed-responsive embed-responsive-16by9">
-										<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/OrWjjOOYxhI"></iframe>
-									</div> -->
+                                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/OrWjjOOYxhI"></iframe>
+                                    </div> -->
                                     </div>
                                     <div class="panel-footer">
                                         <a href="#"> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp Like</a>&nbsp
@@ -354,13 +306,13 @@
                 <div id="friends">
 
                     <?php
-						$sql_friend_friends = "SELECT * FROM FriendsList JOIN Users on FriendsList.Friend_Id = Users.User_Id WHERE FriendsList.User_Id = '$friend_id'";
-						$result_friend_friends = mysqli_query($conn, $sql_friend_friends);
-						while ($row = mysqli_fetch_assoc($result_friend_friends)) {
-								$image = $row['ProfilePhoto'];
-								$friend_name = $row['DisplayName'];
-								$friend_first = $row['FirstName'];
-								$friend_last = $row['LastName'];?>
+                        $sql_friend_friends = "SELECT * FROM FriendsList JOIN Users on FriendsList.Friend_Id = Users.User_Id WHERE FriendsList.User_Id = '$currentId'";
+                        $result_friend_friends = mysqli_query($conn, $sql_friend_friends);
+                        while ($row = mysqli_fetch_assoc($result_friend_friends)) {
+                                $image = $row['ProfilePhoto'];
+                                $friend_name = $row['DisplayName'];
+                                $friend_first = $row['FirstName'];
+                                $friend_last = $row['LastName'];?>
                         <div class='col-md-4 item'>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -392,15 +344,15 @@
 
                         </div>
                         <?php
-									}
-											?>
+                                    }
+                                            ?>
                 </div>
 
 
                 <!--"Photos" div-->
                 <div id="photos">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><b>Photos &nbsp<a href="friendPhoto.php?friendId=<?php echo $friend_id;?>" style="float:right">Photo Wall</a></b></div>
+                        <div class="panel-heading"><b>Photos &nbsp<a href="photo.php" style="float:right">Photo Wall</a></b></div>
                         <div class="panel-body">
                             <div class="modal fade text-center" id="myModel" tabindex="-1" aria-labelledby="myModelLabel" area-hidden="true">
                                 <div class="modal-dialog modal-lg" style="display: inline-block; width: auto;">
@@ -416,7 +368,7 @@
                             </div>
                             <div class="photos">
                                 <?php
-                                        $sql_serchphoto="SELECT * FROM Post WHERE User_Id='$friend_id' ORDER BY Post_Id";
+                                        $sql_serchphoto="SELECT * FROM Post WHERE User_Id='$currentId' ORDER BY Post_Id";
                                         $result_photo=mysqli_query($conn, $sql_serchphoto);
                                         while ($row = mysqli_fetch_assoc($result_photo)) {
                                             $image = $row['Photo_Path']; ?>
@@ -433,7 +385,7 @@
                         </div>
                         <div class="panel-footer">
                             <!--<a href="#"> <span class="glyphicon glyphicon-chevron-left"></span></a>
-							<a href="#"> <span class="glyphicon glyphicon-chevron-right"></span></a>-->
+                            <a href="#"> <span class="glyphicon glyphicon-chevron-right"></span></a>-->
                         </div>
                     </div>
                 </div>
