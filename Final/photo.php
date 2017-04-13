@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-<?php //include "userHome/navBar.php" ?>
+<?php 
+include "navBar.php";
+?>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -132,21 +134,22 @@
                     <div class="row grid">
                         <?php
                                     //get all the user liked post
-                                    $postquery="SELECT Post_Id FROM UserLike WHERE User_Id=1";
+                                    $postquery="SELECT Post_Id FROM UserLike WHERE User_Id='$currentId'";
                                     $likedresult=mysqli_query($conn, $postquery);
                                     $likedPost=Array();
                                     while($row = mysqli_fetch_assoc($likedresult)){
                                         array_push($likedPost, $row['Post_Id']);
                                     }
 
-                                    $sql="SELECT Photo_Path, Post_Id FROM Post";
+                                    //get all user's posts
+                                    $sql="SELECT Photo_Path, Post_Id FROM Post WHERE User_Id='$currentId' ";
                                     $result=mysqli_query($conn, $sql);
 
                                     
                                     //display all post
                                     while($row = mysqli_fetch_assoc($result)){
                                         $image = $row['Photo_Path'];
-                                        $id= $row['Post_Id'];
+                                        $id = $row['Post_Id'];
                                         
                          ?>
                             
@@ -175,6 +178,7 @@
                                     </div>
 
                                 <?php
+
                                     }
                                 ?>                            
                         </div>
@@ -182,25 +186,26 @@
 
                 <div id="like" class="tab-pane fade" role="tabpanel">
 
+
                 <div class="modal fade text-center" id="tabModel" tabindex="-1" aria-labelledby="myModelLabel" area-hidden="true">
                         <div class="modal-dialog modal-lg" style="display: inline-block; width: auto;">
                             <div class="modal-content">
 
                                 <img src="" class="showPic" width=700px>
                                 <div class="modal-footer">
-                                    <button class="btn btn-danger deletePic" type="button" id="" onclick="return Deleteqry();" style="float: left;">Delete</button>
+                                    <!--button class="btn btn-danger deletePic" type="button" id="" onclick="return Deleteqry();" style="float: left;">Delete</button-->
                                    
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                                 </div>
                             </div>
                         </div>
-                    </div>
+                </div>
 
                 <div class="row grid">
                     <?php 
 
-                        $sql="SELECT Photo_Path, Post_Id FROM Post WHERE Post_Id in (SELECT Post_Id FROM UserLike WHERE User_Id=1)";
+                        $sql="SELECT Photo_Path, Post_Id FROM Post WHERE Post_Id in (SELECT Post_Id FROM UserLike WHERE User_Id='$currentId')";
                         $result=mysqli_query($conn, $sql);
                         while($row = mysqli_fetch_assoc($result)){
                             $image = $row['Photo_Path'];
@@ -266,6 +271,8 @@
     </script>
 
     <script>
+
+    //get the src in each pic and pass src to the modal panel
     $('.getSrc').click(function(){
         var src = $(this).attr('src'); 
         $('.showPic').attr('src', src);
@@ -284,30 +291,19 @@
         window.location="photo-action.php?addToLike="+id;
     }
 
-     var url = document.location.toString(); // select current url shown in browser.
-    if (url.match('#')) {
-        $('.nav-tabs a[href=#' + url.split('#')[1] + ']').tab('show'); // activate current tab after reload page.
-    }
-    // Change hash for page-reload
-    $('.nav-tabs a').on('shown', function (e) { // this function call when we change tab.
-        window.location.hash = e.target.hash; // to change hash location in url.
+    //refresh tag content to its clicked tab
+    $(document).ready(function() {
+        if (location.hash) {
+            $("a[href='" + location.hash + "']").tab("show");
+        }
+        $(document.body).on("click", "a[data-toggle]", function(event) {
+            location.hash = this.getAttribute("href");
+            });
     });
-
-    $('#tabs a').click(function(e) {
-  e.preventDefault();
-  $(this).tab('show');
-});
-
-//store the currently selected tab in the hash value
-$("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
-  var id = $(e.target).attr("href").substr(1);
-  window.location.hash = id;
-});
-
-// on load of the page: switch to the currently selected tab
-var hash = window.location.hash;
-$('#tabs a[href="' + hash + '"]').tab('show');
-
+    $(window).on("popstate", function() {
+        var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
+        $("a[href='" + anchor + "']").tab("show");
+    });
 
 
   
