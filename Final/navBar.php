@@ -4,8 +4,8 @@
 include "s3.php";
 include "db.php";
  //change to $sesson("");
- $currentId =1;
- //$currentId =  $_SESSION["userId"];
+ $currentId =$_SESSION['userId'];
+ //$currentId =1;
  $getUserQuery="SELECT * FROM Users WHERE User_Id= '$currentId' ";
  $userResult=mysqli_query($conn, $getUserQuery);
  $row = mysqli_fetch_assoc($userResult);
@@ -65,11 +65,9 @@ include "db.php";
 		          	</ul>
 		          	<ul class="nav navbar-nav navbar-left">
 		          		<li id="user-infor">
-	          		      	<a href="friend_page.php?User_Id=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>" class="avatar img-responsive img-circle" style="display:inline-block;" width="20" height="20" alt="Avatar"/><span style="padding-left:0.7em;"><?php echo $displayName; ?></span></a>
+	          		      	<a href="userPage.php?User_Id=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>" class="avatar img-responsive img-circle" style="display:inline-block;" width="20" height="20" alt="Avatar"/><span style="padding-left:0.7em;"><?php echo $displayName; ?></span></a>
 	          		    </li>
-	          		    <li>
-	          		    	<a href="userHome.php">Home</a>
-	          		    </li>
+	          		    <li><a href="userHome.php">Home</a></li>
 		          	</ul>
 		          	<ul class="nav navbar-nav navbar-right">
 	          			<li ><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout<span class="sr-only">(log out)</span></a></li>

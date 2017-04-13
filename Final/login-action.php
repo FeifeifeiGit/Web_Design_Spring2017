@@ -14,7 +14,7 @@ $conn = mysqli_connect($servername, $usernameServer, $passwordServer, $dbname);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 } else {
-    echo "Connection succeed<br>";
+    //echo "Connection succeed<br>";
 }
 
 //--------------------------------------------------------------------------
@@ -36,14 +36,16 @@ $count=mysqli_num_rows($result);
 if($count==1){
     $row = mysqli_fetch_assoc($result);
     if ($password == $row['Password']){
-        echo "Login Successful<br>";
-        echo $row['Email']."<br>";
-        echo $row['Password']."<br>";
+        //echo "Login Successful<br>";
+        //echo $row['Email']."<br>";
+        //echo $row['Password']."<br>";
         //Session set up
         session_start();
         $_SESSION["username"] = $username;
         $_SESSION["password"] = $password;
+
         $_SESSION["userId"] = $row['User_Id'];
+        header("Location: userHome.php");
         
     } else {
         echo "Wrong Username or Password - 1<br> ";
