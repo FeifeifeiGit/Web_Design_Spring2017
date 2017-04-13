@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 // Initiate Server
 $servername = "webdesignfinal.ccxaerxt39bn.us-west-2.rds.amazonaws.com:3306";
@@ -39,22 +39,40 @@ if($count==1){
         echo "Login Successful<br>";
         echo $row['Email']."<br>";
         echo $row['Password']."<br>";
+        
+        //Set the user Online status to be 1 which is online
+        $sql="UPDATE Users SET Online = 1 WHERE Email = '$username'";
+        $result=mysqli_query($conn, $sql);
+        
         //Session set up
-        session_start();
         $_SESSION["username"] = $username;
         $_SESSION["password"] = $password;
         $_SESSION["userId"] = $row['User_Id'];
+        
+        $_SESSION["message"] = "Successfully Login";
+        
+        //Direct to user home page
+        header('Location: userHome.php');
+        
+        
         
     } else {
         echo "Wrong Username or Password - 1<br> ";
         echo $username."<br>";
         echo $password."<br>";
         
+        $_SESSION["message"] = "Wrong Username or Password";
+        
+        header('Location: login.php');
     }
 } else {
     echo "Wrong Username or Password - 2<br>";
     echo $username."<br>";
     echo $password."<br>";
+    
+    $_SESSION["message"] = "Wrong Username or Password";
+    
+    header('Location: login.php');
 }
 
 ?>

@@ -1,4 +1,22 @@
 <?php
+// Start Session
+session_start();
+
+// Initiate Photo upload
+require 'aws/vendor/autoload.php';
+use Aws\S3\S3Client ;
+use Aws\S3\Exception\S3Exception;
+try{
+    $client = S3Client::factory(array(
+        'profile' => 'project',
+        'version' => '2006-03-01',
+        'region' => 'us-west-2',
+        'scheme' => 'http' 
+    ));
+    } catch(Exception $e) {
+    exit($e->getMessage());
+} 
+$bucket = 'minisocial'; //S3 bucket name
 
 
 // Initiate Server
@@ -51,6 +69,30 @@ $result=mysqli_query($conn, $sql);
 if($result==false){
     echo "error update<br>";
 } else {
+    // Restration successful -> Set up profile image upload
+    $imagename="";
+    $target_dir="postdata/";
+    $imagename = $target_dir . basename($_FILES["uploadimage"]["name"]);
+    if($_SERVER["REQUEST_METHOD"]=="POST"){
+        if(!empty( basename($_FILES["uploadimage"]["name"]))){
+            try{ //upload to S3
+                $result = $client->putObject(array( 
+                    'Bucket' => $bucket,
+                    'Key'    => $imagename,
+                    'Body' => fopen($_FILES['uploadimage']['tmp_name'], 'r+'),
+                    'options' => ['scheme' => 'http',],
+                ));
+             } catch (Exception $e) {exit($e->getMessage());}
+            $targetPath="https://s3-us-west-2.amazonaws.com/minisocial/".$imagename;
+            $sql="UPDATE Users SET ProfilePhoto = '$targetPath' WHERE Email = '$email' ";
+            $result=mysqli_query($conn, $sql);
+            if($result==false){echo "error upload image<br>";}
+        }
+    }
+    // Finished Registration direct to Login
+    $_SESSION["username"] = $email;
+    $_SESSION["message"] = "Registration Succeed";
+    
     echo "Registration Succeed<br>";
     header('Location: login.php');
 }
@@ -62,6 +104,11 @@ foreach($messageError as $value)
 {
     echo "<b>List of the Errors:</b><br/>";
 	echo "$value <br/>";
+    
+    $message = 'Registration Failed';
+    echo "<SCRIPT>alert('$message');</SCRIPT>";
+    
+    header('Location: register.php');
     
 }
 echo "<a href=\"register.php\" >Go Back</a></p>";
