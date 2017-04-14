@@ -151,8 +151,21 @@
                                         </div>
                                         <div class="photos">
                                             <?php
-                                                include "friend_page_leftphotopanel.php";
-                                                ?>
+                                                $sql_serchphoto="SELECT * FROM Post WHERE User_Id='$friend_id' Order BY Post_Id DESC";
+                                                $result_photo=mysqli_query($conn, $sql_serchphoto);
+                                                $count = 6;
+                                                 while ($row = mysqli_fetch_assoc($result_photo)) {
+                                                    if ($count > 0) {
+                                                      $image = $row['Photo_Path']; ?>
+                                                <div class='col-md-4 item'>
+                                                    <div class='thumbnail'>
+                                                        <a data-toggle="modal" data-target="#myModel_small"><img src='<?php echo $image; ?>' class='image getSrc_small'id="friend_photo_small"/></a>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                                    $count--;
+                                                     }
+                                                }?>
                                         </div>
 
                                     </div>
@@ -166,7 +179,35 @@
                                     <div class="panel-body">
                                         <div class="friends">
                                             <?php
-                                                include "friend_page_leftfriendpanel.php";
+                                                $sql_friend_friends = "SELECT * FROM FriendsList JOIN Users on FriendsList.Friend_Id = Users.User_Id WHERE FriendsList.User_Id = '$friend_id'";
+                                                $result_friend_friends = mysqli_query($conn, $sql_friend_friends);
+																								$count = 6;
+                                                while ($row = mysqli_fetch_assoc($result_friend_friends)) {
+                                                    if ($count > 0) {
+                                                        $image = $row['ProfilePhoto'];
+                                                        $friend_name = $row['DisplayName'];
+                                                        $friendId=$row['User_Id'];
+                                                        ?>
+                                                <div class='col-md-4 item'>
+                                                    <?php if($currentId!=$friendId) { ?>
+                                                    <div class='thumbnail'>
+                                                        <a href="friend_page.php?userId=<?php echo $friendId ;?>"><img src='<?php echo $image; ?>' class='friend_friends' id="friend_friends"/></a>
+                                                    </div>
+                                                    <?php
+                                                        ;
+                                                    }
+                                                    ?>
+                                                   
+                                                    <div class="friend_name">
+                                                        <p>
+                                                            <?php echo $friend_name; ?>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                                $count--;
+                                                    }
+                                                }
                                                 ?>
 
                                         </div>
@@ -183,8 +224,66 @@
                         <div class="col-lg-7">
 
                             <?php
-                                    include "friend_page_postdiv.php" 
-									?>
+                                    $sql_post = "SELECT * FROM Post WHERE User_Id='$friend_id' ORDER BY Post_Id DESC";
+                                    $result_post=mysqli_query($conn, $sql_post);
+                                    while ($row_post = mysqli_fetch_assoc($result_post)) {
+                                        $image_post = $row_post['Photo_Path'];
+                                        $comment_post = $row_post['Content'];
+                                        $time_post = $row_post['Post_Time'];
+                                        $comment_post = $row_post['Content'];
+                                        $id_post = $row_post['Post_Id']; ?>
+
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <a href="#"><img src="<?php echo $profile_photo; ?>" width="30px" height="30px" /></a> &nbsp&nbsp
+                                        <b><?php echo $display_name; ?>`s Moments</b>
+                                        <span style="float:right"><?php echo $time_post; ?></span></div>
+                                    <div class="panel-body">
+
+                                        <p>
+                                            <?php echo $comment_post; ?>
+                                        </p>
+                                        <img class="post_photo img-responsive center-block" src="<?php echo $image_post; ?>" />
+                                        <!--embed video from youtube-->
+                                        <!-- <div class="embed-responsive embed-responsive-16by9">
+										<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/OrWjjOOYxhI"></iframe>
+									</div> -->
+                                    </div>
+                                    <div class="panel-footer">
+                                        <a href="#"> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp Like</a>&nbsp
+                                        <a href="#" class="comment_link"> <span class="glyphicon glyphicon glyphicon-share-alt"></span>&nbsp Comment</a>&nbsp
+                                        <a href="#"> <span class="glyphicon glyphicon-share"></span>&nbsp Share</a>
+
+                                        <br />
+                                        <hr />
+
+                                        <!--"Comment" div-->
+                                        <div class="comment_div">
+											<div class="comment_area">
+												<?php
+												$sql_comment = "SELECT * FROM Comments JOIN Users on Comments.User_Id = Users.User_Id
+													WHERE Post_Id='$id_post' ORDER BY Comment_Id DESC";
+												$result_comment = mysqli_query($conn, $sql_comment);
+												while ($row_comment = mysqli_fetch_array($result_comment)) {
+
+													echo "<p>";
+													if ($row_comment['Content'] != '') {
+													echo "<a href='#'><img src=" . $row_comment['ProfilePhoto'] . " width='30px' height='30px' /></a>" . " " . $row_comment['DisplayName']. " : ";
+													echo $row_comment['Content'] . "<br />";
+													}
+													echo "</p>";
+												} ?>
+                                          </div>
+                                        <form class="comment_form" id="comment_form" method="post" action="friend_page-action.php?>">
+                                        <input type="text" name="comment" class="comment" id="<?php echo $id_post?>" placeholder="Enter your comment" />
+                                        <input type="hidden" name="postId" value="<?php echo $id_post?>" />
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                                    } ?>
 
                         </div>
                     </div>
@@ -256,7 +355,47 @@
                 <!--"Friends" div-->
                 <div id="friends">
 
-                    <?php include "friend_page_friendsdiv.php"; ?>
+                    <?php
+						$sql_friend_friends = "SELECT * FROM FriendsList JOIN Users on FriendsList.Friend_Id = Users.User_Id WHERE FriendsList.User_Id = '$friend_id'";
+						$result_friend_friends = mysqli_query($conn, $sql_friend_friends);
+						while ($row = mysqli_fetch_assoc($result_friend_friends)) {
+								$image = $row['ProfilePhoto'];
+								$friend_name = $row['DisplayName'];
+								$friend_first = $row['FirstName'];
+								$friend_last = $row['LastName'];?>
+                        <div class='col-md-4 item'>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="friend_name">
+                                        <p>
+                                            <?php echo $friend_first . " " . $friend_last . " (" . $friend_name . ")"; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="about">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <a href="#"><img src='<?php echo $image; ?>' class='friend_friends img-circle' id="friend_friends"/></a>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <p>
+                                                    Hello everybody!
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <a href="#"> <span class="glyphicon glyphicon-chevron">Follow</span></a>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <?php
+									}
+											?>
                 </div>
 
 
@@ -279,7 +418,18 @@
                             </div>
                             <div class="photos">
                                 <?php
-                                      include "friend_page_photodiv.php";
+                                        $sql_serchphoto="SELECT * FROM Post WHERE User_Id='$friend_id' ORDER BY Post_Id";
+                                        $result_photo=mysqli_query($conn, $sql_serchphoto);
+                                        while ($row = mysqli_fetch_assoc($result_photo)) {
+                                            $image = $row['Photo_Path']; ?>
+                                    <div class='col-xs-offset-0 col-xs-6 col-sm-offset-0 col-sm-4 col-md-3 col-lg-2 col-lg-offset-0 item'>
+                                        <div class='thumbnail'>
+                                            <a data-toggle="modal" data-target="#myModel"><img src='<?php echo $image; ?>' class='image getSrc'id="friend_photo"/></a>
+                                        </div>
+                                    </div>
+                                    <?php
+
+                                        }
                                     ?>
                             </div>
                         </div>

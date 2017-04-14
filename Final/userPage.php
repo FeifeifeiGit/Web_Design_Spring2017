@@ -212,7 +212,7 @@
 
                                         <!--"Comment" div-->
                                         <div class="comment_div">
-                                            div class="comment_area">
+                                            <div class="comment_area">
                                             <?php
                                             $sql_comment = "SELECT * FROM Comments JOIN Users on Comments.User_Id = Users.User_Id
                                               WHERE Post_Id='$id_post' ORDER BY Comment_Id DESC";
