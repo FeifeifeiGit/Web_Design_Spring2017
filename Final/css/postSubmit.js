@@ -8,7 +8,7 @@ document.getElementById("submit").addEventListener("click", function(event) {
   		var files = fileSelect.files;
   		//get the post Content
   		var content=$("#postContent").text();
-  		if((files===undefined)&&(content.trim().length==0)){
+  		if((files===undefined)&&(content.trim().length===0)){
   			var feedback = document.getElementById("posting-feedback");
   				feedback.innerHTML="<b>Cannot Publish Empty Content!</b>";
   				feedback.style.color = "red";
