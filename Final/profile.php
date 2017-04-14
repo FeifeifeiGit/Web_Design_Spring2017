@@ -55,7 +55,7 @@
 
                         <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-heading"> <a data-toggle="collapse" href="#collapse1"><b><span class="glyphicon glyphicon-edit"></span> Username: </b></a></div>
+                                <div class="panel-heading"> <a data-toggle="collapse" href="#collapse1"><b><span class="glyphicon glyphicon-edit"></span> Username: <?php echo $displayName; ?></b></a></div>
                                 <div id="collapse1" class="panel-collapse collapse">
                                     <div class="panel-body">
 
@@ -77,7 +77,7 @@
 						
                         <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse2"><b><span class="glyphicon glyphicon-edit"></span> Headshot: </b></a></div>
+                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse2"><b><span class="glyphicon glyphicon-edit"></span> Headshot: <img src="<?php echo $avatar; ?>" class="avatar img-responsive"></b></a></div>
                                 <div id="collapse2" class="panel-collapse collapse">
                                     <div class="panel-body">
 
@@ -99,7 +99,7 @@
                         <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
 
-                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse3"><b><span class="glyphicon glyphicon-edit"></span> Birthday: </b></a></div>
+                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse3"><b><span class="glyphicon glyphicon-edit"></span> Birthday: <?php echo $row['Birthday']; ?></b></a></div>
                                 <div id="collapse3" class="panel-collapse collapse">
                                     <div class="panel-body">
 
@@ -119,7 +119,7 @@
 
                         <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse4"><b><span class="glyphicon glyphicon-edit"></span> Phone Number: </b></a></div>
+                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse4"><b><span class="glyphicon glyphicon-edit"></span> Phone Number: <?php echo $row['PhoneNumber']; ?></b></a></div>
                                 <div id="collapse4" class="panel-collapse collapse">
                                     <div class="panel-body">
 
@@ -139,7 +139,7 @@
 
                         <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-heading"> <a data-toggle="collapse" href="#collapse5"><b><span class="glyphicon glyphicon-edit"></span> School/ Company: </b></a></div>
+                                <div class="panel-heading"> <a data-toggle="collapse" href="#collapse5"><b><span class="glyphicon glyphicon-edit"></span> School/ Company: <?php echo $row['SchoolOrWork']; ?></b></a></div>
                                 <div id="collapse5" class="panel-collapse collapse">
                                     <div class="panel-body">
 
@@ -161,7 +161,7 @@
                                     <div class="panel-body">
 
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2" for="description"> edit:</label>
+                                            <label class="control-label col-sm-2" for="description"> edit: <?php echo $row['Description']; ?></label>
                                             <div class="col-sm-10">
                                                 <textarea type="text" name="description" class="form-control" placeholder="your description"></textarea>
                                             </div>
