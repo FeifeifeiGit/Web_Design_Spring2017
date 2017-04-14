@@ -1,6 +1,6 @@
 <?php
 //start session, get the username/id in this session
- session_start();
+ //session_start();
 include "s3.php";
 include "db.php";
 
@@ -187,7 +187,7 @@ $fListResult = mysqli_query($conn, $friendListQuery);
                         $friendAvarta = $row['ProfilePhoto'];
                         $friendId= $row['User_Id'];
                         $friendName = $row['DisplayName'];
-                        $online = $row['online'];
+                        $online = $row['Online'];
  ?>
 						<div class="friend-item">
 							<a href="friend_page.php?userId=<?php echo $friendId ;?>"><img src="<?php echo $friendAvarta; ?>" alt="avatar" width="24" height="24"/><span><?php echo $friendName; ?></span></a>
