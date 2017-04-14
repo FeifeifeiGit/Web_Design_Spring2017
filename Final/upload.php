@@ -89,7 +89,6 @@ if ($uploadOk == 0) {
                      try{
                         $targetPath=s3path.$target_file;
                         $postContent = trim($_POST["postContent"]);
-                        $result1 = mysqli_query($conn, $sql);
                         $sql = "INSERT INTO Post (Content,Photo_Path,User_Id)
                             VALUES ('".$postContent."','$targetPath','$currentId')";
                         $result = mysqli_query($conn, $sql);
