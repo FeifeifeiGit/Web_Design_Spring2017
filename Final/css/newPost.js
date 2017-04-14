@@ -3,6 +3,10 @@ $(document).ready(function() {
 	$("#submit").click(function() {
 		console.log("newPost() is called");
 		var content= $("#postContent").text();
+		
+		
+		
+      
 		var userInfo = $("#user-infor").find("a:first");
 		var userHref = userInfo.attr("href");
 		var userName = userInfo.text();
@@ -20,7 +24,7 @@ $(document).ready(function() {
 
 		//clone a single post
 		var newPost = $(".single-post").first().clone(true);
-		console.log("newpost cloned is :" + $(".single-post").first().html() );
+		console.log("newpost is :" + newPost.html() );
 		newPost.find("img:first").attr("src", userImage);
 		newPost.find("a:first").attr("href", userHref).text(userName);	
 		newPost.find(".post-infor").children("p:first").text(timeDisplay);
@@ -28,7 +32,7 @@ $(document).ready(function() {
         console.log("newpost is :" + newPost.html() );
        
        var file = document.querySelector('#fileToUpload').files[0]; 
-		if((file===undefined)&&(content.trim().length==0)){
+		if((file===undefined)&&(content.trim().length===0)){
 			console.log("empty post ");
 			return;
 		}
@@ -49,7 +53,7 @@ $(document).ready(function() {
        			};
        		 reader.readAsDataURL(file); 			
 			newPost.insertAfter(".new-post:first");
-			if(content.trim().length==0){
+			if(content.trim().length===0){
 		 		newPost.find(".post-text").css("display", "none");
 		     }
 		 	
