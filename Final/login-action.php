@@ -12,7 +12,7 @@ $conn = mysqli_connect($servername, $usernameServer, $passwordServer, $dbname);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 } else {
-    echo "Connection succeed<br>";
+   // echo "Connection succeed<br>";
 }
 //--------------------------------------------------------------------------
 $username = "";
@@ -28,9 +28,9 @@ $count=mysqli_num_rows($result);
 if($count==1){
     $row = mysqli_fetch_assoc($result);
     if ($password == $row['Password']){
-        echo "Login Successful<br>";
-        echo $row['Email']."<br>";
-        echo $row['Password']."<br>";
+        //echo "Login Successful<br>";
+        //echo $row['Email']."<br>";
+        //echo $row['Password']."<br>";
         
         //Set the user Online status to be 1 which is online
         $sql="UPDATE Users SET Online = 1 WHERE Email = '$username'";
@@ -50,17 +50,17 @@ if($count==1){
         
     } else {
         echo "Wrong Username or Password - 1<br> ";
-        echo $username."<br>";
-        echo $password."<br>";
+        //echo $username."<br>";
+        //echo $password."<br>";
         
         $_SESSION["message"] = "Wrong Username or Password";
         
         header('Location: login.php');
     }
 } else {
-    echo "Wrong Username or Password - 2<br>";
-    echo $username."<br>";
-    echo $password."<br>";
+    //echo "Wrong Username or Password - 2<br>";
+    //echo $username."<br>";
+    //echo $password."<br>";
     
     $_SESSION["message"] = "Wrong Username or Password";
     
