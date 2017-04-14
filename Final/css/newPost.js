@@ -3,10 +3,6 @@ $(document).ready(function() {
 	$("#submit").click(function() {
 		console.log("newPost() is called");
 		var content= $("#postContent").text();
-		
-		
-		
-      
 		var userInfo = $("#user-infor").find("a:first");
 		var userHref = userInfo.attr("href");
 		var userName = userInfo.text();
@@ -24,7 +20,7 @@ $(document).ready(function() {
 
 		//clone a single post
 		var newPost = $(".single-post").first().clone(true);
-		console.log("newpost is :" + newPost.html() );
+		console.log("newpost cloned is :" + $(".single-post").first().html() );
 		newPost.find("img:first").attr("src", userImage);
 		newPost.find("a:first").attr("href", userHref).text(userName);	
 		newPost.find(".post-infor").children("p:first").text(timeDisplay);

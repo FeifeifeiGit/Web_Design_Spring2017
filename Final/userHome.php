@@ -4,8 +4,6 @@
 include "s3.php";
 include "db.php";
 
-
-
 error_reporting(E_ALL);
 ?>
 <!DOCTYPE html>
