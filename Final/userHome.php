@@ -1,9 +1,8 @@
 <?php
-//start session, get the username/id in this session
- //session_start();
+ //include "checkLogin.php"; 
 include "s3.php";
 include "db.php";
-
+include "checkLogin.php";
 error_reporting(E_ALL);
 ?>
 <!DOCTYPE html>

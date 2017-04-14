@@ -119,7 +119,7 @@ if ($uploadOk == 0) {
                                 echo "insert failed<br> targetPath is ".$targetPath;
                             }
                              else {
-                                echo "successfully publish a new post without image! $postContent";
+                                echo "successfully publish a new post without image! ";
                             }
                      }
                      catch(Exception $e){
