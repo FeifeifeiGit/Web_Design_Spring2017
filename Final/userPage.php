@@ -212,19 +212,21 @@
 
                                         <!--"Comment" div-->
                                         <div class="comment_div">
+                                            div class="comment_area">
                                             <?php
-                                        $sql_comment = "SELECT * FROM Comments JOIN Users on Comments.User_Id = Users.User_Id
-                                        WHERE Post_Id='$id_post' ORDER BY Comment_Id DESC";
-                                        $result_comment = mysqli_query($conn, $sql_comment);
-                                        while ($row_comment = mysqli_fetch_array($result_comment)) {
+                                            $sql_comment = "SELECT * FROM Comments JOIN Users on Comments.User_Id = Users.User_Id
+                                              WHERE Post_Id='$id_post' ORDER BY Comment_Id DESC";
+                                            $result_comment = mysqli_query($conn, $sql_comment);
+                                            while ($row_comment = mysqli_fetch_array($result_comment)) {
 
-                                            echo "<p>";
-                                            if ($row_comment['Content'] != '') {
-                                                echo "<a href='#'><img src=" . $row_comment['ProfilePhoto'] . " width='30px' height='30px' /></a>" . " " . $row_comment['DisplayName']. " : ";
-                                                echo $row_comment['Content'] . "<br />";
-                                            }
-                                            echo "</p>";
-                                        } ?>
+                                              echo "<p>";
+                                              if ($row_comment['Content'] != '') {
+                                              echo "<a href='#'><img src=" . $row_comment['ProfilePhoto'] . " width='30px' height='30px' /></a>" . " " . $row_comment['DisplayName']. " : ";
+                                              echo $row_comment['Content'] . "<br />";
+                                              }
+                                              echo "</p>";
+                                            } ?>
+                                                </div>
                                         <form class="comment_form" id="comment_form" method="post" action="friend_page-action.php?>">
                                         <input type="text" name="comment" class="comment" id="<?php echo $id_post?>" placeholder="Enter your comment" />
                                         <input type="hidden" name="postId" value="<?php echo $id_post?>" />
