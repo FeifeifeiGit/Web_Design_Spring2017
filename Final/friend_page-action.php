@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           echo "error upload comments<br>";
         }
      else{
-        header("location: friend_page.php");
+        header("location:comment.php?User_Id=" . $id);
     exit;
      }
   }

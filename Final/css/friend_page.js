@@ -26,17 +26,28 @@ $(document).ready(function() {
 
 
 
-  // $('.comment_form').submit(function(event) {
-  //   event.preventDefault();
-  //   //var comment = $.trim($('.comment').val());
-  //   var comment = $.trim($(this).children().val());
-  //   if (comment == '') {
-  //     alert($(this).children().attr("class"));
-  //     //$('.comment').attr("placeholder", "Please Enter Something...").placeholder();
-  //     $(this).children().attr("placeholder", "Please Enter Something...").placeholder();
-  //     return false;
-  //   }
-  // });
+  $('.comment_form').submit(function(event) {
+        event.preventDefault();
+        //alert($(this).siblings(".comment_area").attr('class'));
+        var form = $(this);
+        var post_url = form.attr('action');
+        var post_data = form.serialize();
+        //$('#loader3', form).html('<img src="../../images/ajax-loader.gif" />       Please wait...');
+        $.ajax({
+            type: 'POST',
+            url: post_url,
+            data: post_data,
+            success: function(msg) {
+                $(form).fadeOut(200, function() {
+                    form.siblings(".comment_area").html(msg).fadeIn().delay(100);
+                    form.children(".comment").val("");
+                    //form.children(".comment").css('background-color' , none);
+                    form.css("display", "block");
+                    //console.log($(this).parent().attr('id'));
+                });
+            }
+        });
+    });
 
   $(".comment").blur(function() {
     $(this).attr("placeholder", "Enter your comment").placeholder();
