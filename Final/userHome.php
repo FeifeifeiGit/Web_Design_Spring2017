@@ -1,12 +1,12 @@
 <?php
 //start session, get the username/id in this session
- session_start();
+ //session_start();
 include "s3.php";
 include "db.php";
 
 
 
-error_reporting(E_ALL); 
+error_reporting(E_ALL);
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,8 +30,8 @@ error_reporting(E_ALL);
 	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 	<script >
 		//set the backdrop=true when post modal pop up
-		
-			 
+
+
 	</script>
 </head>
 <body>
@@ -51,7 +51,7 @@ error_reporting(E_ALL);
 				   		 	</div>
 				   			<div>
 								<textarea rows="3" cols="80" data-toggle="modal" data-target="#postModal">
-							
+
 								</textarea>
 							</div>
 						</div>
@@ -61,7 +61,7 @@ error_reporting(E_ALL);
 							<span id="posting-feedback"> post test here </span>
 						</div>
 					</div>
-					
+
 					<!-- Modal -->
 					<div id="postModal" class="modal fade" role="dialog">
 						 <div class="modal-dialog">
@@ -84,9 +84,9 @@ error_reporting(E_ALL);
 							      		<input type="file" name="fileToUpload" id="fileToUpload"
 							      		onchange="previewFile()">
 							      		<a class="btn pull-left"><i class="em em-angry"></i>Feeling/Mood</a>
-							      		<input type="button" name ="submit" id="submit" value="Create" class="btn btn-danger">  
+							      		<input type="button" name ="submit" id="submit" value="Create" class="btn btn-danger">
 							      	</form>
-									
+
 						      	</div>
 						    </div>
 						</div>
@@ -94,10 +94,10 @@ error_reporting(E_ALL);
 
 <?php
 $item_per_page = 1;
-$homePostQuery = "SELECT * FROM Post 
+$homePostQuery = "SELECT * FROM Post
 Join Users on Users.User_Id=Post.User_Id
-WHERE Post.User_Id in (SELECT Friend_Id FROM FriendsList WHERE FriendsList.User_Id='$currentId') 
-ORDER BY Post.Post_Time desc 
+WHERE Post.User_Id in (SELECT Friend_Id FROM FriendsList WHERE FriendsList.User_Id='$currentId')
+ORDER BY Post.Post_Time desc
 LIMIT $item_per_page";
 $homePostResult = mysqli_query($conn, $homePostQuery);
 				while($row = mysqli_fetch_assoc($homePostResult)){
@@ -127,7 +127,7 @@ $homePostResult = mysqli_query($conn, $homePostQuery);
 							 		<?php echo $postText;?>
 							   </p>
 							</div>
-						<?php 
+						<?php
 						   if(($postImage==null)||($postImage=="")){}
 						   else{
 						?>
@@ -148,7 +148,7 @@ $homePostResult = mysqli_query($conn, $homePostQuery);
 					</div>
 						<?php
                                 }
-                        ?>  
+                        ?>
 <!-- post end -->
 					<div class="loading-info"><img src="img/ajax-loader.gif" /></div>
 
@@ -187,12 +187,12 @@ $fListResult = mysqli_query($conn, $friendListQuery);
                         $friendAvarta = $row['ProfilePhoto'];
                         $friendId= $row['User_Id'];
                         $friendName = $row['DisplayName'];
-                        $online = $row['online'];
+                        $online = $row['Online'];
  ?>
 						<div class="friend-item">
 							<a href="friend_page.php?userId=<?php echo $friendId ;?>"><img src="<?php echo $friendAvarta; ?>" alt="avatar" width="24" height="24"/><span><?php echo $friendName; ?></span></a>
 							<span class="online-icon fa fa-circle"></span></a>
-							<?php 
+							<?php
 							  if ($online==1){
 							  	echo "<script> $('.online-icon').css({'color':'green'})</script>";
 							  }else{
@@ -202,8 +202,8 @@ $fListResult = mysqli_query($conn, $friendListQuery);
 						</div>
 						<?php
                                 }
-                        ?>  
-						
+                        ?>
+
 <!-- Friend list end-->
 						<div class="rightSideBar-footer">
 	    	           		<button type="submit" onclick="myFunction()">
