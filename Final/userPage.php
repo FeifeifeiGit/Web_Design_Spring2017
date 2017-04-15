@@ -31,7 +31,7 @@
 
 <body>
     <?php
-    
+
     include 'db.php';
     include "navBar.php";
     include "pageFunction.php";
@@ -63,7 +63,7 @@
                 <div class="col-lg-6">
                     <div class="cover_button">
                         <div class="btn-group">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -218,10 +218,17 @@
                                               WHERE Post_Id='$id_post' ORDER BY Comment_Id DESC";
                                             $result_comment = mysqli_query($conn, $sql_comment);
                                             while ($row_comment = mysqli_fetch_array($result_comment)) {
-
+                                              $post_user_id = $row_comment['User_Id'];
                                               echo "<p>";
                                               if ($row_comment['Content'] != '') {
-                                              echo "<a href='#'><img src=" . $row_comment['ProfilePhoto'] . " width='30px' height='30px' /></a>" . " " . $row_comment['DisplayName']. " : ";
+                                                if($post_user_id == $currentId){
+                                                  echo "<a href='userPage.php'><img src=" . $row_comment['ProfilePhoto'] . " width='30px' height='30px' /></a>" . " " . $row_comment['DisplayName']. " : ";
+
+                                                }else{
+                                                  echo "<a href='friend_page.php?userId=$post_user_id'><img src=" . $row_comment['ProfilePhoto'] . " width='30px' height='30px' /></a>" . " " . $row_comment['DisplayName']. " : ";
+                                                  //echo $row_comment['User_Id'];
+                                                }
+                                              //echo "<a href='#'><img src=" . $row_comment['ProfilePhoto'] . " width='30px' height='30px' /></a>" . " " . $row_comment['DisplayName']. " : ";
                                               echo $row_comment['Content'] . "<br />";
                                               }
                                               echo "</p>";

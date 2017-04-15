@@ -32,7 +32,7 @@ $(document).ready(function() {
         console.log("newpost is :" + newPost.html() );
        
        var file = document.querySelector('#fileToUpload').files[0]; 
-		if((file===undefined)&&(content.trim().length==0)){
+		if((file===undefined)&&(content.trim().length===0)){
 			console.log("empty post ");
 			return;
 		}
@@ -53,7 +53,7 @@ $(document).ready(function() {
        			};
        		 reader.readAsDataURL(file); 			
 			newPost.insertAfter(".new-post:first");
-			if(content.trim().length==0){
+			if(content.trim().length===0){
 		 		newPost.find(".post-text").css("display", "none");
 		     }
 		 	
