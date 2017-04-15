@@ -45,8 +45,9 @@ $reloadPostResult = mysqli_query($conn, $reloadPostQuery);
         echo "<div class='post-pic'><img class='img-responsive' src='".$postImage."' alt='post image icon' width='500' height='450' /></div>";
         }
 
-        echo "</div><hr><div class='post-footer feedback-section'><a href='#like'><span class='glyphicon glyphicon-thumbs-up'></span>Like</a><a href='#comment'><span class='glyphicon glyphicon-comment'></span>Comment</a><a href='#share'><span class='glyphicon glyphicon-share-alt'></span>Share</a>
-                        </div></div>";
+        echo "</div>
+            <hr><div class='post-footer feedback-section'><a href='#like'><span class='glyphicon glyphicon-thumbs-up'></span>Like<a href='#comment'><span class='glyphicon glyphicon-comment'></span>Comment</a><a href='#share'><span class='glyphicon glyphicon-share-alt'></span>Share</a></div></div>";
+
 						
     }
 

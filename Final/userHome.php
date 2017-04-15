@@ -21,15 +21,10 @@ error_reporting(E_ALL);
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="css/userHome.css?v=2" rel="stylesheet">
+	<link href="css/userHome.css" rel="stylesheet">
 	<script src="css/userHome.js?v=3"></script>
 	<script src="css/newPost.js"></script>
 	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-	<script >
-		//set the backdrop=true when post modal pop up
-
-
-	</script>
 </head>
 <body>
 <?php include "navBar.php";?>
@@ -42,18 +37,19 @@ error_reporting(E_ALL);
 				   		<div class="new-post-header">
 				   			<a href="#newpost"><span class="glyphicon  glyphicon-pencil"></span>what is in your mind?</a>
 				   		</div>
-				   		<div class="new-post-body">
+				   		
+					   	<div class="new-post-body">	
 				   		 	<div style="margin-bottom:30px;">
 				   		 		<a href="friend_page.php?userId=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>" class="avatar img-responsive" width="30" height="20" alt="Avatar"/></a>
 				   		 	</div>
-				   			<div>
-								<textarea rows="3" cols="80" data-toggle="modal" data-target="#postModal">
-
+				   			<div style="text-align:center">
+								 <textarea rows="3" cols="80" data-toggle="modal" data-target="#postModal">
 								</textarea>
-							</div>
+							</div>	
 						</div>
+
 						<div class="new-post-footer">
-							<a class="btn"><span><img src="img/images-icon.png" width="30px" height="25px" /></span>Photos
+							<a class="btn" data-toggle="modal" data-target="#postModal"><span><img src="img/images-icon.png" width="30px" height="25px" /></span>Photos
 							</a>
 							<span id="posting-feedback"> post test here </span>
 						</div>
@@ -106,6 +102,7 @@ $homePostResult = mysqli_query($conn, $homePostQuery);
                         $postTime = date("D M d Y H:i", $tempTime);
                         $postText = $row['Content'];
                         $postImage = $row['Photo_Path'];
+                        $liked_num = $row['Liked_num'];
  ?>
 					<div class="single-post">
 						<div class="post-owner">
@@ -138,7 +135,7 @@ $homePostResult = mysqli_query($conn, $homePostQuery);
 						</div>
 						<hr>
 						<div class="post-footer feedback-section">
-								<a href="#like"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
+								<a href="#like"><span class="glyphicon glyphicon-thumbs-up"></span>Like
 								<a href="#comment"><span class="glyphicon glyphicon-comment"></span>Comment</a>
 								<a href="#share"><span class="glyphicon glyphicon-share-alt"></span>Share</a>
 						</div>
@@ -170,8 +167,9 @@ $homePostResult = mysqli_query($conn, $homePostQuery);
 						</div>
 					</div>
 				</div>
+
 <!--left side bar end -->
-<!--right side bar -->
+
 				<div class="col-sm-2 rightSideBar">
 
 					<div class="usePage-friend-list">
@@ -188,13 +186,13 @@ $fListResult = mysqli_query($conn, $friendListQuery);
  ?>
 						<div class="friend-item">
 							<a href="friend_page.php?userId=<?php echo $friendId ;?>"><img src="<?php echo $friendAvarta; ?>" alt="avatar" width="24" height="24"/><span><?php echo $friendName; ?></span></a>
-							<span class="online-icon fa fa-circle"></span></a>
+							
 							<?php
 							  if ($online==1){
-							  	echo "<script> $('.online-icon').css({'color':'green'})</script>";
+							  	echo "<span class='online-icon fa fa-circle'></span></a>";
 							  }else{
-							  	echo "<script> $('.online-icon').css({'color':'grey'})</script>";
-							  }
+							  	echo "<span class='offline-icon fa fa-circle'></span></a>";
+							  	}
 							 ?>
 						</div>
 						<?php
@@ -205,7 +203,8 @@ $fListResult = mysqli_query($conn, $friendListQuery);
 						<div class="rightSideBar-footer">
 	    	           		<button type="submit" onclick="myFunction()">
 	    	           			 <i class="glyphicon glyphicon-search"></i>
-	    	           		</button><input type="text" onkeyup="myFunction()" placeholder="Search"><button>
+	    	           		</button>
+	    	           		<input type="text" onkeyup="myFunction()" placeholder="Search"><button>
 	    	           			 <i class="glyphicon glyphicon-cog"></i>
 	    	           		</button>
 						</div>
@@ -215,8 +214,8 @@ $fListResult = mysqli_query($conn, $friendListQuery);
 <!--right side bar end -->
 			</div>
 		</div>
-
+				
 <script src="css/postSubmit.js?v=3"></script>
-<script src="css/reloadPost.js"></script>
+<script src="css/reloadPost.js?v=1"></script>
 </body>
 </html>

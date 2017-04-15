@@ -3,10 +3,6 @@ $(document).ready(function() {
 	$("#submit").click(function() {
 		console.log("newPost() is called");
 		var content= $("#postContent").text();
-		
-		
-		
-      
 		var userInfo = $("#user-infor").find("a:first");
 		var userHref = userInfo.attr("href");
 		var userName = userInfo.text();
@@ -39,19 +35,17 @@ $(document).ready(function() {
 		//create a text only post
 		 if((file===undefined)&&(content.trim().length>0)){
 		 	//insert the new post after newPost section
-		 	newPost.insertAfter(".new-post:first");
+		 	newPost.insertAfter(".new-post").first();
 		 	newPost.find(".post-pic").css("display", "none");
 		 	return;
 		 }
-		 //create a picture only post
-		 
 			
 			console.log(file);
         	var reader  = new FileReader();
         	reader.onloadend = function () {
           	 newPost.find(".post-pic").find(".img-responsive").attr('src', reader.result);
        			};
-       		 reader.readAsDataURL(file); 			
+       		reader.readAsDataURL(file); 			
 			newPost.insertAfter(".new-post:first");
 			if(content.trim().length===0){
 		 		newPost.find(".post-text").css("display", "none");
