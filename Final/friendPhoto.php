@@ -17,20 +17,31 @@ include "navBar.php";
     <script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.js"></script>
      <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-     
+     <script src="script/photo.js"></script>
     <title>my photo</title>
 
     <style>
-        body{
+         body{z-index: 1;}
+
+    body:before{
+            content: "";
+            position: fixed;
             background-image: url("img/background3.jpg");
             background-repeat: no-repeat;
-            background-attachment: fixed;
+            background-attachment: fixed;            
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+            z-index:-1;
+            
         }
-        
-
         .container{
-            background-color: white;
-            padding: 40px;
+            /*background-color: white;*/
+            padding: 30px;
+        }
+
+        #photonav a{
+            color: white;
         }
         
         #photonav {
@@ -54,11 +65,6 @@ include "navBar.php";
             color: black;
         }
         
-       
-        .container{
-            margin-top: 100px;
-        }
-
         .over {
             opacity: 0;
             position: absolute;
@@ -71,8 +77,6 @@ include "navBar.php";
         .userlike{
             color: red;
         }
-
-        
     </style>
 </head>
 <?php include "db.php"; ?>
@@ -138,13 +142,13 @@ include "navBar.php";
                                               <?php 
                                               //if user liked the post, then display remove-like button
                                               if(in_array($id, $likedPost)){ ?>
-                                              <a href="photo-action.php?friendRemoveLike=<?php echo $id; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
+                                              <a href="controller/photo-action.php?friendRemoveLike=<?php echo $id; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
 
                                                <?php }
 
                                                //if user does not add post to like, then display add-to-like button
                                                 else{ ?>
-                                                    <a href="photo-action.php?friendAddToLike=<?php echo $id; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart-empty"></span></a>
+                                                    <a href="controller/photo-action.php?friendAddToLike=<?php echo $id; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart-empty"></span></a>
                                                <?php } ?>
                                                 
                                              </div>
@@ -195,13 +199,13 @@ include "navBar.php";
                                                <?php 
                                               //if user liked the post, then display remove-like button
                                               if(in_array($id, $likedPost)){ ?>
-                                              <a href="photo-action.php?friendRemoveLikeTab=<?php echo $id; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
+                                              <a href="controller/photo-action.php?friendRemoveLikeTab=<?php echo $id; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
 
                                                <?php }
 
                                                //if user does not add post to like, then display add-to-like button
                                                 else{ ?>
-                                                    <a href="photo-action.php?friendAddToLikeTab=<?php echo $id; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart-empty"></span></a>
+                                                    <a href="controller/photo-action.php?friendAddToLikeTab=<?php echo $id; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart-empty"></span></a>
                                                <?php } ?>
                                                 
                                             
@@ -227,35 +231,6 @@ include "navBar.php";
         <p>&copy;Web Design Final</p>
     </footer>
 
-<script type="text/javascript">
-    $(function() {
-        var $container = $('.grid');
-            $container.imagesLoaded(function() {
-                 $container.masonry({
-                    itemSelector: '.item',
-                    layoutMode: 'fitRows'
-                });
-                
-            });
-        
-
-        $('a[data-toggle=tab]').each(function () {
-            var $this = $(this);
-            $this.on('shown.bs.tab', function () {
-                $container.imagesLoaded(function() {
-                    $container.masonry({
-                        itemSelector: '.item',
-                        layoutMode: 'fitRows'
-                     });
-                
-                 });
-            });
-      
-        });
-    });
-
-    </script>
-
     <script>
 
     //get the src in each pic and pass src to the modal panel
@@ -266,24 +241,6 @@ include "navBar.php";
         $('.deletePic').attr('id', id);
         
     });
-
-
-    //refresh tag content to its clicked tab
-    $(document).ready(function() {
-        if (location.hash) {
-            $("a[href='" + location.hash + "']").tab("show");
-        }
-        $(document.body).on("click", "a[data-toggle]", function(event) {
-            location.hash = this.getAttribute("href");
-            });
-    });
-    $(window).on("popstate", function() {
-        var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
-        $("a[href='" + anchor + "']").tab("show");
-    });
-
-
-  
     </script>
 </body>
 

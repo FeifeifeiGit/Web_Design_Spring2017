@@ -1,6 +1,6 @@
 <?php
-include "s3.php";
-include "db.php";
+include "../s3.php";
+include "../db.php";
 session_start();
 
 $currentId=$_SESSION['userId'];
@@ -184,7 +184,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 }
 
- header("Location: profile.php");
+ header("Location: ../profile.php");
 
 ?>
 

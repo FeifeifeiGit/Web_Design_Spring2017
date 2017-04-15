@@ -52,7 +52,7 @@
         <div class="container">
 
             <div class="row">
-                <form method="post" action="profile-action.php" class="form-horizontal" enctype="multipart/form-data">
+                <form method="post" action="controller/profile-action.php" class="form-horizontal" enctype="multipart/form-data">
                     <div class="col-lg-8 col-lg-offset-2 ">
 
                         <div class="div-divider col-lg-10 col-lg-offset-1">
