@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.js"></script>
     <style>
@@ -19,7 +19,8 @@
         
         .container {
             width: 80%;
-            margin-top: 100px;
+            
+            padding-bottom: 50px;
             background-color: white;
         }
         
@@ -56,7 +57,7 @@
 
                         <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-heading"> <a data-toggle="collapse" href="#collapse1"><b><span class="glyphicon glyphicon-edit"></span> Username: <?php echo $displayName; ?></b></a></div>
+                                <div class="panel-heading"> <a data-toggle="collapse" href="#collapse1"><b><span class="glyphicon glyphicon-edit"></span> Username:</b> <?php echo $displayName; ?></a></div>
                                 <div id="collapse1" class="panel-collapse collapse">
                                     <div class="panel-body">
 
@@ -83,7 +84,7 @@
 						
                         <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse2"><b><span class="glyphicon glyphicon-edit"></span> Headshot: <img src="<?php echo $avatar; ?>" class="avatar img-responsive"></b></a></div>
+                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse2"><b><span class="glyphicon glyphicon-edit"></span> Headshot:</b> <img src="<?php echo $avatar; ?>" class="avatar img-responsive"></a></div>
                                 <div id="collapse2" class="panel-collapse collapse">
                                     <div class="panel-body">
 
@@ -109,7 +110,7 @@
                         <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
 
-                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse3"><b><span class="glyphicon glyphicon-edit"></span> Birthday: <?php echo $row['Birthday']; ?></b></a></div>
+                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse3"><b><span class="glyphicon glyphicon-edit"></span> Birthday:</b> <?php echo $row['Birthday']; ?></a></div>
                                 <div id="collapse3" class="panel-collapse collapse">
                                     <div class="panel-body">
 
@@ -134,7 +135,7 @@
 
                         <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse4"><b><span class="glyphicon glyphicon-edit"></span> Phone Number: <?php echo $row['PhoneNumber']; ?></b></a></div>
+                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse4"><b><span class="glyphicon glyphicon-edit"></span> Phone Number:</b>  <?php echo $row['PhoneNumber']; ?></a></div>
                                 <div id="collapse4" class="panel-collapse collapse">
                                     <div class="panel-body">
 
@@ -159,7 +160,7 @@
 
                         <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-heading"> <a data-toggle="collapse" href="#collapse5"><b><span class="glyphicon glyphicon-edit"></span> School/ Company: <?php echo $row['SchoolOrWork']; ?></b></a></div>
+                                <div class="panel-heading"> <a data-toggle="collapse" href="#collapse5"><b><span class="glyphicon glyphicon-edit"></span>School/ Company:</b>  <?php echo $row['SchoolOrWork']; ?></a></div>
                                 <div id="collapse5" class="panel-collapse collapse">
                                     <div class="panel-body">
 
@@ -176,7 +177,7 @@
 
                         <div class="div-divider col-lg-10 col-lg-offset-1">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse6"><b><span class="glyphicon glyphicon-edit"></span> Bio: <?php echo $row['Description']; ?></b></a></div>
+                                <div class="panel-heading"><a data-toggle="collapse" href="#collapse6"><b><span class="glyphicon glyphicon-edit"></span> Bio: </b><?php echo $row['Description']; ?></a></div>
                                 <div id="collapse6" class="panel-collapse collapse">
                                     <div class="panel-body">
 
