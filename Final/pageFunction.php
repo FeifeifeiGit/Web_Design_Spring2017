@@ -1,5 +1,5 @@
 <?php 
-
+//check whether this person is a friend to current user
 function isFriend($friendId, $currentId){
 	
 	include "db.php";
@@ -22,6 +22,28 @@ function isFriend($friendId, $currentId){
 
 	if(in_array($currentId, $userlist) && in_array($friendId, $friendlist)) return true;
 	else return false;
+
+
+}
+
+//check whether user liked the post, for button displaying
+function isUserLiked($postId, $currentId){
+	include "db.php";
+
+	//get all the user liked post
+	$postquery="SELECT Post_Id FROM UserLike WHERE User_Id='$currentId'";
+	$likedresult=mysqli_query($conn, $postquery);
+	$likedPost=Array();
+	while($row = mysqli_fetch_assoc($likedresult)){
+		array_push($likedPost, $row['Post_Id']);
+	}
+
+	if(in_array($postId, $likedPost)){
+		return true;
+	}
+	else{
+		return false;
+	}
 
 
 }
