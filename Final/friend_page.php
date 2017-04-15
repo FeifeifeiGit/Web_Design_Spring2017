@@ -85,11 +85,11 @@
                             <button type="button" id="friend_status" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span>Unconnect &nbsp<i class="fa fa-sort-desc" aria-hidden="true"></i></span>
 								<ul class="dropdown-menu">
 									<li><a href="#">Close Friends</a></li>
-									<li><a href="#">add to friend</a></li>
+									<li><a href="friend_page-action.php?addFriend=<?php echo $friend_id ?>">add to friend</a></li>
 								</ul>
 							</button>
 
-                             <button type="button" class="btn btn-default"><a href="#">add to friend</a>
+                             <button type="button" class="btn btn-default"><a href="friend_page-action.php?addFriend=<?php echo $friend_id ?>">add to friend</a>
                             </button>
                             <?php
                                 ;
