@@ -1,9 +1,6 @@
 <?php 
 include "../db.php";
 
-$friendId="";
-
-
  //get all user's posts
 $sql="SELECT Photo_Path, Post_Id FROM Post WHERE User_Id='$currentId' ";
 $result=mysqli_query($conn, $sql);
@@ -28,30 +25,33 @@ while($row = mysqli_fetch_assoc($likedResult)){
 	array_push($likedList, $row);
 }
 
-
- //get all friend's posts
-$friendSql="SELECT Photo_Path, Post_Id FROM Post WHERE User_Id='$friendId' ";
-$friendResult=mysqli_query($conn, $friendSql);
-$friendPostList=[];
+if(!empty($friendId)){
+	//get all friend's posts
+	$friendSql="SELECT Photo_Path, Post_Id FROM Post WHERE User_Id='$friendId' ";
+	$friendResult=mysqli_query($conn, $friendSql);
+	$friendPostList=[];
 
 //display all post
-while($row = mysqli_fetch_assoc($friendResult)){
+	while($row = mysqli_fetch_assoc($friendResult)){
 	//$image = $row['Photo_Path'];
 	//$postId = $row['Post_Id'];
-	array_push($friendPostList, $row);
-}
+		array_push($friendPostList, $row);
+	}
 
 
 
 //get friend's liked posts
-$friendLikedList=[];
-$friendLikedSql="SELECT Photo_Path, Post_Id FROM Post WHERE Post_Id in (SELECT Post_Id FROM UserLike WHERE User_Id='$friendId')";
-$friendLikedResult=mysqli_query($conn, $friendLikedSql);
-while($row = mysqli_fetch_assoc($friendLikedResult)){
+	$friendLikedList=[];
+	$friendLikedSql="SELECT Photo_Path, Post_Id FROM Post WHERE Post_Id in (SELECT Post_Id FROM UserLike WHERE User_Id='$friendId')";
+	$friendLikedResult=mysqli_query($conn, $friendLikedSql);
+	while($row = mysqli_fetch_assoc($friendLikedResult)){
 	//$image = $row['Photo_Path'];
 	//$id= $row['Post_Id'];
-	array_push($friendLikedList, $row);
+		array_push($friendLikedList, $row);
+	}
 }
+
+
 
 
 ?>

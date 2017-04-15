@@ -79,7 +79,7 @@ $friendId=$_GET["friendId"];
     }
 </style>
 </head>
-<?php 
+<?php
 include "pageFunction.php";
 include "model/photo-model.php";
 ?>
