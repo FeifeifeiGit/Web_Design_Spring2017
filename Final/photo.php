@@ -208,6 +208,34 @@ include "model/photo-model.php";
 </main>
 
 <script type="text/javascript">
+//load the masonry plugin
+    $(function() {
+        var $container = $('.grid');
+            $container.imagesLoaded(function() {
+                 $container.masonry({
+                    itemSelector: '.item',
+                    layoutMode: 'fitRows'
+                });
+                
+            });
+        
+
+        $('a[data-toggle=tab]').each(function () {
+            var $this = $(this);
+            $this.on('shown.bs.tab', function () {
+                $container.imagesLoaded(function() {
+                    $container.masonry({
+                        itemSelector: '.item',
+                        layoutMode: 'fitRows'
+                     });
+                
+                 });
+            });
+      
+        });
+    });
+
+
         //get the src in each pic and pass src to the modal panel
         $('.getSrc').click(function(){
             var src = $(this).attr('src'); 
