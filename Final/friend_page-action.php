@@ -22,6 +22,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 
+//delete a post in user page
+if(!empty($_GET['delete'])){
+    $id=$_GET['delete'];
+    echo "$id";
+    $sql = "DELETE FROM Post WHERE Post_Id='$id'";
+    $result=mysqli_query($conn, $sql);
+        if($result==false){
+            echo "error delete photo post<br>";
+        }  
+    //header("location:userPage.php");
+    //exit; 
+
+  }
+
 //delete friend
 if(!empty($_GET['unfriend'])){
 
