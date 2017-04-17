@@ -321,7 +321,8 @@
                                 $image = $row['ProfilePhoto'];
                                 $friend_name = $row['DisplayName'];
                                 $friend_first = $row['FirstName'];
-                                $friend_last = $row['LastName'];?>
+                                $friend_last = $row['LastName'];
+								$description = $row['Description'];?>
                         <div class='col-md-4 item'>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -335,11 +336,11 @@
                                     <div class="about">
                                         <div class="row">
                                             <div class="col-sm-5">
-                                                <a href="#"><img src='<?php echo $image; ?>' class='friend_friends img-circle' id="friend_friends"/></a>
+                                               <a href="friend_page.php?userId=<?php echo $friendId ;?>"><img src='<?php echo $image; ?>' class='friend_friends img-circle' id="friend_friends"/></a>
                                             </div>
                                             <div class="col-sm-7">
                                                 <p>
-                                                    Hello everybody!
+                                                    <?php echo $description; ?>
                                                 </p>
                                             </div>
                                         </div>

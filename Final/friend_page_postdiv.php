@@ -41,7 +41,7 @@ $sql_comment = "SELECT * FROM Comments JOIN Users on Comments.User_Id = Users.Us
 WHERE Post_Id='$id_post' ORDER BY Comment_Id DESC";
 $result_comment = mysqli_query($conn, $sql_comment);
 while ($row_comment = mysqli_fetch_array($result_comment)) {
-
+$post_user_id = $row_comment['User_Id'];
 echo "<p>";
 if ($row_comment['Content'] != '') {
   if($post_user_id == $currentId){
