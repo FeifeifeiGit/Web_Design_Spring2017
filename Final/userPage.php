@@ -31,10 +31,10 @@
 
 <body>
     <?php
-
     include 'db.php';
     include "navBar.php";
     include "pageFunction.php";
+    include "checkLogin.php";
 ?>
         <!-- Cover -->
         <div class="cover">
@@ -186,7 +186,7 @@
                                         $id_post = $row_post['Post_Id']; ?>
 
 
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" id="userPost<?php echo $id_post?>">
                                     <div class="panel-heading">
                                         <a href="#"><img src="<?php echo $profile_photo; ?>" width="30px" height="30px" /></a> &nbsp&nbsp
                                         <b><?php echo $display_name; ?>`s Moments</b>
@@ -206,7 +206,7 @@
                                         <a href="#"> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp Like</a>&nbsp
                                         <a href="#" class="comment_link"> <span class="glyphicon glyphicon glyphicon-share-alt"></span>&nbsp Comment</a>&nbsp
                                         <a href="#"> <span class="glyphicon glyphicon-share"></span>&nbsp Share</a>
-
+                                        <a href="#" class="deletePost" id="<?php echo $id_post; ?>" style="float: right;"><span class="glyphicon glyphicon-trash"></span>&nbsp delete</a>
                                         <br />
                                         <hr />
 
@@ -401,5 +401,24 @@
             </div>
         </div>
 </body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.deletePost').click(function(){
+            var id=$(this).attr("id");
+            $.ajax({
+                type:"GET",
+                url: "friend_page-action.php",
+                data: 'delete='+id,
+                cache: false,
+                success:function(html){
+                    $("#userPost"+id).fadeOut('slow');
+
+                }
+            });
+
+        });
+    });
+    
+</script>
 
 </html>

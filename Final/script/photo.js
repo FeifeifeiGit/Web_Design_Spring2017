@@ -1,29 +1,5 @@
-//load the masonry plugin
-$(function() {
-        var $container = $('.grid');
-            $container.imagesLoaded(function() {
-                 $container.masonry({
-                    itemSelector: '.item',
-                    layoutMode: 'fitRows'
-                });
-                
-            });
-        
 
-        $('a[data-toggle=tab]').each(function () {
-            var $this = $(this);
-            $this.on('shown.bs.tab', function () {
-                $container.imagesLoaded(function() {
-                    $container.masonry({
-                        itemSelector: '.item',
-                        layoutMode: 'fitRows'
-                     });
-                
-                 });
-            });
-      
-        });
-    });
+
 
 
 
