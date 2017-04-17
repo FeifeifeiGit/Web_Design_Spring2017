@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html>
-<?php 
-include "navBar.php";
 
-$friendId=$_GET["friendId"];
-?>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>my photo</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   
     <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="script/photo.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+     <link href="css/userHome.css" rel="stylesheet">
     <title>my photo</title>
 
     <style>
@@ -80,8 +79,12 @@ $friendId=$_GET["friendId"];
 </style>
 </head>
 <?php
+include "navBar.php";
+$friendId=$_GET["friendId"];
+
 include "pageFunction.php";
 include "model/photo-model.php";
+
 ?>
 
 <body>

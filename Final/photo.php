@@ -7,12 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>my photo</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>   
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+     <link href="css/userHome.css" rel="stylesheet">
     <script src="script/photo.js"></script>
     <title>my photo</title>
     <style type="text/css">
@@ -35,7 +37,7 @@
             padding: 30px;
         }
 
-        #photonav a{
+        #photonav li a{
             color: white;
         }
         
@@ -80,6 +82,7 @@
 include "db.php"; 
 include "pageFunction.php";
 include "model/photo-model.php";
+include "checkLogin.php";
 ?>
 
 <body>
