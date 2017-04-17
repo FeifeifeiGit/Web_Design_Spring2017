@@ -77,10 +77,6 @@ if(!empty($_GET['addFriend'])){
 }
 
 
-/*
-写在navbar下拉框里，现在下拉框没有做，测试不了
-同意添加和不同意应该都只能做部分刷新？？？所以我暂时没有写header跳转
-*/
 //user accept request from others
 if(!empty($_GET['agreeAdd'])){
   $friendId=$_GET['agreeAdd'];
@@ -89,16 +85,15 @@ if(!empty($_GET['agreeAdd'])){
   //add friend in two ways
   $addFriendResult=mysqli_query($conn, "INSERT INTO FriendsList (User_Id, Friend_Id) VALUES ('$currentId', '$friendId')");
   $addFriendRvsResult=mysqli_query($conn, "INSERT INTO FriendsList (User_Id, Friend_Id) VALUES ('$friendId', '$currentId')");
-  header("location: request.php?userId=$currentId");
 }
+
+
 
 //user does not accept request and delete the request
 if(!empty($_GET['deleteRqst'])){
   $friendId=$_GET['deleteRqst'];
   $deleteResult=mysqli_query($conn, "DELETE FROM Request WHERE Sender_Id='$friendId' AND Receiver_Id='$currentId';");
-  header("location: userPage.php?userId=$currentId");
 }
-
 
 
 ?>
