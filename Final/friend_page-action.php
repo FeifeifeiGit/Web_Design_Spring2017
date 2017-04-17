@@ -30,9 +30,9 @@ if(!empty($_GET['delete'])){
     $result=mysqli_query($conn, $sql);
         if($result==false){
             echo "error delete photo post<br>";
-        }  
+        }
     //header("location:userPage.php");
-    //exit; 
+    //exit;
 
   }
 
@@ -89,7 +89,7 @@ if(!empty($_GET['agreeAdd'])){
   //add friend in two ways
   $addFriendResult=mysqli_query($conn, "INSERT INTO FriendsList (User_Id, Friend_Id) VALUES ('$currentId', '$friendId')");
   $addFriendRvsResult=mysqli_query($conn, "INSERT INTO FriendsList (User_Id, Friend_Id) VALUES ('$friendId', '$currentId')");
-  header("location: userPage.php?userId=$currentId");
+  header("location: request.php?userId=$currentId");
 }
 
 //user does not accept request and delete the request
