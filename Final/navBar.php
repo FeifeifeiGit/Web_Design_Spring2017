@@ -33,8 +33,40 @@ include "db.php";
 	</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
 </head>
+<style>
+	.dropdown-menu {
+		width:426px;
+		padding-left: 10px;
+		padding-right: 10px;
+		padding-bottom: 10px;
+	}
+	.request_button{
+		margin-top:5px;
+	}
+</style>
+<script>
+$(document).on('click', '.add_link', function() {
+
+    var request_div = $(this).parent().parent().parent().parent().parent(".request_content");
+    //alert(request_div.attr('class'));
+    var id=$(this).attr("id");
+    //alert(id);
+    $.ajax({
+      type: 'GET',
+      url: "friend_page-action.php",
+      data: 'agreeAdd='+id,
+      cache: false,
+      success: function(msg) {
+        //alert("success!!"+msg);
+        request_div.css('display','block');
+        request_div.html(msg);
+        
+      }
+    });
+});
+</script>
 <body>
 	<!-- Navigation bar-->
 		<nav class="navbar navbar-default navbar-fixed-top">
@@ -43,7 +75,7 @@ include "db.php";
 					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 				        <span class="icon-bar"></span>
 				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>                        
+				        <span class="icon-bar"></span>
 				      </button>
 						<span class="nav navbar-brand navbar-left" id="brandname">Find Your Group</span>
 				</div>
@@ -90,7 +122,7 @@ include "db.php";
 										</div>
 										<div class="col-lg-6">
 											<div class="request_button">
-												<button type="button" class="add_agree btn btn-primary btn-xs"><a class="add_link" href="friend_page-action.php?agreeAdd=<?php echo $send_id ;?>" ><b><span style="color:white">Confirm</span></b></a></button>&nbsp&nbsp
+												<button type="button" class="add_agree btn btn-primary btn-xs"><a class="add_link" href="#" id="<?php echo $send_id ;?>"><b><span style="color:white">Confirm</span></b></a></button>&nbsp&nbsp
 												<button type="button" class="deleteRqst btn btn-default btn-xs"><a class="delete_link" href="friend_page-action.php?deleteRqst=<?php echo $send_id ;?>"><b>Delete Request</b></a></button>
 											</div>
 										</div>
@@ -103,8 +135,8 @@ include "db.php";
 						</li>
 	          			<li ><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>Logout<span class="sr-only">(log out)</span></a></li>
 		       		</ul>
-		       	</div>	
-			</div>	
+		       	</div>
+			</div>
 		</nav>
 </body>
 </html>
