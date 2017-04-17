@@ -53,6 +53,8 @@
                             $birthday = $row_friend['Birthday'];
                             $gender = $row_friend['Gender'];
                             $email = $row_friend['Email'];
+							$description = $row_friend['Description'];
+                            $schoolOrwork = $row_friend['SchoolOrWork'];
                             ?>
                                 <img class="profile_photo" src="<?php echo $profile_photo; ?>" />
                         </div>
@@ -204,17 +206,12 @@
 
                                 <div class="tab-content col-lg-9">
                                     <div class="tab-pane active" id="tab_a">
-
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                </td>
-                                            </tr>
-                                        </table>
+									  <p>
+                                        <?php echo $description; ?>
+                                      </p>
                                     </div>
                                     <div class="tab-pane" id="tab_b">
-                                        <h4>Pane B</h4>
-                                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                                        <p><?php echo $schoolOrwork; ?></p>
                                     </div>
                                     <div class="tab-pane" id="tab_c">
                                         <table class="tg" style="undefined;table-layout: fixed; width: 485px">
