@@ -9,45 +9,45 @@ __NOTICE:__ This project using remote database (RDS) and AWS S3 for images store
 * change __controller/photo-action__ file, modify `$target_dir="img/"` to set all pictures stored in __img__ folder. __delete__ following code:
 
 	```php
-		try{
-	
-    	     //upload to S3
-            $result = $client->putObject(array(
-                'Bucket' => $bucket,
-                'Key'    => $imagename,
-                'Body' => fopen($_FILES['uploadimage']['tmp_name'], 'r+'),
-                'options' => [
-                        'scheme' => 'http',
-                ],
-            ));
+	try{
 
-         } catch (Exception $e) {
-            exit($e->getMessage());
-        }
+    //upload to S3
+	$result = $client->putObject(array(
+		'Bucket' => $bucket,
+		'Key'    => $imagename,
+		'Body' => fopen($_FILES['uploadimage']['tmp_name'], 'r+'),
+		'options' => [
+		'scheme' => 'http',
+		],
+		));
+
+	} catch (Exception $e) {
+	exit($e->getMessage());
+	}
 	```
 
 
 	and __replace it__ with  
 	
 	```php
-	  move_uploaded_file($_FILES['uploadimage']['tmp_name'], $imagename);
+	move_uploaded_file($_FILES['uploadimage']['tmp_name'], $imagename);
 	```
- modify`$targetPath` to `$targetPath=$imagename`
+ 	modify`$targetPath` to `$targetPath=$imagename`
 * change __controller/profile-action.php__ file, delete the following code: 
- 
+  
 	```php
-			try{
-                //upload to S3
-                $result = $client->putObject(array(
-                    'Bucket' => $bucket,
-                    'Key'    => $headshot,
-                    'Body' => fopen($_FILES['headshot']['tmp_name'], 'r+'),
-                     ));
+	try{
+  	 //upload to S3
+		$result = $client->putObject(array(
+			'Bucket' => $bucket,
+			'Key'    => $headshot,
+			'Body' => fopen($_FILES['headshot']['tmp_name'], 'r+'),
+			));
 
-               } catch (Exception $e) {
+	} catch (Exception $e) {
 
-                    exit($e->getMessage());
-	           }
+	exit($e->getMessage());
+	}
 	```  
 and __uncomment__ the following code block. modify`$targetPath` to `$targetPath=$headshot`. 
 
@@ -78,7 +78,7 @@ For crediential file, refer to http://docs.aws.amazon.com/aws-sdk-php/v2/guide/c
 
 * On the other hand, if you want to connect to S3 with hard code, you can replace code in __s3.php__ with following code and paste access key in it:
 
- ```php
+  ```php
 <?php
 require 'aws/vendor/autoload.php';
 use Aws\S3\S3Client ;
@@ -98,6 +98,6 @@ try{
 //S3 bucket name
 $bucket = 'minisocial';
 ?>
- ```   
+  ```   
 * In S3, a bucket named __minisocial__ should be created for storing, if you want to create bucket in another name, edit `$bucket` in S3.php file. Besides, According your S3 URL and bucket name, edit `$targetPath` in __controller/profile-action.php, controller/photo-action.php, register-action.php__, and  `"s3path"` in __upload.php__.
 * For folder used to stored pictures in AWS S3 bucket, create __/img__ for saving user headshot and __/postdata__ for saving post picture.  
