@@ -113,16 +113,22 @@
                                                 $sql_serchphoto="SELECT * FROM Post WHERE User_Id='$currentId' Order BY Post_Id DESC";
                                                 $result_photo=mysqli_query($conn, $sql_serchphoto);
                                                 $count = 6;
+                                                $count_div = 3;
                                                  while ($row = mysqli_fetch_assoc($result_photo)) {
                                                     if ($count > 0) {
                                                       $image = $row['Photo_Path']; ?>
                                                 <div class='col-md-4 item'>
                                                     <div class='thumbnail'>
                                                         <a data-toggle="modal" data-target="#myModel_small"><img src='<?php echo $image; ?>' class='image getSrc_small'id="friend_photo_small"/></a>
+                                                        <?php if ($count_div == 1){
+                                                          echo "<br />";
+                                                          $count_div = 3;
+                                                        }?>
                                                     </div>
                                                 </div>
                                                 <?php
                                                     $count--;
+                                                    $count_div--;
                                                      }
                                                 }?>
                                         </div>
@@ -140,13 +146,13 @@
                                             <?php
                                                 $sql_friend_friends = "SELECT * FROM FriendsList JOIN Users on FriendsList.Friend_Id = Users.User_Id WHERE FriendsList.User_Id = '$currentId'";
                                                 $result_friend_friends = mysqli_query($conn, $sql_friend_friends);
-                                                                                                $count = 6;
+                                                $count_friend = 6;
+                                                $count_div_friend = 3;
                                                 while ($row = mysqli_fetch_assoc($result_friend_friends)) {
-                                                    if ($count > 0) {
+                                                    if ($count_friend > 0) {
                                                         $image = $row['ProfilePhoto'];
                                                         $friend_name = $row['DisplayName'];
                                                         $friendId=$row['User_Id'];
-
                                                         ?>
                                                 <div class='col-md-4 item'>
                                                     <div class='thumbnail'>
@@ -157,9 +163,15 @@
                                                             <?php echo $friend_name; ?>
                                                         </p>
                                                     </div>
+                                                    <?php if($count_div_friend == 1){
+                                                      echo "<br />";
+
+                                                      $count_div_friend = 3;
+                                                    } ?>
                                                 </div>
                                                 <?php
-                                                $count--;
+                                                  $count_friend--;
+                                                  $count_div_friend--;
                                                     }
                                                 }
                                                 ?>
@@ -319,8 +331,8 @@
                                 $friend_name = $row['DisplayName'];
                                 $friend_first = $row['FirstName'];
                                 $friend_last = $row['LastName'];
-								$description = $row['Description'];
-								$friendId=$row['User_Id'];?>
+                                $friendId=$row['User_Id'];
+								                $description = $row['Description'];?>
                         <div class='col-md-4 item'>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
