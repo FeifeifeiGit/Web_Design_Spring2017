@@ -47,8 +47,8 @@
 <body>
 
 <?php 
-include "navBar.php";
 include "checkLogin.php";
+include "navBar.php";
 ?>
     <main>
         <div class="container">
@@ -96,7 +96,7 @@ include "checkLogin.php";
                                                 <input type="file" name="headshot" data-validation="mime" data-validation-allowing="jpg, png, gif" />
                                             </div>
                                             <div class="error col-sm-8 col-sm-offset-2">
-                                            <?php 
+                                            <?php
                                             if(!empty($_SESSION['typeError'])){
                                                 echo $_SESSION['typeError']; 
                                             }

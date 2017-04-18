@@ -126,11 +126,11 @@ $(document).on('click', '.delete_link', function(e) {
 								<?php
 								$sql_request = "SELECT * FROM Request JOIN Users ON Request.Sender_Id = Users.User_Id WHERE Request.Receiver_Id = '$currentId'";
 								$result_request = mysqli_query($conn, $sql_request);
-								while($row = mysqli_fetch_assoc($result_request)){
-									$profile_photo = $row['ProfilePhoto'];
-									$first = $row['FirstName'];
-									$last = $row['LastName'];
-									$send_id = $row['Sender_Id'];?>
+								while($row2 = mysqli_fetch_assoc($result_request)){
+									$profile_photo = $row2['ProfilePhoto'];
+									$first = $row2['FirstName'];
+									$last = $row2['LastName'];
+									$send_id = $row2['Sender_Id'];?>
 
 									<div class="request row" id="request<?php echo $send_id ;?>">
 										<div class="col-lg-6">
