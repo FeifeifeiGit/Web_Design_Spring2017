@@ -60,36 +60,32 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { $messageError = "Please input 
 if ($password== "") { $messageError = "Please input correct password".$password; }
 
 
+// Set up profile image upload
+$imagename="";
+$target_dir="img/";
+$imagename = $target_dir . basename($_FILES["uploadimage"]["name"]);
+if(!empty( basename($_FILES["uploadimage"]["name"]))){
+    $result = $client->putObject(array( 
+        'Bucket' => $bucket,
+        'Key'    => $imagename,
+        'Body' => fopen($_FILES['uploadimage']['tmp_name'], 'r+'),
+        'options' => ['scheme' => 'http',],
+    ));
+    $targetPath="https://s3-us-west-2.amazonaws.com/minisocial/".$imagename;
+} else {
+    $targetPath = null;
+}
 
     
 
 // SQL for register users
 $sql="INSERT INTO Users (FirstName,LastName,DisplayName,Gender,Email,Password,Birthday,ProfilePhoto,Description,SchoolOrWork)"
-    . " VALUES('$firstName','$lastName','$displayName','$gender','$email','$password','$birthday',NULL,'$desc','$schoolOrWork')";
+    . " VALUES('$firstName','$lastName','$displayName','$gender','$email','$password','$birthday','$targetPath','$desc','$schoolOrWork')";
 $result=mysqli_query($conn, $sql);
 if($result==false){
     echo "error update<br>";
 } else {
-    // Restration successful -> Set up profile image upload
-    $imagename="";
-    $target_dir="postdata/";
-    $imagename = $target_dir . basename($_FILES["uploadimage"]["name"]);
-    if($_SERVER["REQUEST_METHOD"]=="POST"){
-        if(!empty( basename($_FILES["uploadimage"]["name"]))){
-            try{ //upload to S3
-                $result = $client->putObject(array( 
-                    'Bucket' => $bucket,
-                    'Key'    => $imagename,
-                    'Body' => fopen($_FILES['uploadimage']['tmp_name'], 'r+'),
-                    'options' => ['scheme' => 'http',],
-                ));
-             } catch (Exception $e) {exit($e->getMessage());}
-            $targetPath="https://s3-us-west-2.amazonaws.com/minisocial/".$imagename;
-            $sql="UPDATE Users SET ProfilePhoto = '$targetPath' WHERE Email = '$email' ";
-            $result=mysqli_query($conn, $sql);
-            if($result==false){echo "error upload image<br>";}
-        }
-    }
+ 
     // Finished Registration direct to Login
     $_SESSION["username"] = $email;
     $_SESSION["message"] = "Registration Succeed";
