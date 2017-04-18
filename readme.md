@@ -79,11 +79,11 @@ For crediential file, refer to http://docs.aws.amazon.com/aws-sdk-php/v2/guide/c
 * On the other hand, if you want to connect to S3 with hard code, you can replace code in __s3.php__ with following code and paste access key in it:
 
   ```php
-<?php
-require 'aws/vendor/autoload.php';
-use Aws\S3\S3Client ;
-use Aws\S3\Exception\S3Exception;
-try{
+	<?php
+	require 'aws/vendor/autoload.php';
+	use Aws\S3\S3Client ;
+	use Aws\S3\Exception\S3Exception;
+	try{
     $client = S3Client::factory(array(
         'credentials' => array(
             'key'    => 'your access key ID',
@@ -94,10 +94,10 @@ try{
     ));
     } catch(Exception $e) {
      exit($e->getMessage());
-} 
-//S3 bucket name
-$bucket = 'minisocial';
-?>
+	} 
+	//S3 bucket name
+	$bucket = 'minisocial';
+	?>
   ```   
 * In S3, a bucket named __minisocial__ should be created for storing, if you want to create bucket in another name, edit `$bucket` in S3.php file. Besides, According your S3 URL and bucket name, edit `$targetPath` in __controller/profile-action.php, controller/photo-action.php, register-action.php__, and  `"s3path"` in __upload.php__.
 * For folder used to stored pictures in AWS S3 bucket, create __/img__ for saving user headshot and __/postdata__ for saving post picture.  
