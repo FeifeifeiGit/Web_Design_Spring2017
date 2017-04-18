@@ -319,7 +319,8 @@
                                 $friend_name = $row['DisplayName'];
                                 $friend_first = $row['FirstName'];
                                 $friend_last = $row['LastName'];
-								$description = $row['Description'];?>
+								$description = $row['Description'];
+								$friendId=$row['User_Id'];?>
                         <div class='col-md-4 item'>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
