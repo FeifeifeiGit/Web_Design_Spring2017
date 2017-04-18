@@ -211,7 +211,7 @@ include "navBar.php";
                             $image = $row['Photo_Path'];
                             $id= $row['Post_Id'];
 
-                            ?>
+                    ?>
                                     <div class='col-md-4 col-sm-6 col-lg-3 item'>
                                    
                                         <div class='thumbnail'>
@@ -224,9 +224,9 @@ include "navBar.php";
                                         </div>
                                     </div>
 
-                                <?php
-                                    }
-                                ?>             
+                    <?php
+                            }
+                    ?>             
                     
                 </div>
                        
