@@ -102,7 +102,7 @@ include "photo-model.php";
 
             <div class="tab-content">
                 <div id="photowall" class="tab-pane fade in active" role="tabpanel">
-                    <div class="modal fade text-center" id="myModel" tabindex="-1" aria-labelledby="myModelLabel" area-hidden="true">
+                    <div class="modal fade text-center" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" area-hidden="true">
                         <div class="modal-dialog modal-lg" style="display: inline-block; width: auto;">
                             <div class="modal-content">
 
@@ -121,7 +121,7 @@ include "photo-model.php";
                         <div class='col-md-4 col-sm-6 col-lg-3 item'>
 
                             <div class='thumbnail'>
-                               <a data-toggle="modal" data-target="#myModel"><img src='<?php echo $post['Photo_Path']; ?>' id='<?php echo $post['Photo_Id']; ?>' class='image getSrc'/></a>
+                               <a data-toggle="modal" data-target="#myModal"><img src='<?php echo $post['Photo_Path']; ?>' id='<?php echo $post['Photo_Id']; ?>' class='image getSrc'/></a>
 
                                <div class="over">
                                <!--if user liked the post, then display remove-like button-->
@@ -146,7 +146,7 @@ include "photo-model.php";
           <div id="like" class="tab-pane fade" role="tabpanel">
 
 
-            <div class="modal fade text-center" id="tabModel" tabindex="-1" aria-labelledby="myModelLabel" area-hidden="true">
+            <div class="modal fade text-center" id="tabModel" tabindex="-1" aria-labelledby="myModalLabel" area-hidden="true">
                 <div class="modal-dialog modal-lg" style="display: inline-block; width: auto;">
                     <div class="modal-content">
 
@@ -218,6 +218,11 @@ include "photo-model.php";
             });
       
         });
+    });
+
+    //set picture height not overflow
+    $('#myModal').on('show.bs.modal', function () {
+        $('.showPic').css('max-height', $(window).height() * 0.85);
     });
 
     //get the src in each pic and pass src to the modal panel

@@ -8,7 +8,7 @@ $(document).ready(function() {
         location.hash = this.getAttribute("href");
     });
 
-    
+     
     
 });
 $(window).on("popstate", function() {
