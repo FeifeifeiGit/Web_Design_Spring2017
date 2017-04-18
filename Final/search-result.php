@@ -95,7 +95,7 @@ hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; 
             echo "<li><i class='glyphicon glyphicon-home'></i><span>".$row['SchoolOrWork']."</span></li></ul></div>";
 
             echo "<div class='col-xs-12 col-sm-12 col-md-7 excerpet'>";
-            echo "<h3><a>".$row['FirstName']." ".$row['LastName']."  (".$row['DisplayName'].")</a></h3>";
+            echo "<h3><a href='friend_page.php?userId=".$row['User_Id']."'>".$row['FirstName']." ".$row['LastName']."  (".$row['DisplayName'].")</a></h3>";
             echo "<p>".$row['Description']."</p></div>";
 
             echo "<span class='clearfix borda'></span></article></section>";
