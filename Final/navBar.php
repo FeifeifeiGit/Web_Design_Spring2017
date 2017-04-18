@@ -57,9 +57,9 @@ include "db.php";
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-left">
-				        <li ><form class="navbar-form">
+				        <li ><form method="post" role="form" class="navbar-form" action="search-action.php" enctype="multipart/form-data">
 			            	<div class="input-group">
-			               	 	<input type="text" class="form-control" placeholder="Search">
+			               	 	<input type="text" class="form-control" placeholder="Search" name="searchInput">
 			               	 	<div class="input-group-btn">
 			    	           		<button type="submit" class="btn btn-default" >
 			    	           			 <i class="glyphicon glyphicon-search"></i>

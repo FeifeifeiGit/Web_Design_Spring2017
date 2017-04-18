@@ -178,8 +178,8 @@ $(function () {
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input class="" type="file" name="profilePhoto">
-                            <input class="" type="submit" value="Upload Profile Image" name="submit">
+                            <input class="" type="file" name="uploadimage">
+                            <p>Upload your profile image here</p>
                         </div>
                     </div>
                 </div>
