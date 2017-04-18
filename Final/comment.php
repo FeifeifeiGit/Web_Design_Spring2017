@@ -19,4 +19,4 @@ if ($row_comment['Content'] != '') {
   echo $row_comment['Content'] . "<br />";
 }
 echo "</p>";
-} ?>
+}} ?>
