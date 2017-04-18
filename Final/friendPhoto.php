@@ -83,7 +83,7 @@ include "navBar.php";
 $friendId=$_GET["friendId"];
 
 include "pageFunction.php";
-include "model/photo-model.php";
+include "photo-model.php";
 
 ?>
 
@@ -125,7 +125,7 @@ include "model/photo-model.php";
 
                                <div class="over">
                                <!--if user liked the post, then display remove-like button-->
-                                 <?php if(isUserLiked($post['Post_Id'], $currentId)){ ?>
+                                 <?php if(in_array($post['Post_Id'], $likedPost)){ ?>
                                   <a href="controller/photo-action.php?friendRemoveLike=<?php echo $post['Post_Id']; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
 
                                   <?php }  
