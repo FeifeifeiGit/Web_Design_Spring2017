@@ -2,36 +2,23 @@
 // Start Session
 session_start();
 
-// Initiate Photo upload
-require 'aws/vendor/autoload.php';
-use Aws\S3\S3Client ;
-use Aws\S3\Exception\S3Exception;
-try{
-    $client = S3Client::factory(array(
-        'profile' => 'project',
-        'version' => '2006-03-01',
-        'region' => 'us-west-2',
-        'scheme' => 'http' 
-    ));
-    } catch(Exception $e) {
-    exit($e->getMessage());
-} 
-$bucket = 'minisocial'; //S3 bucket name
+include "s3.php";
 
+//// Initiate Server
+//$servername = "webdesignfinal.ccxaerxt39bn.us-west-2.rds.amazonaws.com:3306";
+//$username = "webteam";
+//$password = "12345678";
+//$dbname = "findCircle";
+//
+//// Create connection
+//$conn = mysqli_connect($servername, $username, $password, $dbname);
+//
+//// Check connection
+//if (!$conn) {
+//    die("Connection failed: " . mysqli_connect_error());
+//}
 
-// Initiate Server
-$servername = "webdesignfinal.ccxaerxt39bn.us-west-2.rds.amazonaws.com:3306";
-$username = "webteam";
-$password = "12345678";
-$dbname = "findCircle";
-
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+include "db.php";
 
 
 // Set up attributes
