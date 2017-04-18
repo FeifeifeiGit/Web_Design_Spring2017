@@ -79,9 +79,8 @@
 </head>
 
 <?php 
-include "db.php"; 
 include "pageFunction.php";
-include "model/photo-model.php";
+include "photo-model.php";
 include "checkLogin.php";
 ?>
 
@@ -151,7 +150,7 @@ include "checkLogin.php";
 
                              <div class="over">
                                  <!--if user liked the post, then display remove-like button-->
-                                 <?php if(isUserLiked($post['Post_Id'], $currentId)){ ?>
+                                 <?php if(in_array($post['Post_Id'], $likedPost)){ ?>
                                  <a href="controller/photo-action.php?removeLike=<?php echo $post['Post_Id']; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
                                  <?php }
 

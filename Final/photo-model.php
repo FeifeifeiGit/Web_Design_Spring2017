@@ -1,5 +1,5 @@
 <?php 
-include "../db.php";
+include "db.php";
 
  //get all user's posts
 $sql="SELECT Photo_Path, Post_Id FROM Post WHERE User_Id='$currentId' ";
@@ -50,6 +50,13 @@ if(!empty($friendId)){
 		array_push($friendLikedList, $row);
 	}
 }
+
+$postquery="SELECT Post_Id FROM UserLike WHERE User_Id='$currentId'";
+    $likedresult=mysqli_query($conn, $postquery);
+    $likedPost=Array();
+    while($row = mysqli_fetch_assoc($likedresult)){
+        array_push($likedPost, $row['Post_Id']);
+    }
 
 
 

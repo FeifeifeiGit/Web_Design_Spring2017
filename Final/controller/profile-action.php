@@ -14,10 +14,8 @@ $error=0;
 $target_dir="img/";
 $headshot = $target_dir . basename($_FILES["headshot"]["name"]);
 
-//this is the local folder, if you do not want to upload to s3
-//$headshot = basename($_FILES["headshot"]["name"]);
+
 $uploadOk = 1;
-//$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     $username=$_POST["username"];
