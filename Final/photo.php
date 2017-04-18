@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-     <link href="css/userHome.css" rel="stylesheet">
+    <link href="css/userHome.css" rel="stylesheet">
     <script src="script/photo.js"></script>
     <title>my photo</title>
     <style type="text/css">
@@ -97,7 +97,7 @@ include "checkLogin.php";
                     <li class="pull-right"><button class="btn btn-danger" data-toggle="modal" data-target="#addphoto" id="addnew">add new</button></li>
                 </ul>
             </div>
-            <form method="post" action="controller/photo-action.php" enctype="multipart/form-data">
+            <form method="post" id="uploadpostimg" action="controller/photo-action.php" enctype="multipart/form-data">
                 <div class="modal fade text-center" id="addphoto" tabindex="-1" aria-labelledby="addphotoLabel" area-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -126,11 +126,11 @@ include "checkLogin.php";
 
             <div class="tab-content">
                 <div id="photowall" class="tab-pane fade in active" role="tabpanel">
-                    <div class="modal fade text-center" id="myModel" tabindex="-1" aria-labelledby="myModelLabel" area-hidden="true">
-                        <div class="modal-dialog modal-lg" style="display: inline-block; width: auto;">
+                    <div class="modal fade text-center" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" area-hidden="true">
+                        <div class="modal-dialog" style="display: inline-block; width: auto;">
                             <div class="modal-content">
 
-                                <img src="" class="showPic" width=700px>
+                                <img src="" class="showPic">
                                 <div class="modal-footer">
                                     <button class="btn btn-danger deletePic" type="button" id="" onclick="return Deleteqry();" style="float: left;">Delete</button>
 
@@ -146,7 +146,7 @@ include "checkLogin.php";
                         <?php foreach ($postList as $post) { ?>
                         <div class='col-md-4 col-sm-6 col-lg-3 item'>
                             <div class='thumbnail'>
-                             <a data-toggle="modal" data-target="#myModel"><img src='<?php echo $post['Photo_Path']; ?>' id='<?php echo $post['Post_Id']; ?>' class='image getSrc'/></a>
+                             <a data-toggle="modal" data-target="#myModal"><img src='<?php echo $post['Photo_Path']; ?>' id='<?php echo $post['Post_Id']; ?>' class='image getSrc'/></a>
 
                              <div class="over">
                                  <!--if user liked the post, then display remove-like button-->
@@ -171,16 +171,13 @@ include "checkLogin.php";
              <div id="like" class="tab-pane fade" role="tabpanel">
 
 
-                <div class="modal fade text-center" id="tabModel" tabindex="-1" aria-labelledby="myModelLabel" area-hidden="true">
-                    <div class="modal-dialog modal-lg" style="display: inline-block; width: auto;">
+                <div class="modal fade text-center" id="tabModel" tabindex="-1" aria-labelledby="myModalLabel" area-hidden="true">
+                    <div class="modal-dialog" style="display: inline-block; width: auto;">
                         <div class="modal-content">
 
-                            <img src="" class="showPic" width=700px>
+                            <img src="" class="showPic">
                             <div class="modal-footer">
-                                <!--button class="btn btn-danger deletePic" type="button" id="" onclick="return Deleteqry();" style="float: left;">Delete</button-->
-
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
                             </div>
                         </div>
                     </div>
@@ -244,52 +241,56 @@ include "checkLogin.php";
 
 <script type="text/javascript">
 //load the masonry plugin
-    $(function() {
-        var $container = $('.grid');
+$(function() {
+    var $container = $('.grid');
+    $container.imagesLoaded(function() {
+     $container.masonry({
+        itemSelector: '.item',
+        layoutMode: 'fitRows'
+    });
+
+ });
+
+
+    $('a[data-toggle=tab]').each(function () {
+        var $this = $(this);
+        $this.on('shown.bs.tab', function () {
             $container.imagesLoaded(function() {
-                 $container.masonry({
+                $container.masonry({
                     itemSelector: '.item',
                     layoutMode: 'fitRows'
                 });
                 
             });
-        
-
-        $('a[data-toggle=tab]').each(function () {
-            var $this = $(this);
-            $this.on('shown.bs.tab', function () {
-                $container.imagesLoaded(function() {
-                    $container.masonry({
-                        itemSelector: '.item',
-                        layoutMode: 'fitRows'
-                     });
-                
-                 });
-            });
-      
         });
+
+    });
+});
+
+    //get the src in each pic and pass src to the modal panel
+    $('.getSrc').click(function(){
+        var src = $(this).attr('src'); 
+        $('.showPic').attr('src', src);
+        var id = $(this).attr('id');
+        $('.deletePic').attr('id', id);
+
     });
 
+    //set picture height not overflow
+    $('#myModal').on('show.bs.modal', function () {
+        $('.showPic').css('max-height', $(window).height() * 0.85);
+    });
 
-        //get the src in each pic and pass src to the modal panel
-        $('.getSrc').click(function(){
-            var src = $(this).attr('src'); 
-            $('.showPic').attr('src', src);
-            var id = $(this).attr('id');
-            $('.deletePic').attr('id', id);
+    function Deleteqry(){
+        var id = $('.deletePic').attr('id');
+        window.location="controller/photo-action.php?delete="+id;
+    }
 
-        });
-
-        function Deleteqry(){
-            var id = $('.deletePic').attr('id');
-            window.location="controller/photo-action.php?delete="+id;
-        }
-
-        function Addtolike(){
-            var id = $('.deletePic').attr('id');
-            window.location="controller/photo-action.php?addToLike="+id;
-        }
-    </script>
+    function Addtolike(){
+        var id = $('.deletePic').attr('id');
+        window.location="controller/photo-action.php?addToLike="+id;
+    }
+</script>
 
 </body>
 

@@ -1,25 +1,8 @@
 <!DOCTYPE html>
 <?php
-include "db.php";
-session_start();
+include "navBar.php";
     
 $search = $_SESSION["search"];
-
-// Initiate Server
-$servername = "webdesignfinal.ccxaerxt39bn.us-west-2.rds.amazonaws.com:3306";
-$usernameServer = "webteam";
-$passwordServer = "12345678";
-$dbname = "findCircle";
-
-// Create connection
-$conn = mysqli_connect($servername, $usernameServer, $passwordServer, $dbname);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-//--------------------------------------------------------------------------
 
 $sql="SELECT * FROM Users WHERE FirstName LIKE '$search' OR LastName LIKE '$search' OR DisplayName LIKE '$search' OR SchoolOrWork LIKE '$search'";
 
@@ -37,6 +20,8 @@ if(!$result) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="css/userHome.css" rel="stylesheet">
     <style>
 @import "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700";
 
