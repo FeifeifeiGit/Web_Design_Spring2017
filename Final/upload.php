@@ -1,9 +1,10 @@
 <?php
+session_start();
 define("s3path", "https://s3-us-west-2.amazonaws.com/minisocial/", true);
 include "s3.php";
 include "db.php";
 
-
+$currentId = $_SESSION['userId'];
 // Check if image file is a actual image or fake image
 $target_dir = "post/"; 
 $baseName = basename($_FILES["fileToUpload"]["name"]);
@@ -88,9 +89,8 @@ if ($uploadOk == 0) {
                      try{
                         $targetPath=s3path.$target_file;
                         $postContent = trim($_POST["postContent"]);
-                        $result1 = mysqli_query($conn, $sql);
                         $sql = "INSERT INTO Post (Content,Photo_Path,User_Id)
-                            VALUES ('".$postContent."','$targetPath',3)";
+                            VALUES ('".$postContent."','$targetPath','$currentId')";
                         $result = mysqli_query($conn, $sql);
                         if($result==false){
                                 echo "insert failed<br> targetPath is ".$targetPath;
@@ -113,13 +113,13 @@ if ($uploadOk == 0) {
                         $postContent = trim($_POST["postContent"]);
                         $result1 = mysqli_query($conn, $sql);
                         $sql = "INSERT INTO Post (Content,User_Id)
-                            VALUES ('".$postContent."',3)";
+                            VALUES ('".$postContent."','$currentId')";
                         $result = mysqli_query($conn, $sql);
                         if($result==false){
                                 echo "insert failed<br> targetPath is ".$targetPath;
                             }
                              else {
-                                echo "successfully publish a new post without image! $postContent";
+                                echo "successfully publish a new post without image! ";
                             }
                      }
                      catch(Exception $e){

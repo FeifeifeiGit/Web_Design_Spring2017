@@ -1,9 +1,12 @@
 <?php
-include "s3.php";
-include "db.php";
+include "../s3.php";
+include "../db.php";
 session_start();
 
+$currentId=$_SESSION['userId'];
+
 $username=$headshot=$birthday=$phonenumber=$workplace=$description="";
+$_SESSION['phoneError']= $_SESSION['typeError']=$_SESSION['usernameError']=$_SESSION['birthdayError']="";
 $date = date('Y-m-d');
 $error=0;
 
@@ -11,10 +14,8 @@ $error=0;
 $target_dir="img/";
 $headshot = $target_dir . basename($_FILES["headshot"]["name"]);
 
-//this is the local folder, if you do not want to upload to s3
-//$headshot = basename($_FILES["headshot"]["name"]);
+
 $uploadOk = 1;
-$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     $username=$_POST["username"];
@@ -30,7 +31,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             //check the uploaded picture
             $check = getimagesize($_FILES["headshot"]["tmp_name"]);
             if($check !== false) {
-                 echo "File is an image - " . $check["mime"] . ".";
                 $uploadOk = 1;
             } else {
                 $error++;
@@ -92,7 +92,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
   
   /*check if there is any error
   if error detected, return edit profile page
-  */
+  
     if($error>0){
             $url = "profile.php";  
             echo "<script type='text/javascript'>";  
@@ -101,16 +101,15 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             exit;  
     } else{
 
+        */
+
         /*if no error detected, check whether input is empty
         update into database if input is not empty;
         */
         if(!empty($username)){
-            $sql="UPDATE  Users SET DisplayName='$username' WHERE User_Id=22";
+            $sql="UPDATE  Users SET DisplayName='$username' WHERE User_Id='$currentId'";
             $result=mysqli_query($conn, $sql);
-            if($result==false){
-                echo "error update username<br>";
-            }
-            else echo "successfully update username!<br>";
+            
         }
  
 
@@ -118,14 +117,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         if(!empty(basename($_FILES["headshot"]["name"]))){
 
             // Check if $uploadOk is set to 0 by an error
-            if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
-
-            // if everything is ok, try to upload file
-             } 
-
-            else {
-
+            if ($uploadOk != 0) {
+            
                 try{
                 //upload to S3
                     $result = $client->putObject(array(
@@ -152,58 +145,44 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
              //save the image path to database
             $targetPath="https://s3-us-west-2.amazonaws.com/minisocial/".$headshot;
-            $sql="UPDATE  Users SET ProfilePhoto='$targetPath' WHERE User_Id=22";
+            $sql="UPDATE  Users SET ProfilePhoto='$targetPath' WHERE User_Id='$currentId'";
             $result=mysqli_query($conn, $sql);
-            echo "<br>$targetPath";
-            if($result==false){
-                echo "error update headshot<br>";
-            }
-            else echo "successfully update headshot!<br>";
+            //echo "<br>$targetPath";
+            
         }
 
 
 
         if(!empty($phonenumber)){
-            $sql="UPDATE  Users SET PhoneNumber='$phonenumber' WHERE User_Id=22";
+            $sql="UPDATE  Users SET PhoneNumber='$phonenumber' WHERE User_Id='$currentId'";
             $result=mysqli_query($conn, $sql);
-            if($result==false){
-                echo "error update phonenumber<br>";
-            }
-            else echo "successfully update phonenumber!<br>";
+            
         }
 
         if(!empty($description)){
-            $sql="UPDATE  Users SET Description='$description' WHERE User_Id=22";
+            $sql="UPDATE  Users SET Description='$description' WHERE User_Id='$currentId'";
             $result=mysqli_query($conn, $sql);
-            if($result==false){
-                echo "error update description<br>";
-            }
-            else echo "successfully update description!<br>";
+            
         }
 
         if(!empty($workplace)){
-            $sql="UPDATE  Users SET SchoolOrWork='$workplace' WHERE User_Id=22";
+            $sql="UPDATE  Users SET SchoolOrWork='$workplace' WHERE User_Id='$currentId'";
             $result=mysqli_query($conn, $sql);
-            if($result==false){
-                echo "error update workplace<br>";
-            }
-            else echo "successfully update workplace!<br>";
+            
         }
 
         if(!empty($birthday)){
-            $sql="UPDATE  Users SET Birthday='$birthday' WHERE User_Id=22";
+            $sql="UPDATE  Users SET Birthday='$birthday' WHERE User_Id='$currentId'";
             $result=mysqli_query($conn, $sql);
-            if($result==false){
-                echo "error update birthday<br>";
-            }
-            else echo "successfully update birthday!<br>";
+            
         }
         
         mysqli_close($conn);
-
-    }
+       
 
 }
+
+ header("Location: ../profile.php");
 
 ?>
 

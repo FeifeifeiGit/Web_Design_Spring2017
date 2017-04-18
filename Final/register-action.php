@@ -46,6 +46,7 @@ $displayName = $_POST["displayName"];
 $gender = $_POST["gender"];
 $email = $_POST["email"];
 $password = $_POST["password"];
+//$password = hash("sha256", $password);
 $birthday = $_POST["birthday"];
 $desc = $_POST["desc"];
 $schoolOrWork = $_POST["schoolOrWork"];

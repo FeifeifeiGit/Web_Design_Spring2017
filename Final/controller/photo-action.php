@@ -1,6 +1,6 @@
 <?php
-include "s3.php";
-include "db.php";
+include "../s3.php";
+include "../db.php";
 
 session_start();
 $currentId=$_SESSION['userId'];
@@ -41,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             echo "error upload image<br>";
         }       
     }
-    header("Location: photo.php#photowall");
+    header("Location: ../photo.php#photowall");
     exit; 
 }
 
@@ -54,7 +54,7 @@ if(!empty($_GET['delete'])){
         if($result==false){
             echo "error delete photo post<br>";
         }  
-    header("Location: photo.php#photowall");
+    header("Location: ../photo.php#photowall");
     exit; 
 
   }
@@ -67,7 +67,7 @@ if(!empty($_GET['addToLike'])){
     if($result==false){
         echo "error add to like<br>";
     }
-    header("Location: photo.php#photowall");
+    header("Location: ../photo.php#photowall");
     exit; 
   }
 
@@ -79,7 +79,7 @@ if(!empty($_GET['friendAddToLike'])){
     if($result==false){
         echo "error add to like<br>";
     }
-    header("Location: friendPhoto.php?friendId=$friendId");
+    header("Location: ../friendPhoto.php?friendId=$friendId");
     exit; 
   }
 
@@ -91,7 +91,7 @@ if(!empty($_GET['friendAddToLikeTab'])){
     if($result==false){
         echo "error add to like<br>";
     }
-    header("Location: friendPhoto.php?friendId=$friendId#like");
+    header("Location: ../friendPhoto.php?friendId=$friendId#like");
     exit; 
   }
 
@@ -105,7 +105,7 @@ if (!empty($_GET['removeLike'])) {
         echo "cannot remove from like list<br>";
     }
     
-    header("Location: photo.php#photowall");
+    header("Location: ../photo.php#photowall");
     exit; 
 }
 
@@ -118,7 +118,7 @@ if(!empty($_GET['removeLikeTab'])) {
         echo "cannot remove from like list<br>";
     }
     
-    header("Location: photo.php#like");
+    header("Location: ../photo.php#like");
     exit; 
 }
 
@@ -130,7 +130,7 @@ if (!empty($_GET['friendRemoveLike'])) {
     if($result==false){
         echo "cannot remove from like list<br>";
     }   
-    header("Location: friendPhoto.php?friendId=$friendId");
+    header("Location: ../friendPhoto.php?friendId=$friendId");
     exit; 
 }
 
@@ -142,7 +142,7 @@ if(!empty($_GET['friendRemoveLikeTab'])) {
     if($result==false){
         echo "cannot remove from like list<br>";
     }    
-    header("Location: friendPhoto.php?friendId=$friendId#like");
+    header("Location: ../friendPhoto.php?friendId=$friendId#like");
     exit; 
 }
 
