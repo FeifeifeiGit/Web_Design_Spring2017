@@ -67,42 +67,28 @@
                 <div class="col-lg-6">
                     <div class="cover_button">
                         <div class="btn-group">
+                        <?php 
+                            if(requestAlreadySent($friend_id, $currentId)){
+                         ?>
+                         <button type="button" class="btn btn-default">Request send</button>
+
                         <?php
-                            if(isFriend($friend_id, $currentId)){
+                        }
+                            else if(isFriend($friend_id, $currentId)){
                         ?>
-                             <button type="button" id="friend_status" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span>Connected &nbsp<i class="fa fa-sort-desc" aria-hidden="true"></i></span>
-								<ul class="dropdown-menu">
-									<li><a href="#">Close Friends</a></li>
-									<li><a href="friend_page-action.php?unfriend=<?php echo $friend_id;?>">Unfriend</a></li>
-								</ul>
-							</button>
-                            <button type="button" class="btn btn-default"><a href="friend_page-action.php?unfriend=<?php echo $friend_id;?>">Unfriend</a>
-                            </button>
+
+                            <button type="button" class="btn btn-danger deleteFriend" id="<?php echo $friend_id ?>">Unfriend</button>
                             <?php
                                 ;
                             }
                             else {
                             ?>
-
-                            <button type="button" id="friend_status" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span>Unconnect &nbsp<i class="fa fa-sort-desc" aria-hidden="true"></i></span>
-								<ul class="dropdown-menu">
-									<li><a href="#">Close Friends</a></li>
-									<li><a href="friend_page-action.php?addFriend=<?php echo $friend_id ?>">add to friend</a></li>
-								</ul>
-							</button>
-
-                             <button type="button" class="btn btn-default"><a href="friend_page-action.php?addFriend=<?php echo $friend_id ?>">add to friend</a>
-                            </button>
+                             <button type="button" class="btn btn-primary addFriend" id="<?php echo $friend_id ?>">add to friend</button>
                             <?php
                                 ;
                             }
                             ?>
-                            <!-- <button type="button" id="follow_status" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span>Following &nbsp<i class="fa fa-sort-desc" aria-hidden="true"></i></span>
-								<ul class="dropdown-menu">
-									<li><a href="#">Unfollowed</a></li>
-									<li><a href="#">F2</a></li>
-								</ul>
-							</button> -->
+                        
                             <button type="button" id="more_options" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span><i class="fa fa-bars" aria-hidden="true"></i></span>
 								<ul class="dropdown-menu">
 									<li><a href="#">Report</a></li>
