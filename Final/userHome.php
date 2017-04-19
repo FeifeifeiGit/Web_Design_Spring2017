@@ -216,6 +216,6 @@ $fListResult = mysqli_query($conn, $friendListQuery);
 		</div>
 				
 <script src="css/postSubmit.js?v=3"></script>
-<script src="css/reloadPost.js?v=1"></script>
+<script src="css/reloadPost.js"></script>
 </body>
 </html>
