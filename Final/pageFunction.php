@@ -22,8 +22,20 @@ function isFriend($friendId, $currentId){
 
 	if(in_array($currentId, $userlist) && in_array($friendId, $friendlist)) return true;
 	else return false;
+}
 
 
+//check whether the add friend request already sent
+function requestAlreadySent($friendId, $currentId){
+	include 'db.php';
+	$requestlist=[];
+	$getRequestResult=mysqli_query($conn, "SELECT Receiver_Id FROM Request WHERE Sender_Id=$currentId");
+	while($row=mysqli_fetch_assoc($getRequestResult)){
+		array_push($requestlist, $row['Receiver_Id']);
+	}
+
+	if(in_array($friendId, $requestlist)) return true;
+	else return false;
 }
 
 //check whether user liked the post, for button displaying

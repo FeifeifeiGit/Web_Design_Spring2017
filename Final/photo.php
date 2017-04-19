@@ -35,6 +35,7 @@
         .container{
             /*background-color: white;*/
             padding: 30px;
+            margin-top: 40px;
         }
 
         #photonav li a{

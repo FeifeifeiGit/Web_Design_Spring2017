@@ -50,10 +50,8 @@ if(!empty($_GET['unfriend'])){
   if($resultUser==false || $resultFriend==false){
         echo "cannot delete friend<br>";
     }
-  else{
-    header("location: friend_page.php?userId=$friendId");
-    exit;
-  }
+  
+    //header("location: friend_page.php?userId=$friendId");
 
 }
 
@@ -73,7 +71,7 @@ if(!empty($_GET['addFriend'])){
     $result=mysqli_query($conn, $query);
   }
 
-  header("Location: friend_page.php?userId=$friendId");
+  //header("Location: friend_page.php?userId=$friendId");
 }
 
 
