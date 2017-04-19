@@ -357,7 +357,7 @@
                                     </div>
                                 </div>
                                 <div class="panel-footer">
-                                    <a href="#"> <span class="glyphicon glyphicon-chevron">Follow</span></a>
+                                    <a href="#"> <span class="glyphicon glyphicon-chevron">Unfollow</span></a>
                                 </div>
 
                             </div>

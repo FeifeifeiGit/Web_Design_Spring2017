@@ -1,4 +1,6 @@
 <?php
+//include "pageFunction.php";
+
 $sql_friend_friends = "SELECT * FROM FriendsList JOIN Users on FriendsList.Friend_Id = Users.User_Id WHERE FriendsList.User_Id = '$friend_id'";
 $result_friend_friends = mysqli_query($conn, $sql_friend_friends);
 while ($row = mysqli_fetch_assoc($result_friend_friends)) {
@@ -35,7 +37,11 @@ if($currentId != $friendId){
                 </div>
             </div>
             <div class="panel-footer">
-                <a href="#"> <span class="glyphicon glyphicon-chevron">Follow</span></a>
+                <?php if(!isFriend($friendId,$currentId)){
+                  echo "<a href='#'> <span class='glyphicon glyphicon-chevron'>Follow</span></a>";
+                } else{
+                  echo "<a href='#'> <span class='glyphicon glyphicon-chevron'>UnFollow</span></a>";
+                }?>
             </div>
 
         </div>
