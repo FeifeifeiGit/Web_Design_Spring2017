@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="http://cdn.phpoll.com/css/animate.css" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -31,7 +31,7 @@
 
 <body>
     <?php
-    
+
     include 'db.php';
     include "navBar.php";
     include "pageFunction.php";
@@ -53,6 +53,8 @@
                             $birthday = $row_friend['Birthday'];
                             $gender = $row_friend['Gender'];
                             $email = $row_friend['Email'];
+							$description = $row_friend['Description'];
+                            $schoolOrwork = $row_friend['SchoolOrWork'];
                             ?>
                                 <img class="profile_photo" src="<?php echo $profile_photo; ?>" />
                         </div>
@@ -81,15 +83,15 @@
                             }
                             else {
                             ?>
-                            
+
                             <button type="button" id="friend_status" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span>Unconnect &nbsp<i class="fa fa-sort-desc" aria-hidden="true"></i></span>
 								<ul class="dropdown-menu">
 									<li><a href="#">Close Friends</a></li>
-									<li><a href="#">add to friend</a></li>
+									<li><a href="friend_page-action.php?addFriend=<?php echo $friend_id ?>">add to friend</a></li>
 								</ul>
 							</button>
 
-                             <button type="button" class="btn btn-default"><a href="#">add to friend</a>
+                             <button type="button" class="btn btn-default"><a href="friend_page-action.php?addFriend=<?php echo $friend_id ?>">add to friend</a>
                             </button>
                             <?php
                                 ;
@@ -183,7 +185,7 @@
                         <div class="col-lg-7">
 
                             <?php
-                                    include "friend_page_postdiv.php" 
+                                    include "friend_page_postdiv.php"
 									?>
 
                         </div>
@@ -204,17 +206,12 @@
 
                                 <div class="tab-content col-lg-9">
                                     <div class="tab-pane active" id="tab_a">
-
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                </td>
-                                            </tr>
-                                        </table>
+									  <p>
+                                        <?php echo $description; ?>
+                                      </p>
                                     </div>
                                     <div class="tab-pane" id="tab_b">
-                                        <h4>Pane B</h4>
-                                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                                        <p><?php echo $schoolOrwork; ?></p>
                                     </div>
                                     <div class="tab-pane" id="tab_c">
                                         <table class="tg" style="undefined;table-layout: fixed; width: 485px">

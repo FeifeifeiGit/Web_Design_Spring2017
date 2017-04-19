@@ -5,7 +5,9 @@ while ($row = mysqli_fetch_assoc($result_friend_friends)) {
 $image = $row['ProfilePhoto'];
 $friend_name = $row['DisplayName'];
 $friend_first = $row['FirstName'];
-$friend_last = $row['LastName'];?>
+$friend_last = $row['LastName'];
+$description = $row['Description'];
+$friendId=$row['User_Id'];?>
     <div class='col-md-4 item'>
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -23,7 +25,7 @@ $friend_last = $row['LastName'];?>
                         </div>
                         <div class="col-sm-7">
                             <p>
-                                Hello everybody!
+                                <?php echo $description; ?>
                             </p>
                         </div>
                     </div>

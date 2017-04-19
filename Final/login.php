@@ -65,6 +65,7 @@ if (isset($_SESSION["username"])) {
                 <hr class="colorgraph">
                 <div class="row">
                     <div class="col-xs-12 col-md-6"><input type="submit" value="Sign In" class="btn btn-success btn-block btn-lg"></div>
+                    <div class="col-xs-12 col-md-6"><a href="register.php" class="btn btn-primary btn-block btn-lg">Register</a></div>
                 </div>
             </form>
         </div>

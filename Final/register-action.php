@@ -2,36 +2,23 @@
 // Start Session
 session_start();
 
-// Initiate Photo upload
-require 'aws/vendor/autoload.php';
-use Aws\S3\S3Client ;
-use Aws\S3\Exception\S3Exception;
-try{
-    $client = S3Client::factory(array(
-        'profile' => 'project',
-        'version' => '2006-03-01',
-        'region' => 'us-west-2',
-        'scheme' => 'http' 
-    ));
-    } catch(Exception $e) {
-    exit($e->getMessage());
-} 
-$bucket = 'minisocial'; //S3 bucket name
+include "s3.php";
 
+//// Initiate Server
+//$servername = "webdesignfinal.ccxaerxt39bn.us-west-2.rds.amazonaws.com:3306";
+//$username = "webteam";
+//$password = "12345678";
+//$dbname = "findCircle";
+//
+//// Create connection
+//$conn = mysqli_connect($servername, $username, $password, $dbname);
+//
+//// Check connection
+//if (!$conn) {
+//    die("Connection failed: " . mysqli_connect_error());
+//}
 
-// Initiate Server
-$servername = "webdesignfinal.ccxaerxt39bn.us-west-2.rds.amazonaws.com:3306";
-$username = "webteam";
-$password = "12345678";
-$dbname = "findCircle";
-
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+include "db.php";
 
 
 // Set up attributes
@@ -46,7 +33,7 @@ $displayName = $_POST["displayName"];
 $gender = $_POST["gender"];
 $email = $_POST["email"];
 $password = $_POST["password"];
-$password = hash("sha256", $password);
+//$password = hash("sha256", $password);
 $birthday = $_POST["birthday"];
 $desc = $_POST["desc"];
 $schoolOrWork = $_POST["schoolOrWork"];
@@ -60,36 +47,32 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { $messageError = "Please input 
 if ($password== "") { $messageError = "Please input correct password".$password; }
 
 
+// Set up profile image upload
+$imagename="";
+$target_dir="img/";
+$imagename = $target_dir . basename($_FILES["uploadimage"]["name"]);
+if(!empty( basename($_FILES["uploadimage"]["name"]))){
+    $result = $client->putObject(array( 
+        'Bucket' => $bucket,
+        'Key'    => $imagename,
+        'Body' => fopen($_FILES['uploadimage']['tmp_name'], 'r+'),
+        'options' => ['scheme' => 'http',],
+    ));
+    $targetPath="https://s3-us-west-2.amazonaws.com/minisocial/".$imagename;
+} else {
+    $targetPath = null;
+}
 
     
 
 // SQL for register users
 $sql="INSERT INTO Users (FirstName,LastName,DisplayName,Gender,Email,Password,Birthday,ProfilePhoto,Description,SchoolOrWork)"
-    . " VALUES('$firstName','$lastName','$displayName','$gender','$email','$password','$birthday',NULL,'$desc','$schoolOrWork')";
+    . " VALUES('$firstName','$lastName','$displayName','$gender','$email','$password','$birthday','$targetPath','$desc','$schoolOrWork')";
 $result=mysqli_query($conn, $sql);
 if($result==false){
     echo "error update<br>";
 } else {
-    // Restration successful -> Set up profile image upload
-    $imagename="";
-    $target_dir="postdata/";
-    $imagename = $target_dir . basename($_FILES["uploadimage"]["name"]);
-    if($_SERVER["REQUEST_METHOD"]=="POST"){
-        if(!empty( basename($_FILES["uploadimage"]["name"]))){
-            try{ //upload to S3
-                $result = $client->putObject(array( 
-                    'Bucket' => $bucket,
-                    'Key'    => $imagename,
-                    'Body' => fopen($_FILES['uploadimage']['tmp_name'], 'r+'),
-                    'options' => ['scheme' => 'http',],
-                ));
-             } catch (Exception $e) {exit($e->getMessage());}
-            $targetPath="https://s3-us-west-2.amazonaws.com/minisocial/".$imagename;
-            $sql="UPDATE Users SET ProfilePhoto = '$targetPath' WHERE Email = '$email' ";
-            $result=mysqli_query($conn, $sql);
-            if($result==false){echo "error upload image<br>";}
-        }
-    }
+ 
     // Finished Registration direct to Login
     $_SESSION["username"] = $email;
     $_SESSION["message"] = "Registration Succeed";
