@@ -32,7 +32,7 @@ error_reporting(E_ALL);
        <div class="main-wrapper container-fluid text-left">
 			<div class="row">
 
-				<div class="col-sm-8 col-sm-push-2 " id="center-col">
+				<div class="col-sm-9 col-md-8 col-md-push-2 " id="center-col">
 				   <div class="new-post">
 				   		<div class="new-post-header">
 				   			<a href="#newpost"><span class="glyphicon  glyphicon-pencil"></span>what is in your mind?</a>
@@ -40,7 +40,7 @@ error_reporting(E_ALL);
 				   		
 					   	<div class="new-post-body">	
 				   		 	<div style="margin-bottom:30px;">
-				   		 		<a href="friend_page.php?userId=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>" class="avatar img-responsive" width="30" height="20" alt="Avatar"/></a>
+				   		 		<a href="userPage.php?userId=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>" class="avatar img-responsive" width="30" height="20" alt="Avatar"/></a>
 				   		 	</div>
 				   			<div style="text-align:center">
 								 <textarea rows="3" cols="80" data-toggle="modal" data-target="#postModal">
@@ -148,15 +148,15 @@ $homePostResult = mysqli_query($conn, $homePostQuery);
 
 				</div>
 <!--left side bar -->
-				<div class="col-sm-2 col-sm-pull-8 leftSideBar">
+				<div class="hidden-sm col-md-2 col-md-pull-8 leftSideBar">
 					<div class="left-wrapper">
 						<div class="profile-shortcut">
-							<a href="friend_page.php?userId=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>"  alt="avatar" width="20" height="20"/> <?php echo $displayName; ?>
-								<a class="edit-icon" href="profile.php"><span class="glyphicon glyphicon-edit"></span></a>
+							<a href="userPage.php?userId=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>"  alt="avatar" width="20" height="20" /> <?php echo $displayName; ?>
+								<a class="edit-icon pull-right" href="profile.php"><span class="glyphicon glyphicon-edit"></span></a>
 							</a>
 						</div>
 						<div class="calender">
-						 	<img src="img/calender.jpg" alt="calender"/>
+						 	<img src="img/calender.jpg" alt="calender" class="img-responsive" />
 						</div>
 						<div class="comming-event">
 							<div class="side-title">Upcomming event</div>
@@ -170,7 +170,7 @@ $homePostResult = mysqli_query($conn, $homePostQuery);
 
 <!--left side bar end -->
 
-				<div class="col-sm-2 rightSideBar">
+				<div class="col-sm-3 col-md-2  rightSideBar">
 
 					<div class="usePage-friend-list">
 <!-- Friend list end-->

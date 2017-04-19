@@ -39,7 +39,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $result=mysqli_query($conn, $sql);
         if($result==false){
             echo "error upload image<br>";
-        }       
+        }
+           
     }
     header("Location: ../photo.php#photowall");
     exit; 

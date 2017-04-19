@@ -33,7 +33,6 @@ if($row['ProfilePhoto']==null){
 	</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
 </head>
 <style>
 	.dropdown-menu {
@@ -88,43 +87,6 @@ $(document).on('click', '.delete_link', function(e) {
 </script>
 <body>
 	<!-- Navigation bar-->
-<<<<<<< HEAD
-		<nav class="navbar navbar-default navbar-fixed-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>                        
-				      </button>
-						<span class="nav navbar-brand navbar-left" id="brandname">Find Your Group</span>
-				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav navbar-left">
-				        <li ><form method="post" role="form" class="navbar-form" action="search-action.php" enctype="multipart/form-data">
-			            	<div class="input-group">
-			               	 	<input type="text" class="form-control" placeholder="Search" name="searchInput">
-			               	 	<div class="input-group-btn">
-			    	           		<button type="submit" class="btn btn-default" >
-			    	           			 <i class="glyphicon glyphicon-search"></i>
-			    	           		</button>
-			  	           		</div>
-			           		</div>
-		          		</form></li>
-		          	</ul>
-		          	<ul class="nav navbar-nav navbar-left">
-		          		<li id="user-infor">
-	          		      	<a href="userPage.php?User_Id=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>" class="avatar img-responsive img-circle" style="display:inline-block;" width="20" height="20" alt="Avatar"/><span style="padding-left:0.7em;"><?php echo $displayName; ?></span></a>
-	          		    </li>
-	          		    <li><a href="userHome.php">Home</a></li>
-		          	</ul>
-		          	<ul class="nav navbar-nav navbar-right">
-	          			<li ><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout<span class="sr-only">(log out)</span></a></li>
-		       		</ul>
-		       	</div>	
-			</div>	
-		</nav>
-=======
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -136,10 +98,10 @@ $(document).on('click', '.delete_link', function(e) {
 				<span class="nav navbar-brand navbar-left" id="brandname">Find Your Group</span>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav navbar-left">
-					<li ><form class="navbar-form">
+				<ul class="nav navbar-nav navbar-left nav-search">
+					<li ><form method="post" role="form" class="navbar-form" action="search-action.php">
 						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search">
+							<input type="text" class="form-control" placeholder="Search" name="searchInput">
 							<div class="input-group-btn">
 								<button type="submit" class="btn btn-default" >
 									<i class="glyphicon glyphicon-search"></i>
@@ -148,13 +110,14 @@ $(document).on('click', '.delete_link', function(e) {
 						</div>
 					</form></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-left">
+				<ul class="nav navbar-nav navbar-left nav-infor">
 					<li id="user-infor">
 						<a href="userPage.php?User_Id=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>" class="avatar img-responsive img-circle" style="display:inline-block;" width="20" height="20" alt="Avatar"/><span style="padding-left:0.7em;"><?php echo $displayName; ?></span></a>
+					
 					</li>
 					<li><a href="userHome.php">Home</a></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav navbar-right ">
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
 						<div class="dropdown-menu" role="menu">
 							<span><b>Friend Request</b></span>
@@ -163,11 +126,11 @@ $(document).on('click', '.delete_link', function(e) {
 								<?php
 								$sql_request = "SELECT * FROM Request JOIN Users ON Request.Sender_Id = Users.User_Id WHERE Request.Receiver_Id = '$currentId'";
 								$result_request = mysqli_query($conn, $sql_request);
-								while($row = mysqli_fetch_assoc($result_request)){
-									$profile_photo = $row['ProfilePhoto'];
-									$first = $row['FirstName'];
-									$last = $row['LastName'];
-									$send_id = $row['Sender_Id'];?>
+								while($row2 = mysqli_fetch_assoc($result_request)){
+									$profile_photo = $row2['ProfilePhoto'];
+									$first = $row2['FirstName'];
+									$last = $row2['LastName'];
+									$send_id = $row2['Sender_Id'];?>
 
 									<div class="request row" id="request<?php echo $send_id ;?>">
 										<div class="col-lg-6">
@@ -194,6 +157,5 @@ $(document).on('click', '.delete_link', function(e) {
 			</div>
 		</div>
 	</nav>
->>>>>>> refs/remotes/fangninghe/master
 </body>
 </html>
