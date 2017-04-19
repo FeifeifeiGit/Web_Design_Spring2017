@@ -267,7 +267,7 @@
                 <!-- "About" div-->
                 <div id="about">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><b>About</b></div>
+                        <div class="panel-heading"><b>About<a href="profile.php"><span style="float:right">Update</span></a></b></div>
                         <div class="panel-body">
                             <div class="about">
                                 <ul class="nav nav-pills nav-stacked col-lg-3">
