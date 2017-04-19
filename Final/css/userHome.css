@@ -266,12 +266,11 @@ hr{
 		padding-left: 10px;
 		padding-right: 10px;
 	}
-
 }
 /*ipad vertical*/
 @media screen and (max-width:768px){
 	/*.navbar-brand{display: none;}*/
-	#brandname{font-size: 1.4em;}
+	#brandname{font-size: 1em;}
 	.rightsidebar{margin-left: 0;margin-right: 0;}
 	.usePage-friend-list{width: 100%;margin-left: 0;margin-right: 0;}
 }
