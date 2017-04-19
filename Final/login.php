@@ -36,7 +36,7 @@ if (isset($_SESSION["username"])) {
     
 <div class="container">
     <div class="row">
-        <div class="hidden-xs col-sm-6 col-md-6" style="padding-top: 20px">
+        <div class="hidden-sm col-md-6" style="padding-top: 20px">
             <div class="well well-sm">
                 <h1>Connect with friends and the world around you.</h1>
             </div>
@@ -52,7 +52,7 @@ if (isset($_SESSION["username"])) {
         </div>
         
         
-        <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="col-sm-12 col-md-6">
             <form method="post" role="form" action="login-action.php" enctype="multipart/form-data">
                 <h2><?php echo $_SESSION["message"]; ?> <small>Start your social network here.</small></h2>
                 <hr class="colorgraph">
