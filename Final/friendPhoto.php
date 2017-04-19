@@ -36,6 +36,7 @@
     }
     .container{
         /*background-color: white;*/
+        margin-top: 40px;
         padding: 30px;
     }
 
