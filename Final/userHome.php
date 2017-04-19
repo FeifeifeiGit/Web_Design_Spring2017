@@ -40,7 +40,7 @@ error_reporting(E_ALL);
 				   		
 					   	<div class="new-post-body">	
 				   		 	<div style="margin-bottom:30px;">
-				   		 		<a href="friend_page.php?userId=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>" class="avatar img-responsive" width="30" height="20" alt="Avatar"/></a>
+				   		 		<a href="userPage.php?userId=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>" class="avatar img-responsive" width="30" height="20" alt="Avatar"/></a>
 				   		 	</div>
 				   			<div style="text-align:center">
 								 <textarea rows="3" cols="80" data-toggle="modal" data-target="#postModal">
@@ -151,7 +151,7 @@ $homePostResult = mysqli_query($conn, $homePostQuery);
 				<div class="col-sm-2 col-sm-pull-8 leftSideBar">
 					<div class="left-wrapper">
 						<div class="profile-shortcut">
-							<a href="friend_page.php?userId=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>"  alt="avatar" width="20" height="20"/> <?php echo $displayName; ?>
+							<a href="userPage.php?userId=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>"  alt="avatar" width="20" height="20"/> <?php echo $displayName; ?>
 								<a class="edit-icon" href="profile.php"><span class="glyphicon glyphicon-edit"></span></a>
 							</a>
 						</div>
