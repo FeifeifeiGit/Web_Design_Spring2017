@@ -33,7 +33,6 @@ if($row['ProfilePhoto']==null){
 	</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
 </head>
 <style>
 	.dropdown-menu {
@@ -99,7 +98,7 @@ $(document).on('click', '.delete_link', function(e) {
 				<span class="nav navbar-brand navbar-left" id="brandname">Find Your Group</span>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav navbar-left">
+				<ul class="nav navbar-nav navbar-left nav-search">
 					<li ><form method="post" role="form" class="navbar-form" action="search-action.php">
 						<div class="input-group">
 							<input type="text" class="form-control" placeholder="Search" name="searchInput">
@@ -111,13 +110,14 @@ $(document).on('click', '.delete_link', function(e) {
 						</div>
 					</form></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-left">
+				<ul class="nav navbar-nav navbar-left nav-infor">
 					<li id="user-infor">
 						<a href="userPage.php?User_Id=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>" class="avatar img-responsive img-circle" style="display:inline-block;" width="20" height="20" alt="Avatar"/><span style="padding-left:0.7em;"><?php echo $displayName; ?></span></a>
+					
 					</li>
 					<li><a href="userHome.php">Home</a></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav navbar-right ">
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
 						<div class="dropdown-menu" role="menu">
 							<span><b>Friend Request</b></span>
