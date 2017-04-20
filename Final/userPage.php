@@ -27,6 +27,7 @@
     .cover {
         background-image: url("img/cover.jpg");
     }
+
 </style>
 
 <body>
@@ -37,6 +38,7 @@
     include "checkLogin.php";
     ?>
     <!-- Cover -->
+    <div class="container">
     <div class="cover">
         <div class="row">
             <div class="col-lg-6">
@@ -92,7 +94,7 @@
             <div id="home">
                 <div class="row">
                     <div class="col-lg-5">
-                        <div class="left_menu" data-spy="affix" data-offset-top="10">
+                        <div class="left_menu" data-spy="affix" data-offset-top="400">
 
                             <!--Left Photo Panel-->
                             <div class="panel panel-default">
@@ -411,14 +413,7 @@
               ?>
           </div>
       </div>
-      <div class="panel-footer">
-                            <!--<a href="#"> <span class="glyphicon glyphicon-chevron-left"></span></a>
-                            <a href="#"> <span class="glyphicon glyphicon-chevron-right"></span></a>-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </body>
     <script type="text/javascript">
         $(document).ready(function(){
