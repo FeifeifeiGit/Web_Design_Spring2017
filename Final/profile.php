@@ -30,12 +30,10 @@
         }
         
         .form-group .form-error{
-            color: red;
             font-family: Monaco;
         }
 
         .error{
-            color: red;
             font-family: Monaco;
         }
 
