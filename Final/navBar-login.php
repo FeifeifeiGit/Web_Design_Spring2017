@@ -41,15 +41,7 @@
 						</div>
 					</form></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-left nav-infor">
-				</ul>
-				<ul class="nav navbar-nav navbar-right ">
-					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
-						<div class="dropdown-menu" role="menu">
-							<span><b>Friend Request</b></span>
-						</div>
-					</li>
-				</ul>
+				
 			</div>
 		</div>
 	</nav>

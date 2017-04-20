@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<?php  ?>
 <html>
 <head>
     <title>Friend Page</title>
@@ -34,8 +34,8 @@
     <?php
     include 'db.php';
     include "navBar.php";
-    include "pageFunction.php";
-    include "checkLogin.php";
+    include "pageFunction.php"; 
+    include "checkLogin.php"; 
     ?>
     <!-- Cover -->
     <div class="container">

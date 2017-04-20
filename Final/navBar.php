@@ -110,6 +110,7 @@ $(document).on('click', '.delete_link', function(e) {
 						</div>
 					</form></li>
 				</ul>
+				<?php if(!empty($currentId)){ ?>
 				<ul class="nav navbar-nav navbar-left nav-infor">
 					<li id="user-infor">
 						<a href="userPage.php?User_Id=<?php echo $currentId ;?>"><img  src="<?php echo $avatar ; ?>" class="avatar img-responsive img-circle" style="display:inline-block;" width="20" height="20" alt="Avatar"/><span style="padding-left:0.7em;"><?php echo $displayName; ?></span></a>
@@ -117,6 +118,7 @@ $(document).on('click', '.delete_link', function(e) {
 					</li>
 					<li><a href="userHome.php">Home</a></li>
 				</ul>
+				
 				<ul class="nav navbar-nav navbar-right ">
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
 						<div class="dropdown-menu" role="menu">
@@ -154,6 +156,11 @@ $(document).on('click', '.delete_link', function(e) {
 					</li>
 					<li ><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>Logout<span class="sr-only">(log out)</span></a></li>
 				</ul>
+				<?php } 
+				else {
+				?>
+				<a href="login.php" style="float: right; margin-top: 1%"><span class="glyphicon glyphicon-log-in"></span> &nbspLogin</a>
+				<?php } ?>
 			</div>
 		</div>
 	</nav>
