@@ -17,6 +17,10 @@
   background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
   background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }
+.container {
+    padding: auto;
+    padding-top: 7%;      
+}
     </style>
     <script>
 $(document).ready(function(){
@@ -100,7 +104,7 @@ $(function () {
     </script>
 </head>
 <body>
-    
+<?php include "navBar-login.php";?>
     
 <div class="container">
 
@@ -210,6 +214,7 @@ $(function () {
                 <hr class="colorgraph">
                 <div class="row">
                     <div class="col-xs-12 col-md-6"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+                    <div class="col-xs-1 col-sm-1 col-md-0"></div>
                     <div class="col-xs-12 col-md-6"><a href="login.php" class="btn btn-success btn-block btn-lg">Sign In</a></div>
                 </div>
             </form>
