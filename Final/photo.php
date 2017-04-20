@@ -35,6 +35,7 @@
         .container{
             /*background-color: white;*/
             padding: 30px;
+            margin-top: 40px;
         }
 
         #photonav li a{
@@ -149,7 +150,7 @@ include "checkLogin.php";
                              <a data-toggle="modal" data-target="#myModal"><img src='<?php echo $post['Photo_Path']; ?>' id='<?php echo $post['Post_Id']; ?>' class='image getSrc'/></a>
 
                              <div class="over">
-                                 <!--if user liked the post, then display remove-like button-->
+                            <!--if user liked the post, then display remove-like button-->
                                  <?php if(in_array($post['Post_Id'], $likedPost)){ ?>
                                  <a href="controller/photo-action.php?removeLike=<?php echo $post['Post_Id']; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
                                  <?php }
@@ -184,38 +185,7 @@ include "checkLogin.php";
                 </div>
 
                 <div class="row grid">
-<<<<<<< HEAD
-                    <?php 
 
-                        $sql="SELECT Photo_Path, Post_Id FROM Post WHERE Post_Id in (SELECT Post_Id FROM UserLike WHERE User_Id='$currentId')";
-                        $result=mysqli_query($conn, $sql);
-                        while($row = mysqli_fetch_assoc($result)){
-                            $image = $row['Photo_Path'];
-                            $id= $row['Post_Id'];
-
-                    ?>
-                                    <div class='col-md-4 col-sm-6 col-lg-3 item'>
-                                   
-                                        <div class='thumbnail'>
-                                             <a data-toggle="modal" data-target="#tabModel"><img src='<?php echo $image; ?>' id='<?php echo $id; ?>' class='image getSrc'/></a>
-                                             <div class="over">
-                                              <a href="photo-action.php?removeLikeTab=<?php echo $id; ?>" class="btn btn-default" id="<?php echo $id; ?>"><span class="glyphicon glyphicon-heart userlike"></span></a>
-                                            
-                                             </div>
-                                             
-                                        </div>
-                                    </div>
-
-                    <?php
-                            }
-                    ?>             
-                    
-                </div>
-                       
-                </div>
-            </div>
-        </div>
-=======
                     <?php foreach ($likedList as $like) { ?>
                     <div class='col-md-4 col-sm-6 col-lg-3 item'>
 
@@ -225,7 +195,6 @@ include "checkLogin.php";
                           <a href="controller/photo-action.php?removeLikeTab=<?php echo $post['Post_Id']; ?>" class="btn btn-default" id="<?php echo $like['Photo_Id']; ?>"><span class="glyphicon glyphicon-heart userlike"></span></a>
 
                       </div>
->>>>>>> refs/remotes/fangninghe/master
 
                   </div>
               </div>

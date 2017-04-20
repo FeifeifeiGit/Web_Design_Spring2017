@@ -92,4 +92,57 @@ $(document).ready(function() {
          $(this).parent().addClass('active');
       });
 
+  //ajax to send add friend request
+  $('.addFriend').click(function(){
+    var id=$(this).attr("id");
+    $.ajax({
+
+      type: "GET",
+      url: "friend_page-action.php",
+      data: "addFriend="+id,
+      cache: false,
+      success:function(html){
+        //change the button style, set it show request send button
+        $(".cover_button #"+id+"").text("request send");
+        $(".cover_button #"+id+"").addClass("btn-default").removeClass("btn-primary addFriend");
+        $("#"+id+" span").text("RequestSend");
+      }
+    });
+  });
+
+  //ajax to delete friend 
+  $('.deleteFriend').click(function(){
+    var id=$(this).attr("id");
+    $.ajax({
+
+      type: "GET",
+      url: "friend_page-action.php",
+      data: "unfriend="+id,
+      cache: false,
+      success:function(html){
+        //$(".cover_button #"+id+"").text("add to frined");
+        //$(".cover_button #"+id+"").addClass("btn-primary addFriend").removeClass("btn-danger deleteFriend");
+        $(".cover_button").load("friend_page.php .cover_button");
+      }
+    });
+  });
+
+  //ajax to delete friend
+  $('.deleteFriendInPanel').click(function(){
+    var id=$(this).attr("id");
+    $.ajax({
+
+      type: "GET",
+      url: "friend_page-action.php",
+      data: "unfriend="+id,
+      cache: false,
+      success:function(html){
+        //$(".cover_button #"+id+"").text("add to frined");
+        //$(".cover_button #"+id+"").addClass("btn-primary addFriend").removeClass("btn-danger deleteFriend");
+        $("#"+id+" span").text("Follow");
+        $("a #"+id+"").removeClass("deleteFriendInPanel").addClass("addFriend");
+      }
+    });
+  });
+
 })
