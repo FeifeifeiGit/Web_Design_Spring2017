@@ -27,6 +27,8 @@
     .cover {
         background-image: url("img/cover.jpg");
     }
+
+
 </style>
 
 <body>
@@ -36,6 +38,7 @@
     include "navBar.php";
     include "pageFunction.php";
 ?>
+<div class="container">
         <!-- Cover -->
         <div class="cover">
             <div class="row">
@@ -64,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                
                     <div class="cover_button">
                         <div class="btn-group">
                         <?php 
@@ -89,16 +92,10 @@
                             }
                             ?>
                         
-                            <button type="button" id="more_options" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span><i class="fa fa-bars" aria-hidden="true"></i></span>
-								<ul class="dropdown-menu">
-									<li><a href="#">Report</a></li>
-									<li><a href="#">Block</a></li>
-								</ul>
-							</button>
                         </div>
                     </div>
                 </div>
-            </div>
+            
             <div class="cover_menu">
                 <nav class="navbar navbar-default">
                     <div id="cover_menu" class="container-fluid">
@@ -121,7 +118,7 @@
                 <div id="home">
                     <div class="row">
                         <div class="col-lg-5">
-                            <div class="left_menu" data-spy="affix" data-offset-top="10">
+                            <div class="left_menu" data-spy="affix" data-offset-top="400">
 
                                 <!--Left Photo Panel-->
                                 <div class="panel panel-default">
@@ -273,6 +270,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 </body>
 
