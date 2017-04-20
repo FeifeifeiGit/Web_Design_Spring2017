@@ -1,5 +1,5 @@
 .cover {
-  background-image: url("img/cover.jpg");
+  background-image: url("../img/cover.jpg");
   width: 80%;
   margin: auto;
   top: 20px;
@@ -48,7 +48,7 @@
   border: solid 5px white;
 }
 
-#friend_name {
+#user_name, #friend_name {
   color: white;
   bottom: -350px;
   position: absolute;
@@ -65,7 +65,7 @@
 
 .affix {
   top: 0;
-  width: 28%;
+  width: 26%;
   z-index: 2;
 }
 
@@ -165,6 +165,10 @@
 .tg .tg-9hbo{
  font-weight:bold;
  vertical-align:top;}
+ 
+ .post_time_small{
+	 display:none;
+ }
 
  @media only screen and (max-width: 1200px){
   .left_menu{
@@ -173,5 +177,60 @@
   .cover{
     width: 90%
   }
+  #friend_name {
+  color: white;
+  bottom: -350px;
+  position: absolute;
+  margin-left: 200px;
+  z-index: 1;
+}
 
+}
+
+@media screen and (max-width:687px){
+	
+.mycontainer {
+		
+		margin: auto;
+		width: 80%;
+}
+.cover {
+  background-repeat:no-repeat;
+  background-size:cover;
+  margin: auto;
+  position: relative;
+}
+.cover_button {
+  position: relative;
+  margin-top:20%;
+  margin-left: 200px;
+  
+}
+.profile_photo {
+  width: 150px;
+  height: 150px;
+  margin:auto;
+  margin-right:-100px;
+  z-index: 1;
+  border: solid 5px white;
+}
+ #friend_name {
+  color: white;
+  bottom: -350px;
+  position: absolute;
+  margin-left: -50%;
+  margin-bottom: -50%;
+  z-index: 1;
+}
+
+.post_time{
+	display:none;
+}
+.post_time_small{
+	display: block;
+}
+
+}
+@media screen and (max-width:350px){
+	
 }

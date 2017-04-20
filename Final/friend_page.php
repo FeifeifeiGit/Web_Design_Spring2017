@@ -23,13 +23,6 @@
     <link href="css/friend_page.css" rel="stylesheet">
     <script src="css/friend_page.js"></script>
 </head>
-<style>
-    .cover {
-        background-image: url("img/cover.jpg");
-    }
-
-
-</style>
 
 <body>
     <?php
@@ -37,6 +30,7 @@
     include 'db.php';
     include "navBar.php";
     include "pageFunction.php";
+    //include "checkLogin.php";
 ?>
 <div class="container">
         <!-- Cover -->
@@ -44,7 +38,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 col-xs-6">
                             <?php
 
                             $friend_id=$_GET['userId'];
@@ -61,16 +55,16 @@
                             ?>
                                 <img class="profile_photo" src="<?php echo $profile_photo; ?>" />
                         </div>
-                        <div class="profile_name col-lg-8">
+                        <div class="profile_name col-lg-8 col-xs-6">
 
                             <h1 id='friend_name'><?php echo $display_name; ?></h1>
                         </div>
                     </div>
                 </div>
-                
+
                     <div class="cover_button">
                         <div class="btn-group">
-                        <?php 
+                        <?php
                             if(requestAlreadySent($friend_id, $currentId)){
                          ?>
                          <button type="button" class="btn btn-default">Request send</button>
@@ -91,11 +85,11 @@
                                 ;
                             }
                             ?>
-                        
+
                         </div>
                     </div>
                 </div>
-            
+
             <div class="cover_menu">
                 <nav class="navbar navbar-default">
                     <div id="cover_menu" class="container-fluid">

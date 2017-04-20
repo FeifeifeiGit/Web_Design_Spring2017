@@ -12,8 +12,8 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <a href="#"><img src="<?php echo $profile_photo; ?>" width="30px" height="30px" /></a> &nbsp&nbsp
-            <b><?php echo $display_name; ?>`s Moments</b>
-            <span style="float:right"><?php echo $time_post; ?></span></div>
+            <b><?php echo $display_name; ?>`s Moments</b><span class="post_time_small"><br \ /><?php echo $time_post; ?></span>
+            <span class="post_time" style="float:right"><?php echo $time_post; ?></span></div>
         <div class="panel-body">
 
             <p>

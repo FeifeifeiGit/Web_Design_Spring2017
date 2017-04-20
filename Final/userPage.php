@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php  ?>
+
 <html>
 <head>
     <title>Friend Page</title>
@@ -24,18 +24,24 @@
     <script src="css/friend_page.js"></script>
 </head>
 <style>
-    .cover {
-        background-image: url("img/cover.jpg");
-    }
+@media screen and (max-width:687px){
 
+ #user_name {
+  color: white;
+  bottom: -350px;
+  position: absolute;
+  margin-left: 3%;
+  z-index: 1;
+}
+
+}
 </style>
-
 <body>
     <?php
     include 'db.php';
     include "navBar.php";
-    include "pageFunction.php"; 
-    include "checkLogin.php"; 
+    include "pageFunction.php";
+    include "checkLogin.php";
     ?>
     <!-- Cover -->
     <div class="container">
@@ -43,7 +49,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 col-xs-6">
                         <?php
                         $sql_friend="SELECT * FROM Users where User_Id = '$currentId'";
                         $result_friend=mysqli_query($conn, $sql_friend);
@@ -58,19 +64,14 @@
                         ?>
                         <img class="profile_photo" src="<?php echo $profile_photo; ?>" />
                     </div>
-                    <div class="profile_name col-lg-8">
+                    <div class="profile_name col-lg-8 col-xs-6">
 
-                        <h1 id='friend_name'><?php echo $display_name; ?></h1>
+                        <h1 id='user_name'><?php echo $display_name; ?></h1>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="cover_button">
-                    <div class="btn-group">
 
-                    </div>
-                </div>
             </div>
+
         </div>
         <div class="cover_menu">
             <nav class="navbar navbar-default">
@@ -205,10 +206,10 @@
 
 
                     <div class="panel panel-default" id="userPost<?php echo $id_post?>">
-                        <div class="panel-heading">
-                            <a href="#"><img src="<?php echo $profile_photo; ?>" width="30px" height="30px" /></a> &nbsp&nbsp
-                            <b><?php echo $display_name; ?>`s Moments</b>
-                            <span style="float:right"><?php echo $time_post; ?></span></div>
+                      <div class="panel-heading">
+                          <a href="#"><img src="<?php echo $profile_photo; ?>" width="30px" height="30px" /></a> &nbsp&nbsp
+                          <b><?php echo $display_name; ?>`s Moments</b><span class="post_time_small"><br \ /><?php echo $time_post; ?></span>
+                          <span class="post_time" style="float:right"><?php echo $time_post; ?></span></div>
                             <div class="panel-body">
 
                                 <p>
@@ -396,7 +397,7 @@
                 $result_photo=mysqli_query($conn, $sql_serchphoto);
                 $count_photos = 6;
                 while ($row = mysqli_fetch_assoc($result_photo)) {
-                    $image = $row['Photo_Path']; 
+                    $image = $row['Photo_Path'];
                     if($image != ''){?>
                     <div class='col-xs-offset-0 col-xs-6 col-sm-offset-0 col-sm-4 col-md-3 col-lg-2 col-lg-offset-0 item'>
                         <div class='thumbnail'>
