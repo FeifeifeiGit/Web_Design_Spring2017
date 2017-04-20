@@ -150,7 +150,7 @@ include "checkLogin.php";
                              <a data-toggle="modal" data-target="#myModal"><img src='<?php echo $post['Photo_Path']; ?>' id='<?php echo $post['Post_Id']; ?>' class='image getSrc'/></a>
 
                              <div class="over">
-                                 <!--if user liked the post, then display remove-like button-->
+                            <!--if user liked the post, then display remove-like button-->
                                  <?php if(in_array($post['Post_Id'], $likedPost)){ ?>
                                  <a href="controller/photo-action.php?removeLike=<?php echo $post['Post_Id']; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
                                  <?php }
