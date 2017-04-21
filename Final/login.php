@@ -81,6 +81,11 @@ if (isset($_SESSION["username"])) {
         </div>
     </div>
 
+    <?php 
+        unset($_SESSION["message"]);
+        unset($_SESSION["username"]);
+     ?>
+
 </div>
 </body>
     

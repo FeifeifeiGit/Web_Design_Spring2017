@@ -4,20 +4,6 @@ session_start();
 
 include "s3.php";
 
-//// Initiate Server
-//$servername = "webdesignfinal.ccxaerxt39bn.us-west-2.rds.amazonaws.com:3306";
-//$username = "webteam";
-//$password = "12345678";
-//$dbname = "findCircle";
-//
-//// Create connection
-//$conn = mysqli_connect($servername, $username, $password, $dbname);
-//
-//// Check connection
-//if (!$conn) {
-//    die("Connection failed: " . mysqli_connect_error());
-//}
-
 include "db.php";
 
 
@@ -70,30 +56,14 @@ $sql="INSERT INTO Users (FirstName,LastName,DisplayName,Gender,Email,Password,Bi
     . " VALUES('$firstName','$lastName','$displayName','$gender','$email','$password','$birthday','$targetPath','$desc','$schoolOrWork')";
 $result=mysqli_query($conn, $sql);
 if($result==false){
-    echo "error update<br>";
+    header('Location: register.php');
 } else {
  
     // Finished Registration direct to Login
     $_SESSION["username"] = $email;
     $_SESSION["message"] = "Registration Succeed";
     
-    echo "Registration Succeed<br>";
     header('Location: login.php');
 }
-
-
-// Print Error Msg
-echo "<p><font color=\"red\">";
-foreach($messageError as $value)
-{
-    echo "<b>List of the Errors:</b><br/>";
-	echo "$value <br/>";
     
-    $message = 'Registration Failed';
-    echo "<SCRIPT>alert('$message');</SCRIPT>";
-    
-    header('Location: register.php');
-    
-}
-echo "<a href=\"register.php\" >Go Back</a></p>";
 ?>
