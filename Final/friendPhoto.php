@@ -85,7 +85,7 @@ $friendId=$_GET["friendId"];
 
 include "pageFunction.php";
 include "photo-model.php";
-
+include "checkLogin.php";
 ?>
 
 <body>
@@ -107,7 +107,7 @@ include "photo-model.php";
                         <div class="modal-dialog modal-lg" style="display: inline-block; width: auto;">
                             <div class="modal-content">
 
-                                <img src="" class="showPic" width=700px>
+                                <img src="" class="showPic">
                                 <div class="modal-footer">     
                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
@@ -151,7 +151,7 @@ include "photo-model.php";
                 <div class="modal-dialog modal-lg" style="display: inline-block; width: auto;">
                     <div class="modal-content">
 
-                        <img src="" class="showPic" width=700px>
+                        <img src="" class="showPic">
                         <div class="modal-footer">
                             <!--button class="btn btn-danger deletePic" type="button" id="" onclick="return Deleteqry();" style="float: left;">Delete</button-->
 

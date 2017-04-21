@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <?php
+error_reporting(0);
+@ini_set('display_errors', 0);
 session_start();
 if (!isset($_SESSION["message"])){
     $_SESSION["message"] = "Please Login ";
@@ -18,7 +20,10 @@ if (isset($_SESSION["username"])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="css/userHome.css" rel="stylesheet">
     <style>
+
 .colorgraph {
   height: 5px;
   border-top: 0;
@@ -29,14 +34,18 @@ if (isset($_SESSION["username"])) {
   background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
   background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }
+.container {
+    padding: auto;
+    padding-top: 60px;      
+}
     </style>
 </head>
 <body>
-    
+<?php include "navBar-login.php";?>
     
 <div class="container">
     <div class="row">
-        <div class="hidden-sm col-md-6" style="padding-top: 20px">
+        <div class="hidden-xs hidden-sm col-md-6" style="padding-top: 20px">
             <div class="well well-sm">
                 <h1>Connect with friends and the world around you.</h1>
             </div>
@@ -65,6 +74,7 @@ if (isset($_SESSION["username"])) {
                 <hr class="colorgraph">
                 <div class="row">
                     <div class="col-xs-12 col-md-6"><input type="submit" value="Sign In" class="btn btn-success btn-block btn-lg"></div>
+                    <div class="col-xs-1 col-sm-1 col-md-0"></div>
                     <div class="col-xs-12 col-md-6"><a href="register.php" class="btn btn-primary btn-block btn-lg">Register</a></div>
                 </div>
             </form>
