@@ -41,8 +41,6 @@ if($count==1){
         $_SESSION["password"] = $password;
         $_SESSION["userId"] = $row['User_Id'];
         
-        $_SESSION["message"] = "Successfully Login";
-        
         //Direct to user home page
         header('Location: userHome.php');
         
