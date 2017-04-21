@@ -1,5 +1,4 @@
 <?php
- //include "checkLogin.php"; 
 include "s3.php";
 include "db.php";
 include "checkLogin.php";
@@ -22,8 +21,8 @@ error_reporting(E_ALL);
 	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="css/userHome.css" rel="stylesheet">
-	<script src="css/userHome.js?v=3"></script>
-	<script src="css/newPost.js"></script>
+	<script src="css/userHome.js?v=2"></script>
+	<script src="css/newPost.js?v=1"></script>
 	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 </head>
 <body>
@@ -86,7 +85,7 @@ error_reporting(E_ALL);
 					</div>
 
 <?php
-$item_per_page = 1;
+$item_per_page = 3;
 $homePostQuery = "SELECT * FROM Post
 Join Users on Users.User_Id=Post.User_Id
 WHERE Post.User_Id in (SELECT Friend_Id FROM FriendsList WHERE FriendsList.User_Id='$currentId')
@@ -215,7 +214,7 @@ $fListResult = mysqli_query($conn, $friendListQuery);
 			</div>
 		</div>
 				
-<script src="css/postSubmit.js?v=3"></script>
-<script src="css/reloadPost.js"></script>
+<script src="css/postSubmit.js?v=4"></script>
+<script src="css/reloadPost.js?v=1"></script>
 </body>
 </html>
