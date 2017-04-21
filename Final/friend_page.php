@@ -23,6 +23,22 @@
     <link href="css/friend_page.css" rel="stylesheet">
     <script src="css/friend_page.js"></script>
 </head>
+<style>
+@media screen and (max-width:768px){
+#friend_name {
+  bottom: -350px;
+  margin-left: -40%;
+}
+
+}
+@media screen and (max-width:1024px){
+#friend_name {
+  bottom: -350px;
+  margin-left: -40%;
+}
+
+}
+</style>
 
 <body>
     <?php
