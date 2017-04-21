@@ -340,7 +340,7 @@
         $friendId=$row['User_Id'];
         $description = $row['Description'];?>
         <div class='col-md-4 item'>
-            <div class="panel panel-default">
+            <div class="panel panel-default" id="deleteThisFriend<?php echo $friendId ;?>">
                 <div class="panel-heading">
                     <div class="friend_name">
                         <p>
@@ -363,7 +363,7 @@
                 </div>
             </div>
             <div class="panel-footer">
-                <a href="#"> <span class="glyphicon glyphicon-chevron">Unfollow</span></a>
+                <a href="#" class="deleteFriendInUserPage" id="<?php echo $friendId ;?>"> <span class="glyphicon glyphicon-chevron" >Unfollow</span></a>
             </div>
 
         </div>
