@@ -94,7 +94,7 @@
             <!--"Home" div-->
             <div id="home">
                 <div class="row">
-                    <div class="col-lg-5">
+                    <div class="col-lg-5 col-sm-3">
                         <div class="left_menu" data-spy="affix" data-offset-top="400">
 
                             <!--Left Photo Panel-->
@@ -192,7 +192,7 @@
               </div>
 
               <!-- middle friend zone-->
-              <div class="col-lg-7">
+              <div class="col-lg-7 col-xs-12">
 
                 <?php
                 $sql_post = "SELECT * FROM Post WHERE User_Id='$currentId' ORDER BY Post_Id DESC";
@@ -208,7 +208,8 @@
                     <div class="panel panel-default" id="userPost<?php echo $id_post?>">
                       <div class="panel-heading">
                           <a href="#"><img src="<?php echo $profile_photo; ?>" width="30px" height="30px" /></a> &nbsp&nbsp
-                          <b><?php echo $display_name; ?>`s Moments</b><span class="post_time_small"><br \ /><?php echo $time_post; ?></span>
+                          <b><?php echo $display_name; ?>`s Moments</b><span class="post_time_small"><br \ /><?php echo $time_post; ?>
+                          <a href="#" class="deletePost" id="<?php echo $id_post; ?>" style="float: right;"><span class="glyphicon glyphicon-trash"></span>&nbsp delete</a></span>
                           <span class="post_time" style="float:right"><?php echo $time_post; ?></span></div>
                             <div class="panel-body">
 
@@ -225,7 +226,7 @@
                                     <a href="#"> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp Like</a>&nbsp
                                     <a href="#" class="comment_link"> <span class="glyphicon glyphicon glyphicon-share-alt"></span>&nbsp Comment</a>&nbsp
                                     <a href="#"> <span class="glyphicon glyphicon-share"></span>&nbsp Share</a>
-                                    <a href="#" class="deletePost" id="<?php echo $id_post; ?>" style="float: right;"><span class="glyphicon glyphicon-trash"></span>&nbsp delete</a>
+                                    <span class="delete_span"><a href="#" class="deletePost" id="<?php echo $id_post; ?>" style="float: right;"><span class="glyphicon glyphicon-trash"></span>&nbsp delete</a></span>
                                     <br />
                                     <hr />
 
