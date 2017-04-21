@@ -63,9 +63,8 @@ $postquery="SELECT Post_Id FROM UserLike WHERE User_Id='$currentId'";
 $likedresult=mysqli_query($conn, $postquery);
 $likedPost=Array();
 while($row = mysqli_fetch_assoc($likedresult)){
-	if($row['Photo_Path']!=null){
-		array_push($likedPost, $row['Post_Id']);
-	}
+	array_push($likedPost, $row['Post_Id']);
+	
 }
 
 
