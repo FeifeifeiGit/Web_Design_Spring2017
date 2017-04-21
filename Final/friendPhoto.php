@@ -168,8 +168,8 @@ include "checkLogin.php";
 
                         <div class='thumbnail'>
                            <a data-toggle="modal" data-target="#tabModel"><img src='<?php echo $like['Photo_Path']; ?>' id='<?php echo $like['Photo_Id']; ?>' class='image getSrc'/></a>
-                           <div class="over">
-                               <!--if user liked the post, then display remove-like button-->
+                           <!--div class="over">
+                               <if user liked the post, then display remove-like button>
                                  <?php if(isUserLiked($like['Post_Id'], $currentId)){ ?>
                                   <a href="controller/photo-action.php?friendRemoveLike=<?php echo $post['Post_Id']; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart userlike"></span></a>
 
@@ -179,7 +179,7 @@ include "checkLogin.php";
                                   <a href="controller/photo-action.php?friendAddToLike=<?php echo $like['Post_Id']; ?>&friendId=<?php echo $friendId; ?>" class="btn btn-default"><span class="glyphicon glyphicon-heart-empty"></span></a>
                                   <?php } ?>
 
-                              </div>
+                              </div-->
                      </div>
                  </div>
                  <?php } ?>              
