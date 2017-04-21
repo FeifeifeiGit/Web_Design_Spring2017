@@ -81,7 +81,7 @@ hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; 
 
             echo "<div class='col-xs-12 col-sm-12 col-md-7 excerpet'>";
             
-            if ($currentId == null) {
+            if (isset($currentId)) {
                 echo "<h3><a href='friend_page.php?userId=".$row['User_Id']."'>".$row['FirstName']." ".$row['LastName']."  (".$row['DisplayName'].")</a></h3>";
             }
             else if ($currentId == $row['User_Id']) {
