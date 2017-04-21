@@ -211,9 +211,10 @@ include "navBar.php";
         
     </script>
     <script type="text/javascript">
+    //set birthday no later than today
         var today = new Date();
         var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
+        var mm = today.getMonth() + 1; 
         var yyyy = today.getFullYear();
         if (dd < 10) {
             dd = '0' + dd;

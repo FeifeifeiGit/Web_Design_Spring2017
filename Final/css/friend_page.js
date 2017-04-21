@@ -140,9 +140,26 @@ $(document).ready(function() {
         //$(".cover_button #"+id+"").text("add to frined");
         //$(".cover_button #"+id+"").addClass("btn-primary addFriend").removeClass("btn-danger deleteFriend");
         $("#"+id+" span").text("Follow");
-        $("a #"+id+"").removeClass("deleteFriendInPanel").addClass("addFriend");
+        
       }
     });
   });
+
+  $('.deleteFriendInUserPage').click(function(){
+    var id=$(this).attr("id");
+    $.ajax({
+
+      type: "GET",
+      url: "friend_page-action.php",
+      data: "unfriend="+id,
+      cache: false,
+      success:function(html){
+
+        $("#deleteThisFriend"+id).fadeOut('fast');
+        
+      }
+    });
+  });
+
 
 })
