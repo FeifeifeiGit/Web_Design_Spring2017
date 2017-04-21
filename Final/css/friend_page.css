@@ -229,6 +229,9 @@
 .post_time_small{
 	display: block;
 }
+.delete_span{
+	display:none;
+}
 
 }
 @media screen and (max-width:350px){
