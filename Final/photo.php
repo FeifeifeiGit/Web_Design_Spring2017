@@ -191,10 +191,11 @@ include "checkLogin.php";
 
                         <div class='thumbnail'>
                          <a data-toggle="modal" data-target="#tabModel"><img src='<?php echo $like['Photo_Path']; ?>' id='<?php echo $like['Photo_Id']; ?>' class='image getSrc'/></a>
-                         <div class="over">
-                          <a href="controller/photo-action.php?removeLikeTab=<?php echo $post['Post_Id']; ?>" class="btn btn-default" id="<?php echo $like['Photo_Id']; ?>"><span class="glyphicon glyphicon-heart userlike"></span></a>
 
-                      </div>
+                         <!--div class="over">
+                          <a href="controller/photo-action.php?removeLikeTab=<?php echo $like['Photo_Id']; ?>" class="btn btn-default" id='<?php echo $like['Photo_Id']; ?>'><span class="glyphicon glyphicon-heart userlike"></span></a>
+
+                      </div-->
 
                   </div>
               </div>
