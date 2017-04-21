@@ -85,7 +85,7 @@ $friendId=$_GET["friendId"];
 
 include "pageFunction.php";
 include "photo-model.php";
-
+include "checkLogin.php";
 ?>
 
 <body>
