@@ -5,7 +5,8 @@
     $count_div_photo = 3;
      while ($row = mysqli_fetch_assoc($result_photo)) {
         if ($count_photo > 0) {
-          $image = $row['Photo_Path']; ?>
+          $image = $row['Photo_Path']; 
+		  if($image != ''){?>
     <div class='col-md-4 item'>
         <div class='thumbnail'>
             <a data-toggle="modal" data-target="#myModel_small"><img src='<?php echo $image; ?>' class='image getSrc_small'id="friend_photo_small"/></a>
@@ -18,5 +19,5 @@
     <?php
         $count_photo--;
         $count_div_photo--;
-         }
+		  }}
     }?>

@@ -37,10 +37,14 @@ if($currentId != $friendId){
                 </div>
             </div>
             <div class="panel-footer">
-                <?php if(!isFriend($friendId,$currentId)){
-                  echo "<a href='#'> <span class='glyphicon glyphicon-chevron'>Follow</span></a>";
+                <?php 
+                if(requestAlreadySent($friendId, $currentId)){
+                    echo "<a href='#' id=$friendId> <span class='glyphicon glyphicon-chevron'>RequestSend</span></a>";
+                }
+                else if(!isFriend($friendId,$currentId)){
+                  echo "<a href='#' class='addFriend' id=$friendId> <span class='glyphicon glyphicon-chevron'>Follow</span></a>";
                 } else{
-                  echo "<a href='#'> <span class='glyphicon glyphicon-chevron'>UnFollow</span></a>";
+                  echo "<a href='#' class='deleteFriendInPanel' id=$friendId> <span class='glyphicon glyphicon-chevron'>UnFollow</span></a>";
                 }?>
             </div>
 

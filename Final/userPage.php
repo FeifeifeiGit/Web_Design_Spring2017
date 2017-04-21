@@ -116,7 +116,9 @@
                                                 $count_div = 3;
                                                  while ($row = mysqli_fetch_assoc($result_photo)) {
                                                     if ($count > 0) {
-                                                      $image = $row['Photo_Path']; ?>
+                                                      $image = $row['Photo_Path'];
+													  if($image != ''){
+														  ?>
                                                 <div class='col-md-4 item'>
                                                     <div class='thumbnail'>
                                                         <a data-toggle="modal" data-target="#myModel_small"><img src='<?php echo $image; ?>' class='image getSrc_small'id="friend_photo_small"/></a>
@@ -129,7 +131,7 @@
                                                 <?php
                                                     $count--;
                                                     $count_div--;
-                                                     }
+													  }}
                                                 }?>
                                         </div>
 
@@ -265,7 +267,7 @@
                 <!-- "About" div-->
                 <div id="about">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><b>About</b></div>
+                        <div class="panel-heading"><b>About<a href="profile.php"><span style="float:right">Update</span></a></b></div>
                         <div class="panel-body">
                             <div class="about">
                                 <ul class="nav nav-pills nav-stacked col-lg-3">
@@ -332,7 +334,7 @@
                                 $friend_first = $row['FirstName'];
                                 $friend_last = $row['LastName'];
                                 $friendId=$row['User_Id'];
-								                $description = $row['Description'];?>
+								$description = $row['Description'];?>
                         <div class='col-md-4 item'>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -392,7 +394,8 @@
                                         $result_photo=mysqli_query($conn, $sql_serchphoto);
                                         $count_photos = 6;
                                         while ($row = mysqli_fetch_assoc($result_photo)) {
-                                            $image = $row['Photo_Path']; ?>
+                                            $image = $row['Photo_Path']; 
+											if($image != ''){?>
                                     <div class='col-xs-offset-0 col-xs-6 col-sm-offset-0 col-sm-4 col-md-3 col-lg-2 col-lg-offset-0 item'>
                                         <div class='thumbnail'>
                                             <a data-toggle="modal" data-target="#myModel"><img src='<?php echo $image; ?>' class='image getSrc'id="friend_photo"/></a>
@@ -404,7 +407,7 @@
                                     </div>
                                     <?php
                                       $count_photos--;
-                                        }
+											}}
                                     ?>
                             </div>
                         </div>
