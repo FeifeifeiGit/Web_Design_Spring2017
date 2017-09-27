@@ -4,7 +4,7 @@ _This is a mini social project. You can add friends, edit personal profile, uplo
 __NOTICE:__ This project using remote database (RDS) and AWS S3 for images store. If you want to run in local, you must configure some files.
 
 # Demo
-*login, browse posts, view friend's page, photo wall display
+* login, browse posts, view friend's page, photo wall display
 ![image](https://github.com/FeifeifeiGit/Web_Design_Spring2017/blob/master/Final/img/longin.gif)
 
 
