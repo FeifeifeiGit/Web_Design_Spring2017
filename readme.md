@@ -3,6 +3,9 @@ _This is a mini social project. You can add friends, edit personal profile, uplo
 
 __NOTICE:__ This project using remote database (RDS) and AWS S3 for images store. If you want to run in local, you must configure some files.
 
+# Demo
+
+
 ## Configure local database and store pictures locally. 
 
 * change __db.php__ file, modify `$servername`, `$username`, `$password` and `$dbname` according to your own database.
