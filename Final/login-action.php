@@ -2,8 +2,8 @@
 session_start();
 
 // Initiate Server
-$servername = "webdesignfinal.ccxaerxt39bn.us-west-2.rds.amazonaws.com:3306";
-$usernameServer = "webteam";
+$servername = "aa9t2zlqk24nsc.ccxaerxt39bn.us-west-2.rds.amazonaws.com:3306";
+$usernameServer = "dashlorde";
 $passwordServer = "12345678";
 $dbname = "findCircle";
 // Create connection
