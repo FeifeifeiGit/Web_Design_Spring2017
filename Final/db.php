@@ -1,6 +1,6 @@
 <?php
-$servername = "webdesignfinal.ccxaerxt39bn.us-west-2.rds.amazonaws.com:3306";
-$username = "webteam";
+$servername = "aa9t2zlqk24nsc.ccxaerxt39bn.us-west-2.rds.amazonaws.com:3306";
+$username = "dashlorde";
 $password = "12345678";
 $dbname = "findCircle";
 
