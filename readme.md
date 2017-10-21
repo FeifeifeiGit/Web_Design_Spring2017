@@ -9,7 +9,7 @@ __NOTICE:__ This project using remote database (RDS) and AWS S3 for images store
 
 
 
-* create new post, manage hoome page, edit profile
+* create new post, manage home page, edit profile
 ![image](https://github.com/FeifeifeiGit/Web_Design_Spring2017/blob/master/Final/img/newPost.gif)
 
 
